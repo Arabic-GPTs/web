@@ -192,6 +192,29 @@ export default function App() {
     const [toast, setToast] = useState(null);
     const toastTimerRef = useRef(null);
 
+    // Accordion state for packages (collapsed by default)
+    const [expandedPkgs, setExpandedPkgs] = useState(() => {
+        try {
+            const raw = localStorage.getItem('bots:expandedPkgs');
+            const arr = raw ? JSON.parse(raw) : [];
+            return new Set(Array.isArray(arr) ? arr : []);
+        } catch {
+            return new Set();
+        }
+    });
+    const togglePkg = (key) => {
+        setExpandedPkgs((prev) => {
+            const next = new Set(prev);
+            if (next.has(key)) next.delete(key); else next.add(key);
+            return next;
+        });
+    };
+    useEffect(() => {
+        try {
+            localStorage.setItem('bots:expandedPkgs', JSON.stringify(Array.from(expandedPkgs)));
+        } catch {}
+    }, [expandedPkgs]);
+
     // (المفضلة أزيلت)
 
     // تحميل البيانات من public/new_bots.json (هيكل حِزَم → فئات → بوتات)
@@ -736,7 +759,10 @@ export default function App() {
                                         <option key={s.id} value={s.id}>
                                             {s.label}
                                         </option>
-                                    ))}
+                                                ))}
+                                            </motion.div>
+                                        )}
+                                    </AnimatePresence>
                                 </select>
                             </div>
                         </div>
@@ -751,7 +777,7 @@ export default function App() {
                         {/* الحِزَم ← الفئات ← البوتات */}
                         <div className="mt-4 space-y-8">
                             {groupedPackages.map((pkg) => (
-                                <section key={pkg.name} aria-label={pkg.name} className="space-y-3 rounded-3xl border border-white/10 bg-white/5 p-3 md:p-5 shadow">
+                                <section key={pkg.key || pkg.name} aria-label={pkg.name} className="space-y-3 rounded-3xl border border-white/10 bg-white/5 p-3 md:p-5 shadow">
                                     {/* عنوان الحزمة */}
                                     <motion.div
                                         initial={{ opacity: 0, y: 6 }}
@@ -761,18 +787,46 @@ export default function App() {
                                         className="flex items-center gap-2"
                                     >
                                         <div className="h-px flex-1 bg-gradient-to-l from-white/10 to-transparent" />
-                                        <span className={`inline-flex items-center gap-2 text-xl md:text-2xl font-extrabold text-white/95 rounded-full border border-white/10 px-4 py-1.5 bg-gradient-to-br ${pkg.accent} shadow-[0_0_25px_rgba(255,255,255,0.08)] ring-1 ring-white/10 backdrop-blur-sm transition-transform hover:scale-[1.02] animate-gradient-slow`}>
+                                        <button
+                                            type="button"
+                                            onClick={() => {
+                                                const k = pkg.key || pkg.name;
+                                                setExpandedPkgs((prev) => {
+                                                    const next = new Set(prev);
+                                                    if (next.has(k)) next.delete(k); else next.add(k);
+                                                    return next;
+                                                });
+                                            }}
+                                            aria-expanded={expandedPkgs.has(pkg.key || pkg.name)}
+                                            aria-controls={`pkg-panel-${(pkg.key || pkg.name || '').toString().replace(/\s+/g, '-').replace(/[^\w\-]/g, '')}`}
+                                            className={`inline-flex items-center gap-2 text-xl md:text-2xl font-extrabold text-white/95 rounded-full border border-white/10 px-4 py-1.5 bg-gradient-to-br ${pkg.accent} shadow-[0_0_25px_rgba(255,255,255,0.08)] ring-1 ring-white/10 backdrop-blur-sm transition-all hover:scale-[1.02] animate-gradient-slow focus:outline-none focus:ring-2 focus:ring-white/20`}
+                                        >
                                             <span className="opacity-90">
                                                 {(CATEGORY_ICONS[pkg.name] || CATEGORY_ICONS.default)}
                                             </span>
                                             {pkg.name}
-                                        </span>
+                                            <span className="mx-1 text-xs font-semibold text-white/80 bg-black/30 px-2 py-0.5 rounded-lg border border-white/10">{pkg.cats.length}</span>
+                                            <span className={`ms-1 inline-flex h-6 w-6 items-center justify-center rounded-full bg-black/30 border border-white/10 text-white/80 transition-transform ${expandedPkgs.has(pkg.key || pkg.name) ? 'rotate-180' : 'rotate-0'}`}>
+                                                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 10l5 5 5-5H7z"/></svg>
+                                            </span>
+                                        </button>
                                         <div className="h-px flex-1 bg-gradient-to-r from-white/10 to-transparent" />
                                     </motion.div>
                                     <p className="-mt-1 text-center text-[11px] text-white/60">حُزمة • {pkg.cats.length} فئات</p>
 
                                     {/* فئات الحزمة */}
-                                    {pkg.cats.map((cat) => (
+                                    <AnimatePresence initial={false}>
+                                        {expandedPkgs.has(pkg.key || pkg.name) && (
+                                            <motion.div
+                                                key={`pkg-panel-${(pkg.key || pkg.name || '').toString().replace(/\s+/g, '-').replace(/[^\w\-]/g, '')}`}
+                                                id={`pkg-panel-${(pkg.key || pkg.name || '').toString().replace(/\s+/g, '-').replace(/[^\w\-]/g, '')}`}
+                                                initial={{ height: 0, opacity: 0 }}
+                                                animate={{ height: 'auto', opacity: 1 }}
+                                                exit={{ height: 0, opacity: 0 }}
+                                                transition={{ duration: 0.35, ease: 'easeInOut' }}
+                                                className="overflow-hidden mt-3 space-y-5"
+                                            >
+                                                {pkg.cats.map((cat, idx) => (
                                         <div key={`${pkg.name}-${cat.name}`} className="space-y-2">
                                             <div className="flex items-center gap-2 mb-1 justify-center">
                                                 <div className="hidden md:block h-px flex-1 bg-gradient-to-l from-white/10 to-transparent" />
