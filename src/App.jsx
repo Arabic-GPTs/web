@@ -4,6 +4,42 @@ import bgVideoUrl from "../1080-60fps-ai.mp4";
 import logoUrl from "./assets/image/banner.png";
 import { BOOKS as STATIC_BOOKS, SERIES as STATIC_SERIES } from "./data/books.js";
 
+// ترتيب مخصص للباقات على الصفحة الرئيسية
+const PACKAGE_ORDER = [
+    "باقة الباحث",
+    "باقة تنمية المهارات",
+    "باقة الشريعة والقانون",
+    "باقة الإبداع الإعلاني",
+    "باقة الإبداع الإعلامي",
+    "باقة المجسّمات",
+    "باقة الإدارة والتسويق",
+    "باقة الصحة",
+    "باقة تكوين النماذج",
+];
+const PACKAGE_ORDER_INDEX = new Map(PACKAGE_ORDER.map((name, i) => [name, i]));
+const PACKAGE_KEYWORDS = [
+    "الباحث",
+    "تنمية المهارات",
+    "الشريعة والقانون",
+    "الإبداع الإعلاني",
+    "الإبداع الإعلامي",
+    "المجسّمات",
+    "الإدارة والتسويق",
+    "الصحة",
+    "تكوين النماذج",
+];
+const norm = (s) => (s || "").toString().trim().replace(/\s+/g, " ");
+const stripTashkeel = (s) => s.replace(/[\u0617-\u061A\u064B-\u0652\u0670]/g, "");
+const getPkgOrder = (name) => {
+    const n = stripTashkeel(norm(name));
+    if (PACKAGE_ORDER_INDEX.has(n)) return PACKAGE_ORDER_INDEX.get(n);
+    for (let i = 0; i < PACKAGE_KEYWORDS.length; i++) {
+        const kw = PACKAGE_KEYWORDS[i];
+        if (n.includes(kw) || n.includes(kw.replace("المجسّمات", "المجسمات"))) return i;
+    }
+    return Number.POSITIVE_INFINITY;
+};
+
 // ————————————————————————————————————————————
 //  Bots Hub — 2025 Reactive Concept (RTL)
 //  • TailwindCSS for styling
@@ -485,7 +521,13 @@ export default function App() {
             const pkgAccent = cats[0]?.accent || pickAccentByCategory(entry.displayName || pkgKey);
             out.push({ key: pkgKey, name: entry.displayName || pkgKey, accent: pkgAccent, cats });
         }
-        out.sort((a, b) => a.name.localeCompare(b.name));
+        // Sort packages by the custom Arabic order first, then alphabetically
+        out.sort((a, b) => {
+            const oa = getPkgOrder(a.name);
+            const ob = getPkgOrder(b.name);
+            if (oa !== ob) return oa - ob;
+            return a.name.localeCompare(b.name, 'ar');
+        });
         return out;
     }, [filtered]);
 
