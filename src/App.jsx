@@ -563,7 +563,7 @@ export default function App() {
         <div
             dir="rtl"
             lang="ar"
-            className="relative min-h-screen bg-neutral-950 text-neutral-100 selection:bg-lime-300/30 selection:text-white theme-nvidia"
+            className="relative min-h-screen bg-neutral-950 text-neutral-100 selection:bg-lime-300/30 selection:text-white theme-nvidia font-arabic"
             id="top"
         >
             {/* خلفية سائلة */}
