@@ -8,7 +8,7 @@ export default {
         // تمكين ألوان التدرّج الديناميكية القادمة من JSON
         {
             pattern:
-                /(from|via|to)-(zinc|gray|neutral|stone|red|orange|amber|yellow|lime|green|emerald|teal|cyan|sky|blue|indigo|violet|purple|fuchsia|pink|rose)-(100|200|300|400|500|600|700|800|900)/,
+                /(from|via|to)-(zinc|gray|neutral|stone|red|orange|amber|yellow|lime|green|emerald|teal|cyan|sky|blue|indigo|violet|purple|fuchsia|pink|rose|nvidia)-(100|200|300|400|500|600|700|800|900)/,
         },
         // اتجاهات شائعة للتدرّجات
         "bg-gradient-to-r",
@@ -47,7 +47,7 @@ export default {
                 }
             },
             fontFamily: {
-                arabic: ['"Cairo"', "system-ui", "sans-serif"]
+                arabic: ['"Cairo"', '"Noto Sans Arabic"', "system-ui", "sans-serif"]
             },
             boxShadow: {
                 'nv-glow': '0 10px 30px -10px rgba(118, 185, 0, 0.35)',

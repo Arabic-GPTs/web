@@ -243,9 +243,14 @@ html {
 
 body {
   @apply bg-neutral-950 text-neutral-100;
-  font-family: "Cairo", system-ui, -apple-system, Segoe UI, Arial,
+  font-family: "Cairo", "Noto Sans Arabic", system-ui, -apple-system, Segoe UI, Arial,
     sans-serif;
   line-height: 1.7;
+  }
+
+/* Base responsive typography using rem scaling within safe bounds */
+@layer base {
+  html { font-size: clamp(15px, 0.55vw + 13.2px, 17px); }
 }
 
 /* NVIDIA-inspired palette tokens */
