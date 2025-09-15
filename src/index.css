@@ -248,6 +248,101 @@ body {
   line-height: 1.7;
 }
 
+/* NVIDIA-inspired palette tokens */
+:root.theme-nvidia {
+  --nv-bg: #0a0d0a;
+  --nv-surface-1: #0f130f;
+  --nv-surface-2: #141914;
+  --nv-surface-3: #191f19;
+  --nv-border: #232a23;
+  --nv-divider: #1a201a;
+  --nv-text: #ecf6ea;
+  --nv-muted: #b8c8b8;
+  --nv-accent: #76b900; /* NVIDIA Green */
+  --nv-accent-2: #10b981; /* Emerald 500 */
+  --nv-accent-cyan: #22d3ee; /* Cyan for cool details */
+  --nv-warning: #f59e0b;
+  --nv-danger: #ef4444;
+  --nv-focus: rgba(159, 230, 56, 0.4);
+}
+
+@layer components {
+  /* Surfaces */
+  .nv-surface {
+    background-color: var(--nv-surface-1);
+    border-color: color-mix(in oklab, var(--nv-border), #000 35%);
+  }
+
+  .nv-card {
+    @apply rounded-3xl border shadow;
+    background: linear-gradient(180deg, color-mix(in oklab, var(--nv-surface-2), #000 10%), var(--nv-surface-3));
+    border-color: color-mix(in oklab, var(--nv-border), #000 20%);
+  }
+
+  /* Buttons */
+  .nv-btn {
+    @apply inline-flex items-center gap-2 font-bold text-white rounded-2xl px-4 py-2.5 transition;
+    background-image: linear-gradient(135deg, var(--nv-accent) 0%, var(--nv-accent-2) 55%, var(--nv-accent) 100%);
+    box-shadow: 0 10px 30px -12px rgba(16, 185, 129, 0.35), 0 1px 0 0 rgba(255,255,255,0.06) inset;
+    background-size: 200% 200%;
+    animation: gradientShift 14s ease-in-out infinite;
+  }
+  .nv-btn:hover { transform: translateY(-1px); filter: brightness(1.05); }
+  .nv-btn:active { transform: translateY(0); filter: brightness(0.98); }
+  .nv-btn:focus-visible { outline: none; box-shadow: 0 0 0 2px rgba(255,255,255,0.08), 0 0 0 6px var(--nv-focus); }
+
+  /* Ghost / outline button */
+  .nv-btn-ghost {
+    @apply inline-flex items-center gap-2 font-bold rounded-2xl px-4 py-2.5 transition text-white/90 border;
+    border-color: color-mix(in oklab, var(--nv-border), #000 10%);
+    background: color-mix(in oklab, var(--nv-surface-2), transparent 35%);
+  }
+  .nv-btn-ghost:hover { background: color-mix(in oklab, var(--nv-surface-2), #ffffff 7%); }
+  .nv-btn-ghost:focus-visible { outline: none; box-shadow: 0 0 0 2px rgba(255,255,255,0.06), 0 0 0 6px var(--nv-focus); }
+
+  /* Category chip */
+  .nv-chip {
+    @apply inline-flex items-center gap-1 whitespace-nowrap rounded-xl px-3 py-2 text-xs md:text-sm border transition text-white/90;
+    border-color: color-mix(in oklab, var(--nv-border), #000 10%);
+    background: color-mix(in oklab, var(--nv-surface-2), transparent 40%);
+  }
+  .nv-chip[data-active="true"] {
+    color: #fff;
+    background-image: linear-gradient(135deg, var(--nv-accent) 0%, var(--nv-accent-2) 65%, var(--nv-accent) 100%);
+    border-color: transparent;
+    background-size: 200% 200%;
+    animation: gradientShift 16s ease-in-out infinite;
+  }
+
+  /* Inputs & selects */
+  .nv-input {
+    @apply rounded-2xl border px-2 py-1.5 flex items-center gap-1;
+    background: color-mix(in oklab, var(--nv-surface-2), transparent 10%);
+    border-color: color-mix(in oklab, var(--nv-border), #000 15%);
+  }
+  .nv-input:focus-within {
+    box-shadow: 0 0 0 2px rgba(255,255,255,0.06), 0 0 0 6px var(--nv-focus);
+  }
+  .nv-input input::placeholder { color: color-mix(in oklab, var(--nv-muted), #000 15%); }
+
+  .nv-select {
+    @apply rounded-xl border px-3 py-2 text-sm outline-none bg-transparent;
+    background: color-mix(in oklab, var(--nv-surface-2), transparent 10%);
+    border-color: color-mix(in oklab, var(--nv-border), #000 15%);
+  }
+  .nv-select:focus-visible {
+    box-shadow: 0 0 0 2px rgba(255,255,255,0.06), 0 0 0 6px var(--nv-focus);
+  }
+
+  /* Link accent */
+  .nv-link {
+    background-image: linear-gradient(90deg, var(--nv-accent) 0%, var(--nv-accent-2) 50%, var(--nv-accent) 100%);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+    background-size: 200% 200%;
+    animation: gradientShift 18s ease-in-out infinite;
+  }
+}
+
 /* اختيار النص */
 ::selection {
   background: rgba(190, 242, 100, 0.35);

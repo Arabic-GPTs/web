@@ -563,7 +563,7 @@ export default function App() {
         <div
             dir="rtl"
             lang="ar"
-            className="relative min-h-screen bg-neutral-950 text-neutral-100 selection:bg-lime-300/30 selection:text-white"
+            className="relative min-h-screen bg-neutral-950 text-neutral-100 selection:bg-lime-300/30 selection:text-white theme-nvidia"
             id="top"
         >
             {/* خلفية سائلة */}
@@ -688,13 +688,13 @@ export default function App() {
                                 <div className="mt-5 flex flex-wrap items-center gap-3">
                                     <a
                                         href="#"
-                                        className="inline-flex items-center gap-2 rounded-2xl bg-gradient-to-br from-lime-400 via-emerald-500 to-lime-400 px-4 py-2.5 text-sm font-bold text-white shadow-lg shadow-emerald-500/25 hover:scale-[1.02] active:scale-[0.99] transition animate-gradient-slow"
+                                        className="nv-btn text-sm"
                                     >
                                         استكشاف البوتات
                                     </a>
                                     <button
                                         onClick={() => setPaletteOpen(true)}
-                                        className="rounded-2xl border border-white/10 bg-white/5 px-4 py-2.5 text-sm font-bold hover:bg-white/10 transition"
+                                        className="nv-btn-ghost text-sm"
                                     >
                                         فتح البحث السريع
                                     </button>
@@ -742,10 +742,8 @@ export default function App() {
                                         <button
                                             key={c}
                                             onClick={() => setCat(c)}
-                                            className={`inline-flex items-center gap-1 whitespace-nowrap rounded-xl px-3 py-2 text-xs md:text-sm border transition ${cat === c
-                                                ? "bg-gradient-to-br from-lime-400 to-emerald-500 text-white border-transparent"
-                                                : "bg-white/5 border-white/10 hover:bg-white/10 text-white"
-                                                }`}
+                                            data-active={cat === c}
+                                            className="nv-chip"
                                         >
                                             <span className="opacity-90">{Icon}</span>
                                             <span>{c}</span>
@@ -775,7 +773,7 @@ export default function App() {
                             {/* بحث وترتيب */}
                             <div className="ml-auto flex items-center gap-2">
                                 {/* صندوق بحث مبسّط بدون حدود داخلية */}
-                                <div className="flex w-[220px] md:w-[360px] items-center gap-1 rounded-2xl border border-white/10 bg-neutral-900/60 px-2 py-1.5">
+                                <div className="flex w-[220px] md:w-[360px] items-center gap-1 nv-input">
                                     <input
                                         value={q}
                                         onChange={(e) => setQ(e.target.value)}
@@ -785,7 +783,7 @@ export default function App() {
                                     {!!q && (
                                         <button
                                             onClick={() => { setQ(''); }}
-                                            className="ml-auto rounded-lg border border-white/10 bg-white/5 px-2 py-0.5 text-[11px] hover:bg-white/10"
+                                            className="ml-auto nv-btn-ghost px-2 py-0.5 text-[11px]"
                                             title="مسح البحث"
                                         >
                                             مسح
@@ -795,7 +793,7 @@ export default function App() {
                                 <select
                                     value={sort}
                                     onChange={(e) => setSort(e.target.value)}
-                                    className="rounded-xl border border-white/10 bg-neutral-900/60 px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-lime-400/40"
+                                    className="nv-select text-sm"
                                 >
                                     {SORTS.map((s) => (
                                         <option key={s.id} value={s.id}>
@@ -1004,7 +1002,7 @@ export default function App() {
                                                                 href={url}
                                                                 target="_blank"
                                                                 rel="noopener"
-                                                                className={`rounded-xl px-3 py-2 text-center font-bold text-white shadow hover:shadow-lg transition ${name.toLowerCase().includes('4') ? 'bg-gradient-to-br from-lime-400 via-emerald-500 to-lime-400' : 'bg-gradient-to-br from-violet-400 via-fuchsia-500 to-violet-400'} animate-gradient-slow`}
+                                                                className={`nv-btn px-3 py-2 text-center text-sm ${name.toLowerCase().includes('4') ? '' : 'bg-gradient-to-br from-violet-400 via-fuchsia-500 to-violet-400 animate-gradient-slow'}`}
                                                             >
                                                                 {name} ↗
                                                             </a>
@@ -1054,7 +1052,7 @@ export default function App() {
                         </div>
                         <button
                             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-                            className="inline-flex items-center gap-2 rounded-2xl bg-gradient-to-br from-lime-400 to-emerald-500 px-4 py-2 text-sm font-bold text-white shadow-lg shadow-emerald-500/25 hover:scale-[1.02] active:scale-[0.99] transition"
+                            className="nv-btn text-sm"
                             aria-label="العودة إلى أعلى الصفحة"
                         >
                             إلى الأعلى
@@ -1270,7 +1268,7 @@ function BooksPage() {
                                                         </a>
                                                         <button
                                                             onClick={() => b.downloadUrl && handleDownload(b.downloadUrl, `${b.slug || b.id}.pdf`)}
-                                                            className={`rounded-xl px-3 py-2 text-center text-xs font-bold text-white ${b.downloadUrl ? 'bg-gradient-to-br from-lime-400 via-emerald-500 to-lime-400 hover:shadow-lg animate-gradient-slow' : 'bg-white/5 opacity-60 cursor-not-allowed'}`}
+                                                            className={`px-3 py-2 text-center text-xs font-bold text-white rounded-xl ${b.downloadUrl ? 'nv-btn' : 'bg-white/5 opacity-60 cursor-not-allowed'}`}
                                                             disabled={!b.downloadUrl}
                                                         >
                                                             تحميل

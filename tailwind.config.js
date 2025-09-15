@@ -26,10 +26,31 @@ export default {
                 base: {
                     950: "#0b0b0c",
                     900: "#0f1012"
+                },
+                nvidia: {
+                    50: "#f2ffe0",
+                    100: "#e6ffc2",
+                    200: "#cfff89",
+                    300: "#b6f35f",
+                    400: "#9fe638",
+                    500: "#86d115",
+                    600: "#76b900", // Brand
+                    700: "#5c8f00",
+                    800: "#436700",
+                    900: "#2d4500",
+                },
+                surface: {
+                    900: "#0a0d0a",
+                    800: "#0f130f",
+                    700: "#141914",
+                    600: "#191f19",
                 }
             },
             fontFamily: {
                 arabic: ['"Noto Sans Arabic"', "system-ui", "sans-serif"]
+            },
+            boxShadow: {
+                'nv-glow': '0 10px 30px -10px rgba(118, 185, 0, 0.35)',
             }
         }
     },
