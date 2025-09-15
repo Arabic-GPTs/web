@@ -601,12 +601,44 @@ export default function App() {
                                 بوابة النماذج العربية الذكية
                             </strong>
                             </a>
+                            {/* إضافات: إنستغرام، فيسبوك، تيك توك، بريد، PayPal، لينكدإن */}
+                            <a href="https://www.instagram.com/alzarraei.gpts/" target="_blank" rel="noopener" aria-label="إنستغرام" className="grid h-9 w-9 place-items-center rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 transition" title="إنستغرام">
+                                <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" className="text-pink-400"><path d="M5 3h14a3 3 0 013 3v12a3 3 0 01-3 3H5a3 3 0 01-3-3V6a3 3 0 013-3zm7 5a5 5 0 100 10 5 5 0 000-10zm6-2h2v2h-2V6z"/></svg>
+                            </a>
+                            <a href="https://www.facebook.com/alzarraei.gpts/" target="_blank" rel="noopener" aria-label="فيسبوك" className="grid h-9 w-9 place-items-center rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 transition" title="فيسبوك">
+                                <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" className="text-blue-500"><path d="M22 12a10 10 0 11-11.5 9.9V15H8v-3h2V9.7c0-2 1.2-3.2 3.1-3.2.9 0 1.8.1 2 .1V9H14c-1 0-1.3.6-1.3 1.2V12h2.6l-.4 3H12.7v6.9C18 22.7 22 17.9 22 12z"/></svg>
+                            </a>
+                            <a href="https://www.tiktok.com/@alzarraei" target="_blank" rel="noopener" aria-label="تيك توك" className="grid h-9 w-9 place-items-center rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 transition" title="تيك توك">
+                                <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" className="text-white"><path d="M14 3h3a6 6 0 006 6v3a9 9 0 01-6-2v7a5 5 0 11-5-5h2v3a2 2 0 10-2 2 2 2 0 002-2V3z"/></svg>
+                            </a>
+                            <a href="mailto:zraieee@gmail.com" target="_blank" rel="noopener" aria-label="البريد الإلكتروني" className="grid h-9 w-9 place-items-center rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 transition" title="البريد الإلكتروني">
+                                <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" className="text-emerald-300"><path d="M2 6h20v12H2V6zm10 5L2 6h20l-10 5z"/></svg>
+                            </a>
+                            <a href="https://www.paypal.com/paypalme/zraiee" target="_blank" rel="noopener" aria-label="PayPal" className="grid h-9 w-9 place-items-center rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 transition" title="PayPal">
+                                <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" className="text-blue-400"><path d="M7 3h7a5 5 0 010 10H9l-1.2 8H4L7 3zm7 6a2 2 0 000-4H9.8L9 12h5a2 2 0 000-3z"/></svg>
+                            </a>
+                            <a href="https://www.linkedin.com/in/abdulrahman-alzarraei/" target="_blank" rel="noopener" aria-label="لينكدإن" className="grid h-9 w-9 place-items-center rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 transition" title="لينكدإن">
+                                <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" className="text-sky-500"><path d="M4 3a2 2 0 110 4 2 2 0 010-4zM3 8h3v12H3V8zm7 0h3v2h.1c.6-1 1.8-2.2 3.9-2.2 3 0 5 1.9 5 6.1V20h-3v-5c0-2.4-.9-3.6-2.8-3.6-1.5 0-2.4 1-2.8 2V20h-3V8z"/></svg>
+                            </a>
+                            {/* تسميات نصية تظهر على الشاشات الكبيرة فقط */}
+                            <div className="hidden xl:flex items-center gap-1 ml-2 text-[11px] text-white/60">
+                                <span>واتساب</span>
+                                <span>· تيليغرام</span>
+                                <span>· إنستغرام</span>
+                                <span>· فيسبوك</span>
+                                <span>· X</span>
+                                <span>· يوتيوب</span>
+                                <span>· تيك توك</span>
+                                <span>· بريد</span>
+                                <span>· PayPal</span>
+                                <span>· لينكدإن</span>
+                            </div>
                         </div>
                         {/* أزرار الشبكات الاجتماعية */}
                         <div className="flex items-center gap-1">
                             <span className="hidden md:inline text-xs text-white/70 mr-1">قنواتنا الرسمية</span>
                             <a
-                                href="https://chat.whatsapp.com/G8NePbeK6Lx..."
+                                href="https://wa.me/966552191598"
                                 target="_blank"
                                 rel="noopener"
                                 aria-label="واتساب"
