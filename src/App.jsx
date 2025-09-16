@@ -877,7 +877,7 @@ export default function App() {
                                         whileInView={{ opacity: 1, y: 0 }}
                                         viewport={{ once: true, margin: "-10%" }}
                                         transition={{ duration: 0.35, ease: "easeOut" }}
-                                        className="flex items-center gap-2"
+                                        className={`${expandedPkgs.has(pkg.key || pkg.name) ? 'sticky top-16 md:top-20 z-10 -mx-3 md:-mx-5 px-3 md:px-5 py-2 rounded-2xl bg-neutral-950/70 backdrop-blur supports-[backdrop-filter]:bg-neutral-900/55' : ''} flex items-center gap-2`}
                                     >
                                         <div className="h-px flex-1 bg-gradient-to-l from-white/10 to-transparent" />
                                         <button
