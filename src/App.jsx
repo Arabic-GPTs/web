@@ -3,8 +3,6 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import bgVideoUrl from "../1080-60fps-ai.mp4";
 // Use the logo image from public
 const logoUrl = "/logo.png";
-// Import banner.png from src (not present in public)
-import bannerPng from "./assets/image/banner.png";
 import { BOOKS as STATIC_BOOKS, SERIES as STATIC_SERIES } from "./data/books.js";
 
 // ترتيب مخصص للباقات على الصفحة الرئيسية
@@ -592,7 +590,7 @@ export default function App() {
                                 initial={{ opacity: 0.9, scale: 0.98 }}
                                 animate={{ opacity: [0.9, 1, 0.9], scale: 1 }}
                                 transition={{ duration: 8, repeat: Infinity, repeatType: 'mirror', ease: 'easeInOut' }}
-                                className="relative inline-grid w-10 h-10 place-items-center overflow-hidden rounded-xl border border-white/10 bg-white/5 backdrop-blur"
+                                className="relative inline-grid w-12 h-12 md:w-14 md:h-14 place-items-center overflow-hidden rounded-xl border border-white/10 bg-white/5 backdrop-blur"
                                 aria-hidden
                             >
                                 <img src={logoUrl} alt="الشعار" className="h-full w-full object-contain" />
@@ -1665,7 +1663,7 @@ const SAMPLE_BOOKS = [
         author: "د. الزرّاعي",
         category: "الباحث العلمي",
         tags: ["ماجستير", "دكتوراه"],
-        coverUrl: bannerPng,
+        coverUrl: logoUrl,
         viewUrl: "#",
         downloadUrl: "#"
     },
@@ -1675,7 +1673,7 @@ const SAMPLE_BOOKS = [
         author: "د. الزرّاعي",
         category: "الباحث العلمي",
         tags: ["منهجية", "توثيق"],
-        coverUrl: bannerPng,
+        coverUrl: logoUrl,
         viewUrl: "#",
         downloadUrl: "#"
     },
@@ -1685,7 +1683,7 @@ const SAMPLE_BOOKS = [
         author: "د. الزرّاعي",
         category: "المحتوى واللغة",
         tags: ["تحرير", "صياغة"],
-        coverUrl: bannerPng,
+        coverUrl: logoUrl,
         viewUrl: "#",
         downloadUrl: "#"
     },
