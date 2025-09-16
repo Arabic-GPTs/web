@@ -605,9 +605,7 @@ export default function App() {
                                 className="grid h-9 w-9 place-items-center rounded-xl bg-white/5 hover:bg-white/10 transition"
                                 title="Gmail"
                             >
-                                <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" className="text-red-500">
-                                    <path d="M2 4h20a2 2 0 012 2v12a2 2 0 01-2 2H2a2 2 0 01-2-2V6a2 2 0 012-2zm10 7L2 6v12h20V6l-10 5z" />
-                                </svg>
+                                <img src="/icons/gmail.svg" alt="Gmail" className="h-[18px] w-[18px]" />
                             </a>
                             <a href="#/" className="focus:outline-none">
                             <strong className="text-lg md:text-2xl font-extrabold tracking-tight bg-gradient-to-r from-lime-200 via-emerald-300 to-lime-200 text-transparent bg-clip-text drop-shadow-[0_2px_6px_rgba(16,185,129,0.25)] animate-gradient-slow">
@@ -616,22 +614,22 @@ export default function App() {
                             </a>
                             {/* إضافات: إنستغرام، فيسبوك، تيك توك، بريد، PayPal، لينكدإن */}
                             <a href="https://www.instagram.com/alzarraei.gpts/" target="_blank" rel="noopener" aria-label="إنستغرام" className="grid h-9 w-9 place-items-center rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 transition" title="إنستغرام">
-                                <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" className="text-pink-400"><path d="M5 3h14a3 3 0 013 3v12a3 3 0 01-3 3H5a3 3 0 01-3-3V6a3 3 0 013-3zm7 5a5 5 0 100 10 5 5 0 000-10zm6-2h2v2h-2V6z"/></svg>
+                                <img src="/icons/instagram.svg" alt="Instagram" className="h-[18px] w-[18px]" />
                             </a>
                             <a href="https://www.facebook.com/alzarraei.gpts/" target="_blank" rel="noopener" aria-label="فيسبوك" className="grid h-9 w-9 place-items-center rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 transition" title="فيسبوك">
-                                <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" className="text-blue-500"><path d="M22 12a10 10 0 11-11.5 9.9V15H8v-3h2V9.7c0-2 1.2-3.2 3.1-3.2.9 0 1.8.1 2 .1V9H14c-1 0-1.3.6-1.3 1.2V12h2.6l-.4 3H12.7v6.9C18 22.7 22 17.9 22 12z"/></svg>
+                                <img src="/icons/facebook.svg" alt="Facebook" className="h-[18px] w-[18px]" />
                             </a>
                             <a href="https://www.tiktok.com/@alzarraei" target="_blank" rel="noopener" aria-label="تيك توك" className="grid h-9 w-9 place-items-center rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 transition" title="تيك توك">
                                 <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" className="text-white"><path d="M14 3h3a6 6 0 006 6v3a9 9 0 01-6-2v7a5 5 0 11-5-5h2v3a2 2 0 10-2 2 2 2 0 002-2V3z"/></svg>
                             </a>
                             <a href="mailto:zraieee@gmail.com" target="_blank" rel="noopener" aria-label="البريد الإلكتروني" className="grid h-9 w-9 place-items-center rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 transition" title="البريد الإلكتروني">
-                                <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" className="text-emerald-300"><path d="M2 6h20v12H2V6zm10 5L2 6h20l-10 5z"/></svg>
+                                <img src="/icons/gmail.svg" alt="Email" className="h-[18px] w-[18px]" />
                             </a>
                             <a href="https://www.paypal.com/paypalme/zraiee" target="_blank" rel="noopener" aria-label="PayPal" className="grid h-9 w-9 place-items-center rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 transition" title="PayPal">
-                                <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" className="text-blue-400"><path d="M7 3h7a5 5 0 010 10H9l-1.2 8H4L7 3zm7 6a2 2 0 000-4H9.8L9 12h5a2 2 0 000-3z"/></svg>
+                                <img src="/icons/paypal.svg" alt="PayPal" className="h-[18px] w-[18px]" />
                             </a>
                             <a href="https://www.linkedin.com/in/abdulrahman-alzarraei/" target="_blank" rel="noopener" aria-label="لينكدإن" className="grid h-9 w-9 place-items-center rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 transition" title="لينكدإن">
-                                <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" className="text-sky-500"><path d="M4 3a2 2 0 110 4 2 2 0 010-4zM3 8h3v12H3V8zm7 0h3v2h.1c.6-1 1.8-2.2 3.9-2.2 3 0 5 1.9 5 6.1V20h-3v-5c0-2.4-.9-3.6-2.8-3.6-1.5 0-2.4 1-2.8 2V20h-3V8z"/></svg>
+                                <img src="/icons/linkedin.svg" alt="LinkedIn" className="h-[18px] w-[18px]" />
                             </a>
                             {/* تسميات نصية تظهر على الشاشات الكبيرة فقط */}
                             <div className="hidden xl:flex items-center gap-1 ml-2 text-[11px] text-white/60">
@@ -658,9 +656,7 @@ export default function App() {
                                 className="grid h-9 w-9 place-items-center rounded-xl bg-white/5 hover:bg-white/10 transition"
                                 title="انضم عبر واتساب"
                             >
-                                <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" className="text-blue-500">
-                                    <path d="M22 12a10 10 0 11-11.5 9.9V15H8v-3h2V9.7c0-2 1.2-3.2 3.1-3.2.9 0 1.8.1 2 .1V9H14c-1 0-1.3.6-1.3 1.2V12h2.6l-.4 3H12.7v6.9C18 22.7 22 17.9 22 12z" />
-                                </svg>
+                                <img src="/icons/facebook.svg" alt="Facebook" className="h-[18px] w-[18px]" />
                             </a>
                             <a
                                 href="https://t.me/zraiee"
@@ -682,9 +678,7 @@ export default function App() {
                                 className="grid h-9 w-9 place-items-center rounded-xl bg-white/5 hover:bg-white/10 transition"
                                 title="X (Twitter)"
                             >
-                                <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" className="text-white">
-                                    <path d="M18.244 2.25h3.299L14.307 10.67 22.79 21.75h-5.879l-5.06-6.105L6 21.75H2.701l8.13-9.29L2.244 2.25H8.29l4.54 5.48 5.414-5.48zm-1.12 17.999h1.74L8.96 4.25H7.1l10.024 16z" />
-                                </svg>
+                                <img src="/icons/x.svg" alt="X" className="h-[18px] w-[18px]" />
                             </a>
                             <a
                                 href="mailto:zraieee@gmail.com"
@@ -694,9 +688,7 @@ export default function App() {
                                 className="grid h-9 w-9 place-items-center rounded-xl bg-white/5 hover:bg-white/10 transition"
                                 title="Gmail"
                             >
-                                <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" className="text-red-500">
-                                    <path d="M2 4h20a2 2 0 012 2v12a2 2 0 01-2 2H2a2 2 0 01-2-2V6a2 2 0 012-2zm10 7L2 6v12h20V6l-10 5z" />
-                                </svg>
+                                <img src="/icons/gmail.svg" alt="Gmail" className="h-[18px] w-[18px]" />
                             </a>
                             <a
                                 href="https://www.paypal.com/paypalme/zraiee"
@@ -706,9 +698,7 @@ export default function App() {
                                 className="grid h-9 w-9 place-items-center rounded-xl bg-white/5 hover:bg-white/10 transition"
                                 title="يوتيوب"
                             >
-                                <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" className="text-blue-400">
-                                    <path d="M7 3h7a5 5 0 010 10H9l-1.2 8H4L7 3zm7 6a2 2 0 000-4H9.8L9 12h5a2 2 0 000-3z" />
-                                </svg>
+                                <img src="/icons/paypal.svg" alt="PayPal" className="h-[18px] w-[18px]" />
                             </a>
                         </div>
                         {/* separator removed for a cleaner layout */}
@@ -1100,18 +1090,18 @@ export default function App() {
                                     <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" className="text-sky-400"><path d="M9.04 15.59l-.38 5.39c.55 0 .79-.24 1.07-.52l2.57-2.46 5.32 3.9c.98.54 1.68.25 1.94-.9l3.52-16.5h.01c.31-1.46-.53-2.03-1.47-1.67L1.16 9.88c-1.4.54-1.38 1.32-.24 1.67l5.41 1.69 12.6-7.95c.59-.38 1.12-.17.68.21" /></svg>
                                 </a>
                                 <a href="https://x.com/Arab_Ai_" target="_blank" rel="noopener" aria-label="منصة إكس" className="grid h-9 w-9 place-items-center rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 transition">
-                                    <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" className="text-white"><path d="M18.244 2H21.5l-7.59 8.67L22.5 22h-6.39l-5-6.05L5 22H1.74l8.13-9.29L2 2h6.48l4.54 5.48L18.24 2zm-1.12 18h1.74L8.96 4H7.1l10.03 16z" /></svg>
+                                    <img src="/icons/x.svg" alt="X" className="h-[18px] w-[18px]" />
                                 </a>
                                 <a href="https://www.youtube.com/@alzarraei-gpts" target="_blank" rel="noopener" aria-label="يوتيوب" className="grid h-9 w-9 place-items-center rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 transition">
-                                    <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" className="text-rose-400"><path d="M23.5 6.2a3 3 0 00-2.1-2.1C19.3 3.5 12 3.5 12 3.5s-7.3 0-9.4.6A3 3 0 00.5 6.2 31.2 31.2 0 000 12a31.2 31.2 0 00.6 5.8 3 3 0 002.1 2.1c2.1.6 9.4.6 9.4.6s7.3 0 9.4-.6a3 3 0 002.1-2.1A31.2 31.2 0 0024 12a31.2 31.2 0 00-.5-5.8zM9.75 15.02V8.98L15.5 12l-5.75 3.02z" /></svg>
+                                    <img src="/icons/youtube.svg" alt="YouTube" className="h-[18px] w-[18px]" />
                                 </a>
                                 {/* Instagram */}
                                 <a href="https://www.instagram.com/alzarraei.gpts/" target="_blank" rel="noopener" aria-label="إنستغرام" className="grid h-9 w-9 place-items-center rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 transition">
-                                    <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" className="text-pink-400"><path d="M5 3h14a3 3 0 013 3v12a3 3 0 01-3 3H5a3 3 0 01-3-3V6a3 3 0 013-3zm7 5a5 5 0 100 10 5 5 0 000-10zm6-2h2v2h-2V6z"/></svg>
+                                    <img src="/icons/instagram.svg" alt="Instagram" className="h-[18px] w-[18px]" />
                                 </a>
                                 {/* Facebook */}
                                 <a href="https://www.facebook.com/alzarraei.gpts/" target="_blank" rel="noopener" aria-label="فيسبوك" className="grid h-9 w-9 place-items-center rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 transition">
-                                    <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" className="text-blue-500"><path d="M22 12a10 10 0 11-11.5 9.9V15H8v-3h2V9.7c0-2 1.2-3.2 3.1-3.2.9 0 1.8.1 2 .1V9H14c-1 0-1.3.6-1.3 1.2V12h2.6l-.4 3H12.7v6.9C18 22.7 22 17.9 22 12z"/></svg>
+                                    <img src="/icons/facebook.svg" alt="Facebook" className="h-[18px] w-[18px]" />
                                 </a>
                                 {/* TikTok */}
                                 <a href="https://www.tiktok.com/@alzarraei" target="_blank" rel="noopener" aria-label="تيك توك" className="grid h-9 w-9 place-items-center rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 transition">
@@ -1119,15 +1109,15 @@ export default function App() {
                                 </a>
                                 {/* Email */}
                                 <a href="mailto:zraieee@gmail.com" target="_blank" rel="noopener" aria-label="البريد الإلكتروني" className="grid h-9 w-9 place-items-center rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 transition">
-                                    <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" className="text-emerald-300"><path d="M2 6h20v12H2V6zm10 5L2 6h20l-10 5z"/></svg>
+                                    <img src="/icons/gmail.svg" alt="Email" className="h-[18px] w-[18px]" />
                                 </a>
                                 {/* PayPal */}
                                 <a href="https://www.paypal.com/paypalme/zraiee" target="_blank" rel="noopener" aria-label="باي بال" className="grid h-9 w-9 place-items-center rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 transition">
-                                    <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" className="text-blue-400"><path d="M7 3h7a5 5 0 010 10H9l-1.2 8H4L7 3zm7 6a2 2 0 000-4H9.8L9 12h5a2 2 0 000-3z"/></svg>
+                                    <img src="/icons/paypal.svg" alt="PayPal" className="h-[18px] w-[18px]" />
                                 </a>
                                 {/* LinkedIn */}
                                 <a href="https://www.linkedin.com/in/abdulrahman-alzarraei/" target="_blank" rel="noopener" aria-label="لينكدإن" className="grid h-9 w-9 place-items-center rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 transition">
-                                    <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" className="text-sky-500"><path d="M4 3a2 2 0 110 4 2 2 0 010-4zM3 8h3v12H3V8zm7 0h3v2h.1c.6-1 1.8-2.2 3.9-2.2 3 0 5 1.9 5 6.1V20h-3v-5c0-2.4-.9-3.6-2.8-3.6-1.5 0-2.4 1-2.8 2V20h-3V8z"/></svg>
+                                    <img src="/icons/linkedin.svg" alt="LinkedIn" className="h-[18px] w-[18px]" />
                                 </a>
                             </div>
                         </div>
