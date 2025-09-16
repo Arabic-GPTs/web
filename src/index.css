@@ -368,6 +368,30 @@ body {
   }
 }
 
+/* Global button hover behavior */
+@layer components {
+  /* Smooth hover transitions */
+  button,
+  a[role="button"] {
+    transition: background-color 180ms ease, color 180ms ease, box-shadow 180ms ease;
+  }
+
+  /* Turn background emerald on hover */
+  button:hover,
+  a[role="button"]:hover {
+    background-color: #10b981 !important; /* emerald-500 */
+  }
+
+  /* Ensure our framework buttons behave the same */
+  .nv-btn:hover,
+  .nv-btn-ghost:hover {
+    background: #10b981 !important;
+  }
+
+  /* Optional: add this class where you want text to flip to black on hover */
+  .hover-text-black:hover { color: #000 !important; }
+}
+
 /* Hide top header social channels and their labels */
 header a[href*="instagram.com"],
 header a[href*="facebook.com"],
