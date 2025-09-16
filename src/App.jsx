@@ -892,7 +892,7 @@ export default function App() {
                                             }}
                                             aria-expanded={expandedPkgs.has(pkg.key || pkg.name)}
                                             aria-controls={`pkg-panel-${(pkg.key || pkg.name || '').toString().replace(/\s+/g, '-').replace(/[^\w\-]/g, '')}`}
-                                            className={`inline-flex items-center gap-2 text-xl md:text-2xl font-extrabold text-white/95 rounded-full border border-white/10 px-4 py-1.5 bg-gradient-to-br ${pkg.accent} shadow-[0_0_25px_rgba(255,255,255,0.08)] ring-1 ring-white/10 backdrop-blur-sm transition-all hover:scale-[1.02] animate-gradient-slow focus:outline-none focus:ring-2 focus:ring-white/20`}
+                                            className={`inline-flex items-center gap-2 text-xl md:text-2xl font-extrabold text-white rounded-full border border-white/10 px-4 py-1.5 bg-neutral-800 ring-1 ring-white/10 focus:outline-none focus:ring-2 focus:ring-emerald-400 hover:bg-emerald-500`}
                                         >
                                             <span className="opacity-90">
                                                 {(CATEGORY_ICONS[pkg.name] || CATEGORY_ICONS.default)}
@@ -949,13 +949,13 @@ export default function App() {
                                                                     {b.title}
                                                                 </h3>
                                                                 <div className="mt-2 grid grid-cols-3 gap-3 text-xs pb-2">
-                                                                    <button onClick={() => setBotModal({ type: "about", bot: b })} className="rounded-xl border border-white/10 bg-white/10 px-2 py-1.5 font-bold text-white hover:bg-white/15 transition">
+                                                                    <button onClick={() => setBotModal({ type: "about", bot: b })} className="rounded-xl border border-white/15 bg-black px-2 py-1.5 font-bold text-white hover:bg-emerald-500 hover:text-black transition">
                                                                         نبذة
                                                                     </button>
-                                                                    <button onClick={() => setBotModal({ type: "limits", bot: b })} className="rounded-xl border border-white/10 bg-white/10 px-2 py-1.5 font-bold text-white hover:bg-white/15 transition">
+                                                                    <button onClick={() => setBotModal({ type: "limits", bot: b })} className="rounded-xl border border-white/15 bg-black px-2 py-1.5 font-bold text-white hover:bg-emerald-500 hover:text-black transition">
                                                                         حدود
                                                                     </button>
-                                                                    <button onClick={() => setBotModal({ type: "example", bot: b })} className="rounded-xl border border-white/10 bg-white/10 px-2 py-1.5 font-bold text-white hover:bg-white/15 transition">
+                                                                    <button onClick={() => setBotModal({ type: "example", bot: b })} className="rounded-xl border border-white/15 bg-black px-2 py-1.5 font-bold text-white hover:bg-emerald-500 hover:text-black transition">
                                                                         مثال
                                                                     </button>
                                                                 </div>
