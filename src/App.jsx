@@ -605,7 +605,7 @@ export default function App() {
                                 className="grid h-9 w-9 place-items-center rounded-xl bg-white/5 hover:bg-white/10 transition"
                                 title="Gmail"
                             >
-                                <img src="/icons/gmail.svg" alt="Gmail" className="h-[18px] w-[18px]" />
+                                <i className="fa-solid fa-envelope fa-lg text-white"></i>
                             </a>
                             <a href="#/" className="focus:outline-none">
                             <strong className="text-lg md:text-2xl font-extrabold tracking-tight bg-gradient-to-r from-lime-200 via-emerald-300 to-lime-200 text-transparent bg-clip-text drop-shadow-[0_2px_6px_rgba(16,185,129,0.25)] animate-gradient-slow">
@@ -614,22 +614,22 @@ export default function App() {
                             </a>
                             {/* إضافات: إنستغرام، فيسبوك، تيك توك، بريد، PayPal، لينكدإن */}
                             <a href="https://www.instagram.com/alzarraei.gpts/" target="_blank" rel="noopener" aria-label="إنستغرام" className="grid h-9 w-9 place-items-center rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 transition" title="إنستغرام">
-                                <img src="/icons/instagram.svg" alt="Instagram" className="h-[18px] w-[18px]" />
+                                <i className="fa-brands fa-instagram fa-lg text-white"></i>
                             </a>
                             <a href="https://www.facebook.com/alzarraei.gpts/" target="_blank" rel="noopener" aria-label="فيسبوك" className="grid h-9 w-9 place-items-center rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 transition" title="فيسبوك">
-                                <img src="/icons/facebook.svg" alt="Facebook" className="h-[18px] w-[18px]" />
+                                <i className="fa-brands fa-facebook-f fa-lg text-white"></i>
                             </a>
                             <a href="https://www.tiktok.com/@alzarraei" target="_blank" rel="noopener" aria-label="تيك توك" className="grid h-9 w-9 place-items-center rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 transition" title="تيك توك">
-                                <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" className="text-white"><path d="M14 3h3a6 6 0 006 6v3a9 9 0 01-6-2v7a5 5 0 11-5-5h2v3a2 2 0 10-2 2 2 2 0 002-2V3z"/></svg>
+                                <i className="fa-brands fa-tiktok fa-lg text-white"></i>
                             </a>
                             <a href="mailto:zraieee@gmail.com" target="_blank" rel="noopener" aria-label="البريد الإلكتروني" className="grid h-9 w-9 place-items-center rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 transition" title="البريد الإلكتروني">
-                                <img src="/icons/gmail.svg" alt="Email" className="h-[18px] w-[18px]" />
+                                <i className="fa-solid fa-envelope fa-lg text-white"></i>
                             </a>
                             <a href="https://www.paypal.com/paypalme/zraiee" target="_blank" rel="noopener" aria-label="PayPal" className="grid h-9 w-9 place-items-center rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 transition" title="PayPal">
-                                <img src="/icons/paypal.svg" alt="PayPal" className="h-[18px] w-[18px]" />
+                                <i className="fa-brands fa-paypal fa-lg text-white"></i>
                             </a>
                             <a href="https://www.linkedin.com/in/abdulrahman-alzarraei/" target="_blank" rel="noopener" aria-label="لينكدإن" className="grid h-9 w-9 place-items-center rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 transition" title="لينكدإن">
-                                <img src="/icons/linkedin.svg" alt="LinkedIn" className="h-[18px] w-[18px]" />
+                                <i className="fa-brands fa-linkedin-in fa-lg text-white"></i>
                             </a>
                             {/* تسميات نصية تظهر على الشاشات الكبيرة فقط */}
                             <div className="hidden xl:flex items-center gap-1 ml-2 text-[11px] text-white/60">
@@ -656,7 +656,7 @@ export default function App() {
                                 className="grid h-9 w-9 place-items-center rounded-xl bg-white/5 hover:bg-white/10 transition"
                                 title="انضم عبر واتساب"
                             >
-                                <img src="/icons/facebook.svg" alt="Facebook" className="h-[18px] w-[18px]" />
+                                <i className="fa-brands fa-facebook-f fa-lg text-white"></i>
                             </a>
                             <a
                                 href="https://t.me/zraiee"
@@ -666,9 +666,7 @@ export default function App() {
                                 className="grid h-9 w-9 place-items-center rounded-xl bg-white/5 hover:bg-white/10 transition"
                                 title="قناة تيليغرام"
                             >
-                                <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" className="text-sky-400">
-                                    <path d="M11.944 0C5.346 0 0 5.346 0 11.944S5.346 23.887 11.944 23.887 23.887 18.541 23.887 11.944 18.541 0 11.944 0zm4.536 7.993l-2.04 9.631c-.155.688-.57.855-1.153.532l-3.19-2.353-1.539 1.481c-.17.17-.313.313-.64.313l.229-3.248 5.917-5.34c.257-.229-.056-.357-.399-.127l-7.314 4.6-3.146-.985c-.683-.215-.697-.683.143-1.007l12.348-4.76c.57-.199 1.067.127.883 1.004z" />
-                                </svg>
+                                <i className="fa-brands fa-telegram fa-lg text-white"></i>
                             </a>
                             <a
                                 href="https://x.com/Arab_Ai_"
@@ -678,7 +676,7 @@ export default function App() {
                                 className="grid h-9 w-9 place-items-center rounded-xl bg-white/5 hover:bg-white/10 transition"
                                 title="X (Twitter)"
                             >
-                                <img src="/icons/x.svg" alt="X" className="h-[18px] w-[18px]" />
+                                <i className="fa-brands fa-x-twitter fa-lg text-white"></i>
                             </a>
                             <a
                                 href="mailto:zraieee@gmail.com"
@@ -688,7 +686,7 @@ export default function App() {
                                 className="grid h-9 w-9 place-items-center rounded-xl bg-white/5 hover:bg-white/10 transition"
                                 title="Gmail"
                             >
-                                <img src="/icons/gmail.svg" alt="Gmail" className="h-[18px] w-[18px]" />
+                                <i className="fa-solid fa-envelope fa-lg text-white"></i>
                             </a>
                             <a
                                 href="https://www.paypal.com/paypalme/zraiee"
@@ -698,7 +696,7 @@ export default function App() {
                                 className="grid h-9 w-9 place-items-center rounded-xl bg-white/5 hover:bg-white/10 transition"
                                 title="يوتيوب"
                             >
-                                <img src="/icons/paypal.svg" alt="PayPal" className="h-[18px] w-[18px]" />
+                                <i className="fa-brands fa-paypal fa-lg text-white"></i>
                             </a>
                         </div>
                         {/* separator removed for a cleaner layout */}
@@ -1084,40 +1082,40 @@ export default function App() {
                                     aria-label="واتساب"
                                     className="grid h-9 w-9 place-items-center rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 transition"
                                 >
-                                    <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" className="text-green-400"><path d="M20.52 3.48A11.86 11.86 0 0012.06 0C5.44 0 .1 5.34.1 11.95c0 2.1.55 4.1 1.6 5.87L0 24l6.35-1.65a12 12 0 005.7 1.45h.01c6.61 0 11.95-5.34 11.95-11.95 0-3.2-1.25-6.2-3.49-8.37zM12.06 21.8h-.01c-1.85 0-3.66-.5-5.23-1.44l-.38-.23-3.76.98 1.01-3.66-.25-.38a9.82 9.82 0 01-1.5-5.1C1.94 6.5 6.6 1.85 12.06 1.85c2.6 0 5.04 1.02 6.88 2.87a9.7 9.7 0 012.83 6.87c0 5.46-4.65 10.21-9.71 10.21zm5.6-7.63c-.3-.15-1.77-.87-2.04-.96-.27-.1-.47-.15-.67.15-.2.3-.77.96-.95 1.16-.18.2-.35.22-.65.07-.3-.15-1.27-.47-2.42-1.5-.9-.8-1.51-1.78-1.68-2.08-.18-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.18.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.5h-.58c-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.22 3.08c.15.2 2.1 3.2 5.08 4.48.71.3 1.26.47 1.7.6.72.23 1.37.2 1.9.12.58-.08 1.77-.72 2.02-1.42.25-.7.25-1.3.17-1.43-.07-.13-.27-.2-.57-.36z" /></svg>
+                                    <i className="fa-brands fa-whatsapp fa-lg text-white"></i>
                                 </a>
                                 <a href="https://t.me/zraiee" target="_blank" rel="noopener" aria-label="تيليغرام" className="grid h-9 w-9 place-items-center rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 transition">
-                                    <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" className="text-sky-400"><path d="M9.04 15.59l-.38 5.39c.55 0 .79-.24 1.07-.52l2.57-2.46 5.32 3.9c.98.54 1.68.25 1.94-.9l3.52-16.5h.01c.31-1.46-.53-2.03-1.47-1.67L1.16 9.88c-1.4.54-1.38 1.32-.24 1.67l5.41 1.69 12.6-7.95c.59-.38 1.12-.17.68.21" /></svg>
+                                    <i className="fa-brands fa-telegram fa-lg text-white"></i>
                                 </a>
                                 <a href="https://x.com/Arab_Ai_" target="_blank" rel="noopener" aria-label="منصة إكس" className="grid h-9 w-9 place-items-center rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 transition">
-                                    <img src="/icons/x.svg" alt="X" className="h-[18px] w-[18px]" />
+                                    <i className="fa-brands fa-x-twitter fa-lg text-white"></i>
                                 </a>
                                 <a href="https://www.youtube.com/@alzarraei-gpts" target="_blank" rel="noopener" aria-label="يوتيوب" className="grid h-9 w-9 place-items-center rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 transition">
-                                    <img src="/icons/youtube.svg" alt="YouTube" className="h-[18px] w-[18px]" />
+                                    <i className="fa-brands fa-youtube fa-lg text-white"></i>
                                 </a>
                                 {/* Instagram */}
                                 <a href="https://www.instagram.com/alzarraei.gpts/" target="_blank" rel="noopener" aria-label="إنستغرام" className="grid h-9 w-9 place-items-center rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 transition">
-                                    <img src="/icons/instagram.svg" alt="Instagram" className="h-[18px] w-[18px]" />
+                                    <i className="fa-brands fa-instagram fa-lg text-white"></i>
                                 </a>
                                 {/* Facebook */}
                                 <a href="https://www.facebook.com/alzarraei.gpts/" target="_blank" rel="noopener" aria-label="فيسبوك" className="grid h-9 w-9 place-items-center rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 transition">
-                                    <img src="/icons/facebook.svg" alt="Facebook" className="h-[18px] w-[18px]" />
+                                    <i className="fa-brands fa-facebook-f fa-lg text-white"></i>
                                 </a>
                                 {/* TikTok */}
                                 <a href="https://www.tiktok.com/@alzarraei" target="_blank" rel="noopener" aria-label="تيك توك" className="grid h-9 w-9 place-items-center rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 transition">
-                                    <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" className="text-white"><path d="M14 3h3a6 6 0 006 6v3a9 9 0 01-6-2v7a5 5 0 11-5-5h2v3a2 2 0 10-2 2 2 2 0 002-2V3z"/></svg>
+                                    <i className="fa-brands fa-tiktok fa-lg text-white"></i>
                                 </a>
                                 {/* Email */}
                                 <a href="mailto:zraieee@gmail.com" target="_blank" rel="noopener" aria-label="البريد الإلكتروني" className="grid h-9 w-9 place-items-center rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 transition">
-                                    <img src="/icons/gmail.svg" alt="Email" className="h-[18px] w-[18px]" />
+                                    <i className="fa-solid fa-envelope fa-lg text-white"></i>
                                 </a>
                                 {/* PayPal */}
                                 <a href="https://www.paypal.com/paypalme/zraiee" target="_blank" rel="noopener" aria-label="باي بال" className="grid h-9 w-9 place-items-center rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 transition">
-                                    <img src="/icons/paypal.svg" alt="PayPal" className="h-[18px] w-[18px]" />
+                                    <i className="fa-brands fa-paypal fa-lg text-white"></i>
                                 </a>
                                 {/* LinkedIn */}
                                 <a href="https://www.linkedin.com/in/abdulrahman-alzarraei/" target="_blank" rel="noopener" aria-label="لينكدإن" className="grid h-9 w-9 place-items-center rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 transition">
-                                    <img src="/icons/linkedin.svg" alt="LinkedIn" className="h-[18px] w-[18px]" />
+                                    <i className="fa-brands fa-linkedin-in fa-lg text-white"></i>
                                 </a>
                             </div>
                         </div>
@@ -1698,3 +1696,4 @@ const DEFAULT_BOT_LIMITS =
     "تعمل ضمن نطاق أكاديمي صارم، وتلتزم بالأصالة البحثية والحياد والدقة واللغة العربية الفصيحة والتوثيق العلمي السليم. لا تقدّم اقتراحات عامة متداولة.";
 const DEFAULT_BOT_EXAMPLE =
     "أدخل تخصصك (مثل: التربية الخاصة)، وسيقترح البوت 3 عناوين أصيلة لرسائل ماجستير ضمن هذا المجال.";
+
