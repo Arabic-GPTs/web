@@ -312,6 +312,8 @@ body {
     background: color-mix(in oklab, var(--nv-surface-2), transparent 40%);
     text-align: start; /* right in RTL, left in LTR */
     justify-content: flex-start;
+    width: 100%;
+    display: flex; /* override inline-flex to allow full-width in grid cell */
   }
   .nv-chip[data-active="true"] {
     color: #fff;

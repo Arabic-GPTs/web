@@ -790,7 +790,7 @@ export default function App() {
                         <div className="flex flex-wrap items-start gap-3 rounded-3xl border border-white/10 bg-white/5 p-3">
                             {/* فلاتر الفئات */}
                             <div
-                                className={`relative basis-full flex flex-wrap justify-start gap-2 ${catsExpanded ? 'max-h-none overflow-visible' : 'max-h-10 overflow-hidden'}`}
+                                className={`relative basis-full grid gap-2 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 ${catsExpanded ? 'max-h-none overflow-visible' : 'max-h-10 overflow-hidden'}`}
                             >
                                 {categories.map((c) => {
                                     const Icon = CATEGORY_ICONS[c] || CATEGORY_ICONS.default;
@@ -799,7 +799,7 @@ export default function App() {
                                             key={c}
                                             onClick={() => setCat(c)}
                                             data-active={cat === c}
-                                            className="nv-chip"
+                                            className="nv-chip w-full"
                                         >
                                             <span className="opacity-90">{Icon}</span>
                                             <span>{c}</span>
