@@ -31,6 +31,20 @@ const PACKAGE_KEYWORDS = [
 ];
 const norm = (s) => (s || "").toString().trim().replace(/\s+/g, " ");
 const stripTashkeel = (s) => s.replace(/[\u0617-\u061A\u064B-\u0652\u0670]/g, "");
+// Sanitize user-provided text inputs (keeps Arabic; strips control chars; clamps length)
+const sanitizeText = (s, max = 200) => {
+    try {
+        const t = (s ?? "").toString();
+        return t.replace(/[\u0000-\u001F\u007F]/g, "").slice(0, max);
+    } catch { return ""; }
+};
+// Basic allowlist URL check (http/https only)
+const isSafeUrl = (url) => {
+    try {
+        const u = new URL(url, typeof window !== 'undefined' ? window.location.href : 'about:blank');
+        return u.protocol === 'http:' || u.protocol === 'https:';
+    } catch { return false; }
+};
 const getPkgOrder = (name) => {
     const n = stripTashkeel(norm(name));
     if (PACKAGE_ORDER_INDEX.has(n)) return PACKAGE_ORDER_INDEX.get(n);
@@ -228,6 +242,16 @@ export default function App() {
     // Toast رسالة عابرة (مثلاً: تم نسخ الرابط)
     const [toast, setToast] = useState(null);
     const toastTimerRef = useRef(null);
+    // Safe external opener with simple feedback
+    const openExternal = (url) => {
+        try { clearTimeout(toastTimerRef.current); } catch {}
+        if (!isSafeUrl(url)) {
+            setToast('رابط غير صالح');
+            toastTimerRef.current = setTimeout(() => setToast(null), 1800);
+            return;
+        }
+        try { window.open(url, '_blank', 'noopener,noreferrer'); } catch { }
+    };
 
     // Accordion state for packages (collapsed by default)
     const [expandedPkgs, setExpandedPkgs] = useState(() => {
@@ -336,7 +360,10 @@ export default function App() {
             const s = JSON.parse(raw);
             if (typeof s.q === "string") setQ(s.q);
             if (typeof s.cat === "string") setCat(s.cat);
-            if (typeof s.sort === "string") setSort(s.sort);
+            if (typeof s.sort === "string") {
+                const ok = (Array.isArray(SORTS) ? SORTS : []).some((x) => x.id === s.sort);
+                setSort(ok ? s.sort : SORTS[0].id);
+            }
         } catch { }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
@@ -422,7 +449,7 @@ export default function App() {
                     setSelectedIndex((i) => Math.max(i - 1, 0));
                 if (e.key === "Enter") {
                     const item = filtered[selectedIndex];
-                    if (item) window.open(item.url, "_blank", "noopener");
+                    if (item) openExternal(item.url);
                 }
             }
         };
@@ -461,6 +488,7 @@ export default function App() {
     // أدوات مساعدة: تهيئة الاتصال ونسخ الرابط
     const warmUp = (url) => {
         try {
+            if (!isSafeUrl(url)) return;
             const u = new URL(url, window.location.href);
             const origin = `${u.protocol}//${u.host}`;
             const pre = document.createElement("link");
@@ -477,6 +505,12 @@ export default function App() {
     };
 
     const copyLink = async (url) => {
+        if (!isSafeUrl(url)) {
+            try { clearTimeout(toastTimerRef.current); } catch {}
+            setToast('لا يمكن نسخ رابط غير صالح');
+            toastTimerRef.current = setTimeout(() => setToast(null), 1800);
+            return;
+        }
         try {
             await navigator.clipboard.writeText(url);
             try { clearTimeout(toastTimerRef.current); } catch {}
@@ -820,8 +854,13 @@ export default function App() {
                                 {/* صندوق بحث مبسّط بدون حدود داخلية */}
                                 <div className="flex w-[220px] md:w-[360px] items-center gap-1 nv-input">
                                     <input
+                                        type="search"
+                                        inputMode="search"
+                                        autoComplete="off"
+                                        maxLength={200}
+                                        aria-label="بحث"
                                         value={q}
-                                        onChange={(e) => setQ(e.target.value)}
+                                        onChange={(e) => setQ(sanitizeText(e.target.value))}
                                         placeholder={'ابحث باسم البوت…'}
                                         className="flex-1 bg-transparent px-1 py-0.5 text-sm outline-none placeholder:text-white/50"
                                     />
@@ -837,7 +876,10 @@ export default function App() {
                                 </div>
                                 <select
                                     value={sort}
-                                    onChange={(e) => setSort(e.target.value)}
+                                    onChange={(e) => {
+                                        const v = e.target.value;
+                                        setSort((SORTS || []).some((s) => s.id === v) ? v : (SORTS?.[0]?.id || 'popular'));
+                                    }}
                                     className="nv-select text-sm"
                                 >
                                     {SORTS.map((s) => (
@@ -957,7 +999,7 @@ export default function App() {
                                                                                 setBotModal({ type: 'choose-model', bot: b });
                                                                             } else {
                                                                                 const u = urls[0] || b.url;
-                                                                                if (u) window.open(u, '_blank', 'noopener');
+                                                                                if (u) openExternal(u);
                                                                             }
                                                                         }}
                                                                         className="flex-1 grid place-items-center rounded-xl bg-gradient-to-br from-lime-400 via-emerald-500 to-lime-400 px-3 py-2 font-bold text-white shadow hover:shadow-lg animate-gradient-slow"
@@ -1177,10 +1219,15 @@ export default function App() {
                             <div className="flex items-center gap-2 border-b border-white/10 bg-white/5 px-4 py-3">
                                 <input
                                     autoFocus
+                                    type="search"
+                                    inputMode="search"
+                                    autoComplete="off"
+                                    maxLength={200}
+                                    aria-label="بحث"
                                     placeholder="اكتب للبحث عن أي بوت…"
                                     value={q}
                                     onChange={(e) => {
-                                        setQ(e.target.value);
+                                        setQ(sanitizeText(e.target.value));
                                         setSelectedIndex(0);
                                     }}
                                     className="w-full bg-transparent text-sm outline-none placeholder:text-white/50"
@@ -1198,7 +1245,7 @@ export default function App() {
                                 {filtered.map((b, i) => (
                                     <li key={b.id}>
                                         <button
-                                            onClick={() => window.open(b.url, "_blank", "noopener")}
+                                            onClick={() => openExternal(b.url)}
                                             onMouseEnter={() => setSelectedIndex(i)}
                                             className={`flex w-full items-center justify-between gap-3 rounded-xl px-3 py-2 text-start text-sm transition ${selectedIndex === i ? "bg-white/10" : "hover:bg-white/5"
                                                 }`}
@@ -1246,6 +1293,7 @@ function BooksPage() {
     const [loading, setLoading] = useState(true);
     const handleDownload = async (url, name = "file") => {
         try {
+            if (!isSafeUrl(url)) return;
             const a = document.createElement('a');
             a.href = url;
             a.download = name;
@@ -1253,7 +1301,7 @@ function BooksPage() {
             a.click();
             document.body.removeChild(a);
             setTimeout(() => {
-                try { window.open(url, '_blank', 'noopener'); } catch { }
+                try { if (isSafeUrl(url)) window.open(url, '_blank', 'noopener,noreferrer'); } catch { }
             }, 350);
         } catch { }
     };
