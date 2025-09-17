@@ -8,6 +8,9 @@ import pdf_5 from "../assets/pdfs/the-imitating-machine.pdf";
 import pdf_6 from "../assets/pdfs/the-interacting-machine.pdf";
 import pdf_7 from "../assets/pdfs/the-learning-machine.pdf";
 import pdf_8 from "../assets/pdfs/the-thinking-machine.pdf";
+import pdf_9 from "../assets/pdfs/the-commanding-machine.pdf";
+import pdf_10 from "../assets/pdfs/the-instructing-machine.pdf";
+import pdf_11 from "../assets/pdfs/the-comparing-machine.pdf";
 import cover_0 from "../assets/covers/the-creating-machine.jpg";
 import cover_1 from "../assets/covers/the-dialogue-machine.jpg";
 import cover_2 from "../assets/covers/the-emerging-machine.jpg";
@@ -168,6 +171,51 @@ export const BOOKS = [
     downloadUrl: pdf_8,
     coverUrl: cover_8,
     viewUrl: pdf_8,
+  },
+  {
+    id: "the-commanding-machine",
+    title: "The Commanding Machine",
+    slug: "the-commanding-machine",
+    category: "�?�?�?�?�?",
+    tags: [],
+    seriesId: "machine-series",
+    seriesIndex: 10,
+    primaryCategoryId: "series",
+    categoryIds: ["series"],
+    pdfUrl: pdf_9,
+    downloadUrl: pdf_9,
+    coverUrl: "/logo.png",
+    viewUrl: pdf_9,
+  },
+  {
+    id: "the-instructing-machine",
+    title: "The Instructing Machine",
+    slug: "the-instructing-machine",
+    category: "�?�?�?�?�?",
+    tags: [],
+    seriesId: "machine-series",
+    seriesIndex: 11,
+    primaryCategoryId: "series",
+    categoryIds: ["series"],
+    pdfUrl: pdf_10,
+    downloadUrl: pdf_10,
+    coverUrl: "/logo.png",
+    viewUrl: pdf_10,
+  },
+  {
+    id: "the-comparing-machine",
+    title: "The Comparing Machine",
+    slug: "the-comparing-machine",
+    category: "�?�?�?�?�?",
+    tags: [],
+    seriesId: "machine-series",
+    seriesIndex: 12,
+    primaryCategoryId: "series",
+    categoryIds: ["series"],
+    pdfUrl: pdf_11,
+    downloadUrl: pdf_11,
+    coverUrl: "/logo.png",
+    viewUrl: pdf_11,
   },
 ];
 
