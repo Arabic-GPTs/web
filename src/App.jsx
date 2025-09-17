@@ -398,12 +398,12 @@ export default function App() {
     // عدّادات للفئات بناءً على البحث + المفضلة
     const categoryCounts = useMemo(() => {
         const counts = new Map();
-        const tokens = q.trim().toLowerCase().split(/\s+/).filter(Boolean);
+        const tokens = tokenize(q);
         let base = bots;
         if (tokens.length) {
             base = base.filter((b) => {
-                const title = b.title.toLowerCase();
-                const catL = (b.category || "").toLowerCase();
+                const title = normalizeAr(b.title);
+                const catL = normalizeAr(b.category || "");
                 return tokens.every((tok) => title.includes(tok) || catL.includes(tok));
             });
         }
