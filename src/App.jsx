@@ -45,6 +45,9 @@ const isSafeUrl = (url) => {
         return u.protocol === 'http:' || u.protocol === 'https:';
     } catch { return false; }
 };
+// Arabic-insensitive normalization for search
+const normalizeAr = (s) => stripTashkeel((s || "").toString()).toLowerCase();
+const tokenize = (s) => normalizeAr(s).trim().split(/\s+/).filter(Boolean);
 const getPkgOrder = (name) => {
     const n = stripTashkeel(norm(name));
     if (PACKAGE_ORDER_INDEX.has(n)) return PACKAGE_ORDER_INDEX.get(n);
@@ -485,6 +488,14 @@ export default function App() {
         return rows;
     }, [q, cat, sort, bots]);
 
+    // Titles list for datalist suggestions
+    const botTitles = useMemo(() => {
+        try {
+            const set = new Set(bots.map((b) => (b.title || '').toString().trim()).filter(Boolean));
+            return Array.from(set).sort((a, b) => a.localeCompare(b, 'ar'));
+        } catch { return []; }
+    }, [bots]);
+
     // أدوات مساعدة: تهيئة الاتصال ونسخ الرابط
     const warmUp = (url) => {
         try {
@@ -881,6 +892,7 @@ export default function App() {
                                         setSort((SORTS || []).some((s) => s.id === v) ? v : (SORTS?.[0]?.id || 'popular'));
                                     }}
                                     className="nv-select text-sm"
+                                    style={{ position: 'relative', zIndex: 50, isolation: 'isolate' }}
                                 >
                                     {SORTS.map((s) => (
                                         <option key={s.id} value={s.id}>
