@@ -942,12 +942,13 @@ export default function App() {
                                             }}
                                             aria-expanded={expandedPkgs.has(pkg.key || pkg.name)}
                                             aria-controls={`pkg-panel-${(pkg.key || pkg.name || '').toString().replace(/\s+/g, '-').replace(/[^\w\-]/g, '')}`}
-                                            className={`inline-flex items-center gap-2 text-xl md:text-2xl font-extrabold text-white rounded-full border border-white/10 px-4 py-1.5 bg-neutral-800 ring-1 ring-white/10 focus:outline-none focus:ring-2 focus:ring-emerald-400 hover:bg-emerald-500`}
+                                            className={`inline-flex items-center gap-2 text-xl md:text-2xl font-extrabold text-white rounded-full border-2 border-emerald-500/45 px-4 py-1.5 bg-neutral-900/60 ring-1 ring-emerald-400/20 focus:outline-none focus:ring-2 focus:ring-emerald-400/40 hover:bg-neutral-900/70 transition-colors`}
                                         >
                                             <span className="opacity-90">
                                                 {(CATEGORY_ICONS[pkg.name] || CATEGORY_ICONS.default)}
                                             </span>
                                             {pkg.name}
+                                            <span className="me-1 inline-block h-2.5 w-2.5 rounded-full bg-neutral-300/70"></span>
                                             <span className="mx-1 text-xs font-semibold text-white/80 bg-black/30 px-2 py-0.5 rounded-lg border border-white/10">{pkg.cats.length}</span>
                                             <span className={`ms-1 inline-flex h-6 w-6 items-center justify-center rounded-full bg-black/30 border border-white/10 text-white/80 transition-transform ${expandedPkgs.has(pkg.key || pkg.name) ? 'rotate-180' : 'rotate-0'}`}>
                                                 <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 10l5 5 5-5H7z"/></svg>
