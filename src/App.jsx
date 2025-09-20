@@ -930,20 +930,21 @@ export default function App() {
                                         className={`${expandedPkgs.has(pkg.key || pkg.name) ? 'sticky top-16 md:top-20 z-10 -mx-3 md:-mx-5 px-3 md:px-5 py-2 rounded-2xl bg-neutral-950/70 backdrop-blur supports-[backdrop-filter]:bg-neutral-900/55' : ''} flex items-center gap-2`}
                                     >
                                         <div className="h-px flex-1 bg-gradient-to-l from-white/10 to-transparent" />
-                                        <button
-                                            type="button"
-                                            onClick={() => {
-                                                const k = pkg.key || pkg.name;
-                                                setExpandedPkgs((prev) => {
-                                                    const next = new Set(prev);
-                                                    if (next.has(k)) next.delete(k); else next.add(k);
-                                                    return next;
-                                                });
-                                            }}
-                                            aria-expanded={expandedPkgs.has(pkg.key || pkg.name)}
-                                            aria-controls={`pkg-panel-${(pkg.key || pkg.name || '').toString().replace(/\s+/g, '-').replace(/[^\w\-]/g, '')}`}
-                                            className={`inline-flex items-center gap-2 text-xl md:text-2xl font-extrabold text-white rounded-full border-2 border-emerald-300 px-4 py-1.5 bg-neutral-900/60 ring-2 ring-emerald-300/50 focus:outline-none focus:ring-2 focus:ring-emerald-300/60 hover:bg-neutral-900/70 shadow-[0_0_0_1px_rgba(16,185,129,0.18)] transition-colors`}
-                                        >
+                                        <span className="inline-flex rounded-full p-[2px] bg-gradient-to-r from-emerald-300 via-emerald-400 to-emerald-300 shadow-[0_0_0_1px_rgba(16,185,129,0.15)]">
+                                            <button
+                                                type="button"
+                                                onClick={() => {
+                                                    const k = pkg.key || pkg.name;
+                                                    setExpandedPkgs((prev) => {
+                                                        const next = new Set(prev);
+                                                        if (next.has(k)) next.delete(k); else next.add(k);
+                                                        return next;
+                                                    });
+                                                }}
+                                                aria-expanded={expandedPkgs.has(pkg.key || pkg.name)}
+                                                aria-controls={`pkg-panel-${(pkg.key || pkg.name || '').toString().replace(/\s+/g, '-').replace(/[^\w\-]/g, '')}`}
+                                                className={`inline-flex items-center gap-2 text-xl md:text-2xl font-extrabold text-white rounded-full px-4 py-1.5 bg-neutral-900/60 ring-1 ring-emerald-300/30 focus:outline-none focus:ring-2 focus:ring-emerald-300/50 hover:bg-neutral-900/70 transition-colors`}
+                                            >
                                             <span className="opacity-90">
                                                 {(CATEGORY_ICONS[pkg.name] || CATEGORY_ICONS.default)}
                                             </span>
@@ -953,7 +954,8 @@ export default function App() {
                                             <span className={`ms-1 inline-flex h-6 w-6 items-center justify-center rounded-full bg-black/30 border border-white/10 text-white/80 transition-transform ${expandedPkgs.has(pkg.key || pkg.name) ? 'rotate-180' : 'rotate-0'}`}>
                                                 <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 10l5 5 5-5H7z"/></svg>
                                             </span>
-                                        </button>
+                                            </button>
+                                        </span>
                                         <div className="h-px flex-1 bg-gradient-to-r from-white/10 to-transparent" />
                                     </motion.div>
                                     <p className="-mt-1 text-center text-[11px] text-white/60">حُزمة • {pkg.cats.length} فئات</p>
