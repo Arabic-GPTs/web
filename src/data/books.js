@@ -3,7 +3,7 @@ import pdf_0 from '../assets/pdfs/the-commanding-machine.pdf';
 import pdf_1 from '../assets/pdfs/the-comparing-machine.pdf';
 import pdf_2 from '../assets/pdfs/the-conversing-machine.pdf';
 import pdf_3 from '../assets/pdfs/the-creating-machine.pdf';
-import pdf_4 from '../assets/pdfs/the-dialogue-machine1.pdf';
+import pdf_4 from '../assets/pdfs/the-dialogue-machine.pdf';
 import pdf_5 from '../assets/pdfs/the-emerging-machine.pdf';
 import pdf_6 from '../assets/pdfs/the-feeling-machine.pdf';
 import pdf_7 from '../assets/pdfs/the-imitating-machine.pdf';
@@ -14,7 +14,7 @@ import cover_0 from '../assets/covers/the-commanding-machine.jpg';
 import cover_1 from '../assets/covers/the-comparing-machine.jpg';
 import cover_2 from '../assets/covers/the-conversing-machine.jpg';
 import cover_3 from '../assets/covers/the-creating-machine.jpg';
-import cover_4 from '../assets/covers/the-dialogue-machine1.jpg';
+import cover_4 from '../assets/covers/the-dialogue-machine.jpg';
 import cover_5 from '../assets/covers/the-emerging-machine.jpg';
 import cover_6 from '../assets/covers/the-feeling-machine.jpg';
 import cover_7 from '../assets/covers/the-imitating-machine.jpg';
@@ -35,7 +35,7 @@ export const BOOKS = [
   { id: 'the-comparing-machine', title: 'الآلة التي تُفكّر', slug: 'the-comparing-machine', category: 'الكتب', tags: [], seriesId: 'machine-series', seriesIndex: 2, primaryCategoryId: 'series', categoryIds: ['series'], pdfUrl: pdf_1, downloadUrl: pdf_1, coverUrl: cover_1, viewUrl: pdf_1 },
   { id: 'the-conversing-machine', title: 'الآلة التي تُحاور', slug: 'the-conversing-machine', category: 'الكتب', tags: [], seriesId: 'machine-series', seriesIndex: 3, primaryCategoryId: 'series', categoryIds: ['series'], pdfUrl: pdf_2, downloadUrl: pdf_2, coverUrl: cover_2, viewUrl: pdf_2 },
   { id: 'the-creating-machine', title: 'الآلة التي تشعر', slug: 'the-creating-machine', category: 'الكتب', tags: [], seriesId: 'machine-series', seriesIndex: 4, primaryCategoryId: 'series', categoryIds: ['series'], pdfUrl: pdf_3, downloadUrl: pdf_3, coverUrl: cover_3, viewUrl: pdf_3 },
-  { id: 'the-dialogue-machine1', title: 'الآلة التي تُقلّد', slug: 'the-dialogue-machine1', category: 'الكتب', tags: [], seriesId: 'machine-series', seriesIndex: 5, primaryCategoryId: 'series', categoryIds: ['series'], pdfUrl: pdf_4, downloadUrl: pdf_4, coverUrl: cover_4, viewUrl: pdf_4 },
+  { id: 'the-dialogue-machine', title: 'الآلة التي تُقلّد', slug: 'the-dialogue-machine', category: 'الكتب', tags: [], seriesId: 'machine-series', seriesIndex: 5, primaryCategoryId: 'series', categoryIds: ['series'], pdfUrl: pdf_4, downloadUrl: pdf_4, coverUrl: cover_4, viewUrl: pdf_4 },
   { id: 'the-emerging-machine', title: 'الآلة التي تُبدِع', slug: 'the-emerging-machine', category: 'الكتب', tags: [], seriesId: 'machine-series', seriesIndex: 6, primaryCategoryId: 'series', categoryIds: ['series'], pdfUrl: pdf_5, downloadUrl: pdf_5, coverUrl: cover_5, viewUrl: pdf_5 },
   { id: 'the-feeling-machine', title: 'الآلة التي تتعلّم', slug: 'the-feeling-machine', category: 'الكتب', tags: [], seriesId: 'machine-series', seriesIndex: 7, primaryCategoryId: 'series', categoryIds: ['series'], pdfUrl: pdf_6, downloadUrl: pdf_6, coverUrl: cover_6, viewUrl: pdf_6 },
   { id: 'the-imitating-machine', title: 'الآلة التي تتفاعل', slug: 'the-imitating-machine', category: 'الكتب', tags: [], seriesId: 'machine-series', seriesIndex: 8, primaryCategoryId: 'series', categoryIds: ['series'], pdfUrl: pdf_7, downloadUrl: pdf_7, coverUrl: cover_7, viewUrl: pdf_7 },
