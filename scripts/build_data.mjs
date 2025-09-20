@@ -3,8 +3,8 @@ import { readFileSync, writeFileSync, existsSync, mkdirSync } from 'node:fs';
 import { join } from 'node:path';
 
 const repoRoot = process.cwd();
-const pyScript = join(repoRoot, 'pytoncode', 'build_packages_json.py');
-const pyOutput = join(repoRoot, 'pytoncode', 'output.json');
+const pyMerge = join(repoRoot, 'pytoncode', 'update_from_docx.py');
+const pyOutput = join(repoRoot, 'public', 'new_bots.json');
 const publicJson = join(repoRoot, 'public', 'new_bots.json');
 
 function runPython() {
@@ -12,7 +12,7 @@ function runPython() {
   const candidates = process.platform === 'win32' ? ['python', 'python3'] : ['python3', 'python'];
   let lastRes = null;
   for (const exe of candidates) {
-    const res = spawnSync(exe, [pyScript], {
+    const res = spawnSync(exe, [pyMerge], {
       cwd: repoRoot,
       stdio: 'pipe',
       encoding: 'utf8',
@@ -40,17 +40,21 @@ function ensureDir(path) {
 
 const res = runPython();
 if (res && res.status !== 0) {
-  // Continue only if output.json exists and is valid
-  // This handles consoles that choke on Unicode prints while file is written.
+  console.warn('[data:build] Python merge script exited with non-zero. Continuing if file updated.');
 }
 
-const data = safeReadJSON(pyOutput);
-if (!data || !Array.isArray(data.packages) || data.packages.length === 0) {
-  console.log('[data:build] Skipped updating public/new_bots.json: no packages found.');
+const dataText = existsSync(pyOutput) ? readFileSync(pyOutput, 'utf8') : null;
+if (!dataText) {
+  console.log('[data:build] No changes to public/new_bots.json');
   process.exit(0);
 }
+let data;
+try {
+  data = JSON.parse(dataText);
+} catch (e) {
+  console.error('[data:build] Invalid JSON at public/new_bots.json');
+  process.exit(1);
+}
 
-ensureDir(join(repoRoot, 'public'));
 writeFileSync(publicJson, JSON.stringify(data, null, 2), 'utf8');
-console.log(`[data:build] Updated ${publicJson} with ${data.packages.length} package(s).`);
-
+console.log(`[data:build] Merged DOCX updates into ${publicJson}.`);
