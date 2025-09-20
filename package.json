@@ -5,11 +5,13 @@
     "type": "module",
   "scripts": {
     "dev": "vite",
+    "prebuild": "node scripts/build_data.mjs",
     "build": "vite build",
     "preview": "vite preview --open",
     "img:banner": "node scripts/process_images.mjs --task banner",
     "img:covers": "node scripts/process_images.mjs --task covers",
-    "img:all": "node scripts/process_images.mjs --task all"
+    "img:all": "node scripts/process_images.mjs --task all",
+    "data:build": "node scripts/build_data.mjs"
   },
     "dependencies": {
         "framer-motion": "^11.2.10",
