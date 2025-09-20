@@ -22,7 +22,7 @@ from pathlib import Path
 # ======== إعدادات المسارات ========
 # إن كانت ملفاتك في /mnt/data كما في جلسة العمل الحالية، اترك BASE كما هو.
 BASE = Path(__file__).resolve().parent
-HUDUD_PATH = os.path.join(BASE, "oldحدود.docx")
+HUDUD_PATH = os.path.join(BASE, "حدود.docx")
 NOBTHA_PATH = os.path.join(BASE, "نبذة.docx")
 MITHAL_PATH = os.path.join(BASE, "مثال.docx")
 # LINKS_PATH  = os.path.join(BASE, "روابط النسخة الكاملة.docx")
