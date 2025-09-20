@@ -180,13 +180,13 @@ const CATEGORY_ACCENTS = {
 // اختيار ثابت للتدرّج بناءً على الفئة (مع تجزئة مستقرة للفئات غير المعرّفة)
 const pickAccentByCategory = (category) => {
     const c = (category || "").toString().trim();
-    if (CATEGORY_ACCENTS[c]) return "from-neutral-800 via-neutral-900 to-black";
+    if (CATEGORY_ACCENTS[c]) return "from-nvidia-600 via-emerald-500 to-nvidia-600";
     // تجزئة بسيطة وثابتة لإسناد لون من القائمة
     let hash = 0;
     for (let i = 0; i < c.length; i++) {
         hash = (hash * 31 + c.charCodeAt(i)) >>> 0;
     }
-    return "from-neutral-800 via-neutral-900 to-black";
+    return "from-nvidia-600 via-emerald-500 to-nvidia-600";
 };
 
 // مساعد لإرجاع لون البطاقة دائمًا حسب الفئة
@@ -224,7 +224,7 @@ export default function App() {
     const [paletteOpen, setPaletteOpen] = useState(false);
     const [selectedIndex, setSelectedIndex] = useState(0);
     const [progress, setProgress] = useState(0);
-    const [bots, setBots] = useState([]);
+    const [bots, setBots] = useState(BOTS);
     const [botModal, setBotModal] = useState(null); // { type, bot }
 
     // تم إزالة مكونات المفضلة والوسوم من الواجهة
@@ -930,32 +930,29 @@ export default function App() {
                                         className={`${expandedPkgs.has(pkg.key || pkg.name) ? 'sticky top-16 md:top-20 z-10 -mx-3 md:-mx-5 px-3 md:px-5 py-2 rounded-2xl bg-neutral-950/70 backdrop-blur supports-[backdrop-filter]:bg-neutral-900/55' : ''} flex items-center gap-2`}
                                     >
                                         <div className="h-px flex-1 bg-gradient-to-l from-white/10 to-transparent" />
-                                        <span className="inline-flex rounded-full p-[2px] bg-gradient-to-r from-emerald-300 via-emerald-400 to-emerald-300 shadow-[0_0_0_1px_rgba(16,185,129,0.15)]">
-                                            <button
-                                                type="button"
-                                                onClick={() => {
-                                                    const k = pkg.key || pkg.name;
-                                                    setExpandedPkgs((prev) => {
-                                                        const next = new Set(prev);
-                                                        if (next.has(k)) next.delete(k); else next.add(k);
-                                                        return next;
-                                                    });
-                                                }}
-                                                aria-expanded={expandedPkgs.has(pkg.key || pkg.name)}
-                                                aria-controls={`pkg-panel-${(pkg.key || pkg.name || '').toString().replace(/\s+/g, '-').replace(/[^\w\-]/g, '')}`}
-                                                className={`inline-flex items-center gap-2 text-xl md:text-2xl font-extrabold text-white rounded-full px-4 py-1.5 bg-neutral-900/60 ring-1 ring-emerald-300/30 focus:outline-none focus:ring-2 focus:ring-emerald-300/50 hover:bg-neutral-900/70 transition-colors`}
-                                            >
+                                        <button
+                                            type="button"
+                                            onClick={() => {
+                                                const k = pkg.key || pkg.name;
+                                                setExpandedPkgs((prev) => {
+                                                    const next = new Set(prev);
+                                                    if (next.has(k)) next.delete(k); else next.add(k);
+                                                    return next;
+                                                });
+                                            }}
+                                            aria-expanded={expandedPkgs.has(pkg.key || pkg.name)}
+                                            aria-controls={`pkg-panel-${(pkg.key || pkg.name || '').toString().replace(/\s+/g, '-').replace(/[^\w\-]/g, '')}`}
+                                            className={`inline-flex items-center gap-2 text-xl md:text-2xl font-extrabold text-white rounded-full border border-white/10 px-4 py-1.5 bg-neutral-800 ring-1 ring-white/10 focus:outline-none focus:ring-2 focus:ring-emerald-400 hover:bg-emerald-500`}
+                                        >
                                             <span className="opacity-90">
                                                 {(CATEGORY_ICONS[pkg.name] || CATEGORY_ICONS.default)}
                                             </span>
                                             {pkg.name}
-                                            <span className="me-1 inline-block h-2.5 w-2.5 rounded-full bg-neutral-300/70"></span>
                                             <span className="mx-1 text-xs font-semibold text-white/80 bg-black/30 px-2 py-0.5 rounded-lg border border-white/10">{pkg.cats.length}</span>
                                             <span className={`ms-1 inline-flex h-6 w-6 items-center justify-center rounded-full bg-black/30 border border-white/10 text-white/80 transition-transform ${expandedPkgs.has(pkg.key || pkg.name) ? 'rotate-180' : 'rotate-0'}`}>
                                                 <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 10l5 5 5-5H7z"/></svg>
                                             </span>
-                                            </button>
-                                        </span>
+                                        </button>
                                         <div className="h-px flex-1 bg-gradient-to-r from-white/10 to-transparent" />
                                     </motion.div>
                                     <p className="-mt-1 text-center text-[11px] text-white/60">حُزمة • {pkg.cats.length} فئات</p>
@@ -976,7 +973,7 @@ export default function App() {
                                         <div key={`${pkg.name}-${cat.name}`} className="space-y-2">
                                             <div className="flex items-center gap-2 mb-1 justify-center">
                                                 <div className="hidden md:block h-px flex-1 bg-gradient-to-l from-white/10 to-transparent" />
-                                                <span className={`inline-flex items-center gap-1 text-sm md:text-base text-white/90 rounded-full border border-white/10 px-2 py-0.5 bg-gradient-to-br from-neutral-700 to-neutral-900 shadow-[0_0_18px_rgba(0,0,0,0.35)] ring-1 ring-white/10 backdrop-blur-sm animate-gradient-slow`}>
+                                                <span className={`inline-flex items-center gap-1 text-sm md:text-base text-white/90 rounded-full border border-white/10 px-2 py-0.5 bg-gradient-to-br ${cat.accent} shadow-[0_0_18px_rgba(0,0,0,0.35)] ring-1 ring-white/10 backdrop-blur-sm animate-gradient-slow`}>
                                                     {cat.name}
                                                 </span>
                                                 <span className="hidden md:inline text-xs text-white/60">{cat.rows.length} بوت</span>
@@ -993,7 +990,7 @@ export default function App() {
                                                             transition={{ duration: 0.3, ease: "easeOut" }}
                                                             className="pixel-card group relative overflow-hidden rounded-2xl bg-neutral-900/60 p-3 shadow-lg hover:shadow-2xl hover:-translate-y-0.5 transition will-change-transform"
                                                         >
-                                                            <div className={`absolute inset-0 opacity-60 bg-gradient-to-br from-neutral-800 via-neutral-900 to-black`} />
+                                                            <div className={`absolute inset-0 opacity-60 bg-gradient-to-br ${getAccent(b)}`} />
                                                             <div className="relative z-10 flex h-full flex-col">
                                                                 <div className="flex items-center gap-2 text-xs">
                                                                     <div className="ml-auto" />
@@ -1002,13 +999,13 @@ export default function App() {
                                                                     {b.title}
                                                                 </h3>
                                                                 <div className="mt-2 grid grid-cols-3 gap-3 text-xs pb-2">
-                                                                    <button onClick={() => setBotModal({ type: "about", bot: b })} className="rounded-xl border border-white/15 bg-black px-2 py-1.5 font-bold text-white hover:bg-white/10 hover:text-white transition">
+                                                                    <button onClick={() => setBotModal({ type: "about", bot: b })} className="rounded-xl border border-white/15 bg-black px-2 py-1.5 font-bold text-white hover:bg-emerald-500 hover:text-black transition">
                                                                         نبذة
                                                                     </button>
-                                                                    <button onClick={() => setBotModal({ type: "limits", bot: b })} className="rounded-xl border border-white/15 bg-black px-2 py-1.5 font-bold text-white hover:bg-white/10 hover:text-white transition">
+                                                                    <button onClick={() => setBotModal({ type: "limits", bot: b })} className="rounded-xl border border-white/15 bg-black px-2 py-1.5 font-bold text-white hover:bg-emerald-500 hover:text-black transition">
                                                                         حدود
                                                                     </button>
-                                                                    <button onClick={() => setBotModal({ type: "example", bot: b })} className="rounded-xl border border-white/15 bg-black px-2 py-1.5 font-bold text-white hover:bg-white/10 hover:text-white transition">
+                                                                    <button onClick={() => setBotModal({ type: "example", bot: b })} className="rounded-xl border border-white/15 bg-black px-2 py-1.5 font-bold text-white hover:bg-emerald-500 hover:text-black transition">
                                                                         مثال
                                                                     </button>
                                                                 </div>
@@ -1024,7 +1021,7 @@ export default function App() {
                                                                                 if (u) openExternal(u);
                                                                             }
                                                                         }}
-                                                                        className="flex-1 grid place-items-center rounded-xl bg-gradient-to-br from-neutral-700 via-neutral-800 to-black px-3 py-2 font-bold text-white shadow hover:shadow-lg animate-gradient-slow"
+                                                                        className="flex-1 grid place-items-center rounded-xl bg-gradient-to-br from-lime-400 via-emerald-500 to-lime-400 px-3 py-2 font-bold text-white shadow hover:shadow-lg animate-gradient-slow"
                                                                     >
                                                                         فتح البوت ↗
                                                                     </button>
@@ -1770,4 +1767,3 @@ const DEFAULT_BOT_LIMITS =
     "تعمل ضمن نطاق أكاديمي صارم، وتلتزم بالأصالة البحثية والحياد والدقة واللغة العربية الفصيحة والتوثيق العلمي السليم. لا تقدّم اقتراحات عامة متداولة.";
 const DEFAULT_BOT_EXAMPLE =
     "أدخل تخصصك (مثل: التربية الخاصة)، وسيقترح البوت 3 عناوين أصيلة لرسائل ماجستير ضمن هذا المجال.";
-
