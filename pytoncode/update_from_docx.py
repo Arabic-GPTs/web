@@ -6,6 +6,7 @@ import os
 import re
 import sys
 from pathlib import Path
+from collections import OrderedDict
 
 try:
     from docx import Document
@@ -109,6 +110,31 @@ def extract_desc_from_buffer(text: str, label: str):
         return m.group(1).strip()
     return text.strip()
 
+def parse_blocks_any(lines):
+    """تحليل كتل عامة تعتمد على رؤوس '#...' أو '@@@...'"""
+    result = {}
+    current = None
+    buf = []
+    def flush():
+        nonlocal buf, current
+        if current and buf:
+            text='\n'.join(buf).strip()
+            if text:
+                result[current]=text
+        buf=[]
+    for raw in lines:
+        line=(raw or '').strip()
+        if not line:
+            continue
+        m = re.match(r'^\s*(?:#+|@@@)\s*(.+?)\s*$', line)
+        if m:
+            flush()
+            current = normalize_text(m.group(1))
+            continue
+        buf.append(line)
+    flush()
+    return result
+
 def build_maps(known_titles):
     known_map = build_known_map(known_titles)
 
@@ -117,14 +143,27 @@ def build_maps(known_titles):
     mithal_lines = read_docx_lines(MITHAL_PATH)
 
     hudud_map = parse_blocks(hudud_lines, known_map)
-    nobtha_map = parse_blocks(nobtha_lines, known_map)
-    mithal_map = parse_blocks(mithal_lines, known_map)
+    # خرائط عامة بدون اشتراط العناوين المعروفة
+    nobtha_all = parse_blocks_any(nobtha_lines)
+    def parse_pairs_map(lines):
+        res = {}
+        for raw in lines:
+            s = (raw or '').strip()
+            if not s:
+                continue
+            m = re.search(r'["“”«](.+?)["”»]\s*[:：]\s*["“”«](.+?)["”»]', s)
+            if m:
+                k = normalize_text(m.group(1))
+                v = m.group(2).strip()
+                res[k] = v
+        return res
 
-    # Post-process to extract labeled descriptions if present
-    nobtha_map = {k: extract_desc_from_buffer(v, 'نبذة') for k, v in nobtha_map.items()}
-    mithal_map = {k: extract_desc_from_buffer(v, 'مثال') for k, v in mithal_map.items()}
+    mithal_all = parse_pairs_map(mithal_lines)
+    # للأدوات الموجودة فقط
+    nobtha_map = {t: extract_desc_from_buffer(nobtha_all.get(normalize_text(t), ''), 'نبذة') for t in known_titles}
+    mithal_map = {t: extract_desc_from_buffer(mithal_all.get(normalize_text(t), ''), 'مثال') for t in known_titles}
 
-    return hudud_map, nobtha_map, mithal_map
+    return hudud_map, nobtha_map, mithal_map, nobtha_all, mithal_all
 
 def update_public_json(data, hudud_map, nobtha_map, mithal_map):
     updated = 0
@@ -143,6 +182,146 @@ def update_public_json(data, hudud_map, nobtha_map, mithal_map):
                     updated += 1
     return updated
 
+# ------------- إضافة الأدوات الجديدة وتصنيفها -------------
+
+def is_package_line(line: str) -> bool:
+    s = re.sub(r'^[#*@\-\s]+', '', line or '')
+    return bool(re.match(r'^(باقة|حزمة)\b', s))
+
+def is_category_line(line: str) -> bool:
+    s = re.sub(r'^[#*@\-\s]+', '', line or '')
+    return bool(re.match(r'^(تصنيف|فئة|مجموعة|قسم|باب)\b', s))
+
+def is_bot_header_line(line: str) -> bool:
+    # Bots غالباً تسبقها # كعنوان
+    return bool(re.match(r'^\s*#+\s*', line or ''))
+
+def parse_hudud_structure(lines):
+    """إرجاع هيكل: OrderedDict{ package -> OrderedDict{ category -> OrderedDict{ botTitle -> hudud_text } } }"""
+    pkgs = OrderedDict()
+    current_package = None
+    current_category = None
+    current_bot = None
+    buffer = []
+
+    def flush_bot():
+        nonlocal buffer, current_package, current_category, current_bot
+        if current_package and current_category and current_bot:
+            text = '\n'.join(buffer).strip()
+            pkgs.setdefault(current_package, OrderedDict())
+            cats = pkgs[current_package]
+            cats.setdefault(current_category, OrderedDict())
+            bots = cats[current_category]
+            bots[current_bot] = text
+        buffer = []
+
+    for raw in lines:
+        line = raw.strip()
+        if not line:
+            continue
+        # دعم صيغ: "العنوان الرئيسي: ..." و"العنوان الفرعي: ..."
+        m = re.match(r'^\s*(العنوان\s*الرئيسي|العنوان\s*الفرعي)\s*[:：]\s*(.+)$', line)
+        if m:
+            label = m.group(1)
+            value = normalize_text(m.group(2))
+            if 'الرئيسي' in label:
+                flush_bot()
+                current_package = value
+                current_category = None
+                current_bot = None
+            else:
+                flush_bot()
+                current_category = value or 'غير مصنف'
+                current_bot = None
+            continue
+        if is_package_line(line):
+            flush_bot()
+            current_package = normalize_text(re.sub(r'^[#*@\-\s]+', '', line))
+            current_category = None
+            current_bot = None
+            continue
+        if is_category_line(line):
+            flush_bot()
+            current_category = normalize_text(re.sub(r'^[#*@\-\s]+', '', line))
+            current_bot = None
+            continue
+        if is_bot_header_line(line):
+            flush_bot()
+            current_bot = normalize_text(re.sub(r'^\s*#+\s*', '', line))
+            # Default category if missing
+            if not current_category:
+                current_category = 'غير مصنف'
+            continue
+        # otherwise, bot body
+        if current_bot:
+            buffer.append(line)
+
+    flush_bot()
+    return pkgs
+
+def add_missing_tools(data, hudud_pkgs, nobtha_map, mithal_map):
+    """يضيف البوتات غير الموجودة في JSON مع تصنيفها حسب هيكل حدود.docx"""
+    # خرائط بحث سريعة للاسماء المعيارية
+    def norm(s):
+        return normalize_text(s or '')
+
+    pkg_norm_to_obj = {}
+    cat_norm_to_obj = {}
+    bot_norms = set()
+
+    max_pkg_id = 0
+    for p in data.get('packages', []):
+        max_pkg_id = max(max_pkg_id, int(p.get('packageId', 0) or 0))
+        pkg_norm_to_obj[norm(p.get('package',''))] = p
+        for c in p.get('categories', []):
+            key = (norm(p.get('package','')), norm(c.get('category','')))
+            cat_norm_to_obj[key] = c
+            for b in c.get('bots', []):
+                bot_norms.add(norm(b.get('botTitle','')))
+
+    created = 0
+    for pkg_name, cats in hudud_pkgs.items():
+        pkg_key = norm(pkg_name)
+        pkg_obj = pkg_norm_to_obj.get(pkg_key)
+        if not pkg_obj:
+            max_pkg_id += 1
+            pkg_obj = {
+                'package': pkg_name,
+                'packageId': max_pkg_id,
+                'categories': []
+            }
+            data.setdefault('packages', []).append(pkg_obj)
+            pkg_norm_to_obj[pkg_key] = pkg_obj
+
+        for cat_name, bots_map in cats.items():
+            cat_key = (pkg_key, norm(cat_name))
+            cat_obj = cat_norm_to_obj.get(cat_key)
+            if not cat_obj:
+                cat_obj = {
+                    'category': cat_name,
+                    'bots': []
+                }
+                pkg_obj['categories'].append(cat_obj)
+                cat_norm_to_obj[cat_key] = cat_obj
+
+            for bot_title, hudud_text in bots_map.items():
+                bkey = norm(bot_title)
+                if bkey in bot_norms:
+                    # سيُحدّث لاحقاً عبر update_public_json
+                    continue
+                # إنشاء بوت جديد
+                new_bot = {
+                    'botTitle': bot_title,
+                    'نبذة': nobtha_map.get(bot_title, ''),
+                    'حدود': hudud_text or '',
+                    'مثال': mithal_map.get(bot_title, '')
+                }
+                cat_obj['bots'].append(new_bot)
+                bot_norms.add(bkey)
+                created += 1
+
+    return created
+
 def main():
     data = read_json(PUBLIC_JSON)
     if not data or 'packages' not in data:
@@ -158,12 +337,21 @@ def main():
                 if t:
                     titles.append(t)
 
-    hudud_map, nobtha_map, mithal_map = build_maps(titles)
+    # ابني الخرائط والنصوص
+    hudud_map, nobtha_map, mithal_map, nobtha_all, mithal_all = build_maps(titles)
+
+    # هيكل الحدود لتحديد الحِزم/الفئات/العناوين الجديدة
+    hudud_lines = read_docx_lines(HUDUD_PATH)
+    hudud_pkgs = parse_hudud_structure(hudud_lines)
+
+    # أضف البوتات غير الموجودة
+    created = add_missing_tools(data, hudud_pkgs, nobtha_all, mithal_all)
+
+    # حدّث الموجود
     updated = update_public_json(data, hudud_map, nobtha_map, mithal_map)
     write_json(PUBLIC_JSON, data)
-    print(f'Updated entries: {updated}')
+    print(f'Created: {created}, Updated: {updated}')
     return 0
 
 if __name__ == '__main__':
     sys.exit(main())
-
