@@ -942,7 +942,7 @@ export default function App() {
                                             }}
                                             aria-expanded={expandedPkgs.has(pkg.key || pkg.name)}
                                             aria-controls={`pkg-panel-${(pkg.key || pkg.name || '').toString().replace(/\s+/g, '-').replace(/[^\w\-]/g, '')}`}
-                                            className={`inline-flex items-center gap-2 text-xl md:text-2xl font-extrabold text-white rounded-full border-2 border-emerald-500/45 px-4 py-1.5 bg-neutral-900/60 ring-1 ring-emerald-400/20 focus:outline-none focus:ring-2 focus:ring-emerald-400/40 hover:bg-neutral-900/70 transition-colors`}
+                                            className={`inline-flex items-center gap-2 text-xl md:text-2xl font-extrabold text-white rounded-full border-2 border-emerald-300 px-4 py-1.5 bg-neutral-900/60 ring-2 ring-emerald-300/50 focus:outline-none focus:ring-2 focus:ring-emerald-300/60 hover:bg-neutral-900/70 shadow-[0_0_0_1px_rgba(16,185,129,0.18)] transition-colors`}
                                         >
                                             <span className="opacity-90">
                                                 {(CATEGORY_ICONS[pkg.name] || CATEGORY_ICONS.default)}
