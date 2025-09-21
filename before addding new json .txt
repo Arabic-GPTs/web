@@ -1,0 +1,13 @@
+do 
+
+ set PYTHONIOENCODING=utf-8
+
+ then 
+
+ python c:\myapps\web\pytoncode\build_packages_json.py
+
+
+ تشغيل الموقع في الجهاز قبل جيت هوب 
+ npm run dev
+
+ ثم اضغط فوق الموقع بعد التاكد من اغلاقه قبلا
