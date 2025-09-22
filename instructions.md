@@ -88,7 +88,7 @@ Use `scripts/process_images.mjs` to (1) rebuild the banner PNGs from `public/ban
 
 Commands:
 
-- `npm run img:banner` â€” outputs `src/assets/image/banner.png` (1440x720) and `src/assets/image/banner@2x.png` (2880x1440)
+- `npm run img:banner` â€” outputs `src/assets/image/banner.png` (1200x630) and `src/assets/image/banner@2x.png` (2400x1260)
 - `npm run img:covers` â€” reads from `src/assets/covers` and writes responsive sets + `manifest.json` into `public/covers`
 - `npm run img:all` â€” runs both tasks
 
