@@ -45,6 +45,15 @@ const isSafeUrl = (url) => {
         return u.protocol === 'http:' || u.protocol === 'https:';
     } catch { return false; }
 };
+const toSafeUrl = (value) => {
+    try {
+        const trimmed = (value ?? '').toString().trim();
+        if (!trimmed) return '';
+        const url = new URL(trimmed);
+        return url.protocol === 'http:' || url.protocol === 'https:' ? trimmed : '';
+    } catch { return ''; }
+};
+
 // Arabic-insensitive normalization for search
 const normalizeAr = (s) => stripTashkeel((s || "").toString()).toLowerCase();
 const tokenize = (s) => normalizeAr(s).trim().split(/\s+/).filter(Boolean);
@@ -64,59 +73,80 @@ const normalizeKeyName = (key) =>
         .toLowerCase();
 
 const buildAlias = (values) => {
-    const raw = new Set(values);
-    const normalized = new Set(values.map((value) => normalizeKeyName(value)).filter(Boolean));
+    const raw = new Set();
+    const normalized = new Set();
+    for (const value of values) {
+        if (!value) continue;
+        raw.add(value);
+        const norm = normalizeKeyName(value);
+        if (!norm) continue;
+        normalized.add(norm);
+        const stripped = norm.replace(/[0-9a-z]+$/g, '');
+        if (stripped && stripped !== norm) normalized.add(stripped);
+    }
     return { raw, normalized };
 };
 
 const KEY_ALIAS = {
     models: buildAlias([
-        "�?�?�?�?",
-        "�?�?�?�?�?���?",
-        "النموذج",
-        "النماذج",
-        "نموذج",
-        "نماذج",
-        "models",
-        "model",
+        '???????',
+        '???????',
+        '?????',
+        '?????',
+        '???????4o',
+        '???????5',
+        '??????????????',
+        '??????????????',
+        'model',
+        'models',
     ]),
     about: buildAlias([
-        "�?�?�?�?",
-        "نبذة",
-        "الوصف",
-        "وصف",
-        "about",
-        "description",
+        '????',
+        '?????',
+        '????? ???????',
+        '??????',
+        '????????',
+        'about',
+        'description',
     ]),
     limits: buildAlias([
-        "�?�?�?�?",
-        "حدود",
-        "الحدود",
-        "القيود",
-        "قيود",
-        "limits",
-        "constraints",
+        '????',
+        '??????',
+        '??????',
+        '????',
+        '????????',
+        '????????????',
+        'limits',
+        'constraints',
     ]),
     example: buildAlias([
-        "�?�?�?�?",
-        "مثال",
-        "أمثلة",
-        "الأمثلة",
-        "example",
-        "examples",
+        '????',
+        '?????',
+        '???????',
+        '?????',
+        '????????',
+        '???????',
+        'example',
+        'examples',
     ]),
     url: buildAlias([
-        "�?�?�?�?",
-        "url",
-        "link",
-        "links",
-        "الرابط",
-        "رابط",
-        "الرابطالمباشر",
-        "الرابط المباشر",
-        "href",
-        "primaryurl",
-        "directurl",
+        '??????',
+        '????',
+        '?????? ???????',
+        '?????? ???????',
+        '?????? ???????',
+        '?????? ???????',
+        '????????????',
+        '????????',
+        '??????????????????????????',
+        '???????????? ??????????????',
+        'href',
+        'url',
+        'link',
+        'links',
+        'primaryurl',
+        'primaryUrl',
+        'directurl',
     ]),
 };
 const hasOwn = (obj, key) => Object.prototype.hasOwnProperty.call(obj, key);
@@ -149,18 +179,20 @@ const pickVariantValue = (source, alias, fallback) => {
             if (!hasOwn(source, key)) continue;
             const value = source[key];
             if (value && typeof value === 'object' && !Array.isArray(value)) {
-                const hasHttp = Object.values(value).some((v) => typeof v === 'string' && v.trim().startsWith('http'));
-                if (hasHttp) return value;
+                const cleaned = {};
+                for (const [k, v] of Object.entries(value)) {
+                    const safe = toSafeUrl(v);
+                    if (safe) cleaned[k] = safe;
+                }
+                if (Object.keys(cleaned).length) return cleaned;
             }
         }
     } else if (fallback === 'string-with-http') {
         for (const key of keys) {
             if (!hasOwn(source, key)) continue;
             const value = source[key];
-            if (typeof value === 'string') {
-                const trimmed = value.trim();
-                if (trimmed.startsWith('http')) return trimmed;
-            }
+            const safe = toSafeUrl(value);
+            if (safe) return safe;
         }
     }
     return undefined;
@@ -169,15 +201,14 @@ const pickVariantValue = (source, alias, fallback) => {
 const normalizeModels = (bot) => {
     const raw = pickVariantValue(bot, KEY_ALIAS.models, 'object-with-url');
     if (typeof raw === 'string') {
-        const trimmed = raw.trim();
-        return trimmed ? { '4O': trimmed } : {};
+        const safe = toSafeUrl(raw);
+        return safe ? { '4O': safe } : {};
     }
     if (raw && typeof raw === 'object' && !Array.isArray(raw)) {
         const cleaned = {};
         for (const [key, val] of Object.entries(raw)) {
-            if (typeof val !== 'string') continue;
-            const trimmed = val.trim();
-            if (trimmed) cleaned[key] = trimmed;
+            const safe = toSafeUrl(val);
+            if (safe) cleaned[key] = safe;
         }
         return cleaned;
     }
@@ -201,11 +232,13 @@ const normalizeTextField = (bot, alias, minLength = 0) => {
 
 const normalizeLinkField = (bot) => {
     const raw = pickVariantValue(bot, KEY_ALIAS.url, 'string-with-http');
-    return typeof raw === 'string' ? raw : '';
+    return toSafeUrl(raw);
 };
 
 const firstNonEmptyString = (...values) => {
     for (const value of values) {
+        const safe = toSafeUrl(value);
+        if (safe) return safe;
         if (typeof value === 'string') {
             const trimmed = value.trim();
             if (trimmed) return trimmed;
@@ -404,12 +437,13 @@ export default function App() {
     // Safe external opener with simple feedback
     const openExternal = (url) => {
         try { clearTimeout(toastTimerRef.current); } catch {}
-        if (!isSafeUrl(url)) {
-            setToast('رابط غير صالح');
+        const safe = toSafeUrl(url);
+        if (!safe) {
+            setToast('???????? ?????? ????????');
             toastTimerRef.current = setTimeout(() => setToast(null), 1800);
             return;
         }
-        try { window.open(url, '_blank', 'noopener,noreferrer'); } catch { }
+        try { window.open(safe, '_blank', 'noopener,noreferrer'); } catch { }
     };
 
     // Accordion state for packages (collapsed by default)
@@ -466,17 +500,29 @@ export default function App() {
                             const limits = normalizeTextField(b, KEY_ALIAS.limits, 8);
                             const example = normalizeTextField(b, KEY_ALIAS.example, 8);
                             const directLink = normalizeLinkField(b);
-                            const directUrl = firstNonEmptyString(
-                                directLink,
-                                typeof b?.url === 'string' ? b.url : '',
-                                typeof b?.link === 'string' ? b.link : ''
-                            );
                             const model4o = firstNonEmptyString(models['4O'], models['4o'], models['4o-mini'], models['gpt-4o'], models['gpt4o']);
                             const model5 = firstNonEmptyString(models['5'], models['gpt-5'], models['gpt5']);
-                            const primaryUrl = firstNonEmptyString(directUrl, model4o, model5) || "#";
+                            const primaryUrlCandidate = firstNonEmptyString(
+                                directLink,
+                                model4o,
+                                model5,
+                                b?.url,
+                                b?.link
+                            );
+                            const safeUrl = toSafeUrl(primaryUrlCandidate);
                             const canonicalModels = { ...models };
                             if (model4o) canonicalModels['4O'] = model4o;
                             if (model5) canonicalModels['5'] = model5;
+                            for (const key in canonicalModels) {
+                                if (!hasOwn(canonicalModels, key)) continue;
+                                const safe = toSafeUrl(canonicalModels[key]);
+                                if (safe) {
+                                    canonicalModels[key] = safe;
+                                } else {
+                                    delete canonicalModels[key];
+                                }
+                            }
+                            const hasLink = Boolean(safeUrl);
                             const accent = pickAccentByCategory(category);
                             const id = `${(packageName || 'pkg').replace(/\s+/g, '-')}-${(category || 'cat').replace(/\s+/g, '-')}-${i}`;
                             flat.push({
@@ -487,13 +533,14 @@ export default function App() {
                                 packageId,
                                 category,
                                 accent,
-                                url: primaryUrl,
+                                url: safeUrl,
+                                hasLink,
                                 models: canonicalModels,
                                 about,
                                 limits,
                                 example,
                                 tags: [],
-                                badge: "",
+                                badge: '',
                                 score: 0,
                                 date: 0,
                             });
@@ -664,8 +711,9 @@ export default function App() {
     // أدوات مساعدة: تهيئة الاتصال ونسخ الرابط
     const warmUp = (url) => {
         try {
-            if (!isSafeUrl(url)) return;
-            const u = new URL(url, window.location.href);
+            const safe = toSafeUrl(url);
+            if (!safe) return;
+            const u = new URL(safe);
             const origin = `${u.protocol}//${u.host}`;
             const pre = document.createElement("link");
             pre.rel = "preconnect";
@@ -674,34 +722,35 @@ export default function App() {
             document.head.appendChild(pre);
             const pf = document.createElement("link");
             pf.rel = "prefetch";
-            pf.href = url;
+            pf.href = safe;
             pf.as = "document";
             document.head.appendChild(pf);
         } catch { }
     };
 
     const copyLink = async (url) => {
-        if (!isSafeUrl(url)) {
+        const safe = toSafeUrl(url);
+        if (!safe) {
             try { clearTimeout(toastTimerRef.current); } catch {}
-            setToast('لا يمكن نسخ رابط غير صالح');
+            setToast('???? ???????? ?????? ???????? ?????? ????????');
             toastTimerRef.current = setTimeout(() => setToast(null), 1800);
             return;
         }
         try {
-            await navigator.clipboard.writeText(url);
+            await navigator.clipboard.writeText(safe);
             try { clearTimeout(toastTimerRef.current); } catch {}
-            setToast('تم نسخ الرابط');
+            setToast('???? ?????? ????????????');
             toastTimerRef.current = setTimeout(() => setToast(null), 1800);
         } catch {
             try {
                 const ta = document.createElement("textarea");
-                ta.value = url;
+                ta.value = safe;
                 document.body.appendChild(ta);
                 ta.select();
                 document.execCommand("copy");
                 document.body.removeChild(ta);
                 try { clearTimeout(toastTimerRef.current); } catch {}
-                setToast('تم نسخ الرابط');
+                setToast('???? ?????? ????????????');
                 toastTimerRef.current = setTimeout(() => setToast(null), 1800);
             } catch { }
         }
@@ -1146,62 +1195,82 @@ export default function App() {
                                             </div>
                                             <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
                                                 <AnimatePresence mode="popLayout">
-                                                    {cat.rows.map((b) => (
+                                                    {cat.rows.map((b) => {
+                                                    const modelEntries = Object.entries(b?.models || {}).filter(([, url]) => !!url);
+                                                    const hasMultipleModels = modelEntries.length > 1;
+                                                    const primaryLink = toSafeUrl(b?.url);
+                                                    const fallbackCopyLink = primaryLink || (modelEntries[0]?.[1] || '');
+                                                    const canLaunch = hasMultipleModels || Boolean(primaryLink);
+                                                    const copyDisabled = !fallbackCopyLink;
+
+                                                    return (
                                                         <motion.div
                                                             key={b.id}
                                                             initial={{ opacity: 0, y: 18 }}
                                                             animate={{ opacity: 1, y: 0 }}
                                                             exit={{ opacity: 0, y: -10 }}
-                                                            transition={{ duration: 0.3, ease: "easeOut" }}
-                                                            className="pixel-card group relative overflow-hidden rounded-2xl bg-neutral-900/60 p-3 shadow-lg hover:shadow-2xl hover:-translate-y-0.5 transition will-change-transform"
+                                                            transition={{ duration: 0.3, ease: \"easeOut\" }}
+                                                            className=\"pixel-card group relative overflow-hidden rounded-2xl bg-neutral-900/60 p-3 shadow-lg hover:shadow-2xl hover:-translate-y-0.5 transition will-change-transform\"
                                                         >
                                                             <div className={`absolute inset-0 opacity-60 bg-gradient-to-br ${getAccent(b)}`} />
-                                                            <div className="relative z-10 flex h-full flex-col">
-                                                                <div className="flex items-center gap-2 text-xs">
-                                                                    <div className="ml-auto" />
+                                                            <div className=\"relative z-10 flex h-full flex-col\">
+                                                                <div className=\"flex items-center gap-2 text-xs\">
+                                                                    <div className=\"ml-auto\" />
                                                                 </div>
-                                                                <h3 className="mt-2 line-clamp-2 text-base md:text-lg leading-snug font-bold tracking-tight drop-shadow-sm min-h-[2.75rem] md:min-h-[3.125rem]">
+                                                                <h3 className=\"mt-2 line-clamp-2 text-base md:text-lg leading-snug font-bold tracking-tight drop-shadow-sm min-h-[2.75rem] md:min-h-[3.125rem]\">
                                                                     {b.title}
                                                                 </h3>
-                                                                <div className="mt-2 grid grid-cols-3 gap-3 text-xs pb-2">
-                                                                    <button onClick={() => setBotModal({ type: "about", bot: b })} className="rounded-xl border border-white/15 bg-black px-2 py-1.5 font-bold text-white hover:bg-emerald-500 hover:text-black transition">
-                                                                        نبذة
+                                                                <div className=\"mt-2 grid grid-cols-3 gap-3 text-xs pb-2\">
+                                                                    <button onClick={() => setBotModal({ type: \"about\", bot: b })} className=\"rounded-xl border border-white/15 bg-black px-2 py-1.5 font-bold text-white hover:bg-emerald-500 hover:text-black transition\">
+                                                                        ????????
                                                                     </button>
-                                                                    <button onClick={() => setBotModal({ type: "limits", bot: b })} className="rounded-xl border border-white/15 bg-black px-2 py-1.5 font-bold text-white hover:bg-emerald-500 hover:text-black transition">
-                                                                        حدود
+                                                                    <button onClick={() => setBotModal({ type: \"limits\", bot: b })} className=\"rounded-xl border border-white/15 bg-black px-2 py-1.5 font-bold text-white hover:bg-emerald-500 hover:text-black transition\">
+                                                                        ????????
                                                                     </button>
-                                                                    <button onClick={() => setBotModal({ type: "example", bot: b })} className="rounded-xl border border-white/15 bg-black px-2 py-1.5 font-bold text-white hover:bg-emerald-500 hover:text-black transition">
-                                                                        مثال
+                                                                    <button onClick={() => setBotModal({ type: \"example\", bot: b })} className=\"rounded-xl border border-white/15 bg-black px-2 py-1.5 font-bold text-white hover:bg-emerald-500 hover:text-black transition\">
+                                                                        ???????
                                                                     </button>
                                                                 </div>
-                                                                {/* أزرار النماذج */}
-                                                                <div className="mt-auto flex items-center gap-2 text-xs">
+                                                                {/* ????????? ?????????????? */}
+                                                                <div className=\"mt-auto flex items-center gap-2 text-xs\">
                                                                     <button
-                                                                        onClick={() => {
-                                                                            const urls = Object.values(b?.models || {}).filter(Boolean);
-                                                                            if (urls.length > 1) {
-                                                                                setBotModal({ type: 'choose-model', bot: b });
-                                                                            } else {
-                                                                                const u = urls[0] || b.url;
-                                                                                if (u) openExternal(u);
-                                                                            }
+                                                                        type=\"button\"
+                                                                        onMouseEnter={() => {
+                                                                            if (primaryLink) warmUp(primaryLink);
+                                                                            else if (modelEntries[0]?.[1]) warmUp(modelEntries[0][1]);
                                                                         }}
-                                                                        className="flex-1 grid place-items-center rounded-xl bg-gradient-to-br from-lime-400 via-emerald-500 to-lime-400 px-3 py-2 font-bold text-white shadow hover:shadow-lg animate-gradient-slow"
+                                                                        onClick={() => {
+                                                                            if (hasMultipleModels) {
+                                                                                setBotModal({ type: 'choose-model', bot: b });
+                                                                                return;
+                                                                            }
+                                                                            if (primaryLink) {
+                                                                                openExternal(primaryLink);
+                                                                                return;
+                                                                            }
+                                                                            openExternal('');
+                                                                        }}
+                                                                        disabled={!canLaunch}
+                                                                        className=\"flex-1 grid place-items-center rounded-xl bg-gradient-to-br from-lime-400 via-emerald-500 to-lime-400 px-3 py-2 font-bold text-white shadow hover:shadow-lg animate-gradient-slow disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:shadow-none\"
                                                                     >
-                                                                        فتح البوت ↗
+                                                                        {canLaunch ? '?????? ?????????? ???' : '??????'}
                                                                     </button>
                                                                     <button
-                                                                        onClick={() => copyLink(b?.models?.['4O'] || b?.models?.['5'] || b.url)}
-                                                                        className="rounded-xl border border-white/10 bg-white/10 px-3 py-2 font-bold text-white hover:bg-white/15 transition"
-                                                                        title="نسخ الرابط"
+                                                                        type=\"button\"
+                                                                        onClick={() => copyLink(fallbackCopyLink)}
+                                                                        disabled={copyDisabled}
+                                                                        className=\"rounded-xl border border-white/10 bg-white/10 px-3 py-2 font-bold text-white transition hover:bg-white/15 disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:bg-white/10\"
+                                                                        title=\"?????? ????????????\"
                                                                     >
-                                                                        نسخ الرابط
+                                                                        ?????? ????????????
                                                                     </button>
                                                                 </div>
                                                             </div>
-                                                            <div className="pointer-events-none absolute -inset-[1px] bg-[conic-gradient(from_180deg_at_50%_50%,transparent_0,rgba(255,255,255,0.12)_20%,transparent_35%)] opacity-0 group-hover:opacity-100 transition duration-700" />
+                                                            <div className=\"pointer-events-none absolute -inset-[1px] bg-[conic-gradient(from_180deg_at_50%_50%,transparent_0,rgba(255,255,255,0.12)_20%,transparent_35%)] opacity-0 group-hover:opacity-100 transition duration-700\" />
                                                         </motion.div>
-                                                    ))}
+                                                    );
+                                                })}
+
                                                 </AnimatePresence>
                                             </div>
                                         </div>
