@@ -9,24 +9,24 @@
             {
               "botTitle": "اقتراح عنوان وفكرة بحث",
               "النموذج": {
-                "4o": "https://chatgpt.com/g/g-686b8ac963248191b35f6c4d8629e688-qtrh-nwn-wfkr-bhth-research-titles-mod-4o",
-                "5": "https://chatgpt.com/g/g-68c0f53b875881918f4b9ba01c57668a-qtrh-nwn-wfkr-bhth-research-titles-mod-5"
+                "5": "https://chatgpt.com/g/g-68c0f53b875881918f4b9ba01c57668a-qtrh-nwn-wfkr-bhth-research-titles-mod-5",
+                "4o": "https://chatgpt.com/g/g-686b8ac963248191b35f6c4d8629e688-qtrh-nwn-wfkr-bhth-research-titles-mod-4o"
               },
               "نبذة": "يُعد هذا البوت أداة ذكية متخصصة في دعم الباحثين وطلاب الدراسات العليا في اختيار عناوين أصيلة ومتميزة لرسائل الماجستير والدكتوراه. يقوم بتحليل التخصصات الأكاديمية واستنباط الفرص البحثية غير المستكشفة، ويولّد اقتراحات مبنية على فجوات معرفية حقيقية واتجاهات علمية حديثة. يقدّم العناوين بلغة فصيحة دقيقة، مع مراعاة القابلية للتنفيذ والارتباط بالواقع العلمي. يُساعد الباحث على تجنّب المواضيع المستهلكة والتكرار، ويضمن توجيهه نحو مسارات جديدة تتوافق مع معايير الأصالة والأهمية.",
               "حدود": "يعمل ضمن نطاق أكاديمي صارم، مع الالتزام بالأصالة البحثية، الحياد، الدقة، اللغة العربية الفصيحة، والتوثيق السليم. لا يجوز تقديم عناوين عامة أو متداولة، ولا استخدام مصطلحات دارجة أو دمج المعاني بطريقة غير أكاديمية.",
               "مثال": "\"أدخل تخصصك (مثل: التربية الخاصة) وسيقترح البوت 3 عناوين أصيلة لرسائل ماجستير ضمن هذا المجال.\"",
               "url": "https://chatgpt.com/g/g-686b8ac963248191b35f6c4d8629e688-qtrh-nwn-wfkr-bhth-research-titles-mod-4o",
               "model": {
-                "4o": "https://chatgpt.com/g/g-686b8ac963248191b35f6c4d8629e688-qtrh-nwn-wfkr-bhth-research-titles-mod-4o",
-                "5": "https://chatgpt.com/g/g-68c0f53b875881918f4b9ba01c57668a-qtrh-nwn-wfkr-bhth-research-titles-mod-5"
+                "5": "https://chatgpt.com/g/g-68c0f53b875881918f4b9ba01c57668a-qtrh-nwn-wfkr-bhth-research-titles-mod-5",
+                "4o": "https://chatgpt.com/g/g-686b8ac963248191b35f6c4d8629e688-qtrh-nwn-wfkr-bhth-research-titles-mod-4o"
               },
               "models": {
-                "4o": "https://chatgpt.com/g/g-686b8ac963248191b35f6c4d8629e688-qtrh-nwn-wfkr-bhth-research-titles-mod-4o",
-                "5": "https://chatgpt.com/g/g-68c0f53b875881918f4b9ba01c57668a-qtrh-nwn-wfkr-bhth-research-titles-mod-5"
+                "5": "https://chatgpt.com/g/g-68c0f53b875881918f4b9ba01c57668a-qtrh-nwn-wfkr-bhth-research-titles-mod-5",
+                "4o": "https://chatgpt.com/g/g-686b8ac963248191b35f6c4d8629e688-qtrh-nwn-wfkr-bhth-research-titles-mod-4o"
               },
               "links": {
-                "4o": "https://chatgpt.com/g/g-686b8ac963248191b35f6c4d8629e688-qtrh-nwn-wfkr-bhth-research-titles-mod-4o",
-                "5": "https://chatgpt.com/g/g-68c0f53b875881918f4b9ba01c57668a-qtrh-nwn-wfkr-bhth-research-titles-mod-5"
+                "5": "https://chatgpt.com/g/g-68c0f53b875881918f4b9ba01c57668a-qtrh-nwn-wfkr-bhth-research-titles-mod-5",
+                "4o": "https://chatgpt.com/g/g-686b8ac963248191b35f6c4d8629e688-qtrh-nwn-wfkr-bhth-research-titles-mod-4o"
               },
               "about": "يُعد هذا البوت أداة ذكية متخصصة في دعم الباحثين وطلاب الدراسات العليا في اختيار عناوين أصيلة ومتميزة لرسائل الماجستير والدكتوراه. يقوم بتحليل التخصصات الأكاديمية واستنباط الفرص البحثية غير المستكشفة، ويولّد اقتراحات مبنية على فجوات معرفية حقيقية واتجاهات علمية حديثة. يقدّم العناوين بلغة فصيحة دقيقة، مع مراعاة القابلية للتنفيذ والارتباط بالواقع العلمي. يُساعد الباحث على تجنّب المواضيع المستهلكة والتكرار، ويضمن توجيهه نحو مسارات جديدة تتوافق مع معايير الأصالة والأهمية.",
               "description": "يُعد هذا البوت أداة ذكية متخصصة في دعم الباحثين وطلاب الدراسات العليا في اختيار عناوين أصيلة ومتميزة لرسائل الماجستير والدكتوراه. يقوم بتحليل التخصصات الأكاديمية واستنباط الفرص البحثية غير المستكشفة، ويولّد اقتراحات مبنية على فجوات معرفية حقيقية واتجاهات علمية حديثة. يقدّم العناوين بلغة فصيحة دقيقة، مع مراعاة القابلية للتنفيذ والارتباط بالواقع العلمي. يُساعد الباحث على تجنّب المواضيع المستهلكة والتكرار، ويضمن توجيهه نحو مسارات جديدة تتوافق مع معايير الأصالة والأهمية.",
@@ -39,24 +39,24 @@
             {
               "botTitle": "صناعة الخطة البحثية",
               "النموذج": {
-                "4o": "https://chatgpt.com/g/g-683d09bea51c8191b7688edadeef821d-sn-lkht-lbhthy-research-plan-mod-4o",
-                "5": "https://chatgpt.com/g/g-68c0fcbcc7f48191b5236ff7bc232204-sn-lkht-lbhthy-research-plan-mod-5"
+                "5": "https://chatgpt.com/g/g-68c0fcbcc7f48191b5236ff7bc232204-sn-lkht-lbhthy-research-plan-mod-5",
+                "4o": "https://chatgpt.com/g/g-683d09bea51c8191b7688edadeef821d-sn-lkht-lbhthy-research-plan-mod-4o"
               },
               "نبذة": "يوفّر هذا البوت أداة متخصصة في إعداد خطط بحثية لرسائل الماجستير والدكتوراه. عند إدخال موضوع البحث، يقوم البوت بإنشاء خطة متكاملة تشمل: المقدمة، مشكلة البحث، الأهداف، الأسئلة أو الفرضيات، المنهجية، والإطار النظري. يُفيد الطلاب في بناء خطة بحثية متوازنة تلبي متطلبات الجامعات. كما يساعد المشرفين في مراجعة جودة الخطة البحثية. يُعتبر أداة عملية لتسريع عملية إعداد الخطط الأكاديمية.",
               "حدود": "يعمل ضمن نطاق أكاديمي صارم، مع الالتزام بالمنهجية العلمية الدقيقة واللغة الفصيحة. لا يجوز إنتاج خطط سطحية أو بعيدة عن المعايير الأكاديمية.",
               "مثال": "\"أدخل موضوعك البحثي وسيُنشئ البوت خطة بحثية متكاملة وفق المعايير الأكاديمية.\"",
               "url": "https://chatgpt.com/g/g-683d09bea51c8191b7688edadeef821d-sn-lkht-lbhthy-research-plan-mod-4o",
               "model": {
-                "4o": "https://chatgpt.com/g/g-683d09bea51c8191b7688edadeef821d-sn-lkht-lbhthy-research-plan-mod-4o",
-                "5": "https://chatgpt.com/g/g-68c0fcbcc7f48191b5236ff7bc232204-sn-lkht-lbhthy-research-plan-mod-5"
+                "5": "https://chatgpt.com/g/g-68c0fcbcc7f48191b5236ff7bc232204-sn-lkht-lbhthy-research-plan-mod-5",
+                "4o": "https://chatgpt.com/g/g-683d09bea51c8191b7688edadeef821d-sn-lkht-lbhthy-research-plan-mod-4o"
               },
               "models": {
-                "4o": "https://chatgpt.com/g/g-683d09bea51c8191b7688edadeef821d-sn-lkht-lbhthy-research-plan-mod-4o",
-                "5": "https://chatgpt.com/g/g-68c0fcbcc7f48191b5236ff7bc232204-sn-lkht-lbhthy-research-plan-mod-5"
+                "5": "https://chatgpt.com/g/g-68c0fcbcc7f48191b5236ff7bc232204-sn-lkht-lbhthy-research-plan-mod-5",
+                "4o": "https://chatgpt.com/g/g-683d09bea51c8191b7688edadeef821d-sn-lkht-lbhthy-research-plan-mod-4o"
               },
               "links": {
-                "4o": "https://chatgpt.com/g/g-683d09bea51c8191b7688edadeef821d-sn-lkht-lbhthy-research-plan-mod-4o",
-                "5": "https://chatgpt.com/g/g-68c0fcbcc7f48191b5236ff7bc232204-sn-lkht-lbhthy-research-plan-mod-5"
+                "5": "https://chatgpt.com/g/g-68c0fcbcc7f48191b5236ff7bc232204-sn-lkht-lbhthy-research-plan-mod-5",
+                "4o": "https://chatgpt.com/g/g-683d09bea51c8191b7688edadeef821d-sn-lkht-lbhthy-research-plan-mod-4o"
               },
               "about": "يوفّر هذا البوت أداة متخصصة في إعداد خطط بحثية لرسائل الماجستير والدكتوراه. عند إدخال موضوع البحث، يقوم البوت بإنشاء خطة متكاملة تشمل: المقدمة، مشكلة البحث، الأهداف، الأسئلة أو الفرضيات، المنهجية، والإطار النظري. يُفيد الطلاب في بناء خطة بحثية متوازنة تلبي متطلبات الجامعات. كما يساعد المشرفين في مراجعة جودة الخطة البحثية. يُعتبر أداة عملية لتسريع عملية إعداد الخطط الأكاديمية.",
               "description": "يوفّر هذا البوت أداة متخصصة في إعداد خطط بحثية لرسائل الماجستير والدكتوراه. عند إدخال موضوع البحث، يقوم البوت بإنشاء خطة متكاملة تشمل: المقدمة، مشكلة البحث، الأهداف، الأسئلة أو الفرضيات، المنهجية، والإطار النظري. يُفيد الطلاب في بناء خطة بحثية متوازنة تلبي متطلبات الجامعات. كما يساعد المشرفين في مراجعة جودة الخطة البحثية. يُعتبر أداة عملية لتسريع عملية إعداد الخطط الأكاديمية.",
@@ -161,24 +161,24 @@
             {
               "botTitle": "التدقيق اللغوي",
               "النموذج": {
-                "4o": "https://chatgpt.com/g/g-lf64lTcUn-bwt-ltdqyq-llgwy-proofreading",
-                "5": "https://chatgpt.com/g/g-68c13b315aa48191befd9fe8441bcf3e-bwt-ltdqyq-llgwy-proofreading-mod-5"
+                "5": "https://chatgpt.com/g/g-68c13b315aa48191befd9fe8441bcf3e-bwt-ltdqyq-llgwy-proofreading-mod-5",
+                "4o": "https://chatgpt.com/g/g-lf64lTcUn-bwt-ltdqyq-llgwy-proofreading"
               },
               "نبذة": "يُعدّ هذا البوت أداة فعّالة في دعم الباحثين لغويًّا وأسلوبيًّا، حيث يُسهِم في رفع جودة النصوص الأكاديمية عبر تدقيقها نحويًّا، صرفيًّا، وإملائيًّا وفق المعايير المعتمدة. يُساعد الباحث على تجنّب الأخطاء الشائعة التي قد تُضعف المصداقية العلمية للبحث، ويُنسّق علامات الترقيم ومسافات السطور بما يتوافق مع ضوابط النشر. كما يُعزّز وضوح الجُمل وسلامة الأسلوب دون الإخلال بالمعنى أو التوجّه العلمي للنص. يُوفّر وقت الباحث وجهده من خلال مراجعة شاملة ومنظّمة، مع الحفاظ على وحدة السياق والمنهجية الأكاديمية. يُفيد أيضًا في إعداد الملخّصات والرسائل الجامعية بصياغة دقيقة ولغة فصيحة. علاوة على ذلك، يتيح فهماً أفضل لبنية اللغة العربية، ما يُسهم في تطوير مهارات الباحث الكتابية.",
               "حدود": "يعمل ضمن نطاق أكاديمي صارم، بوصفه بوتاً ذكاء اصطناعي متخصص في تقديم اقتراحات لعناوين رسائل الماجستير والدكتوراه، ويُشترط عليه الالتزام بالمبادئ التالية: الأصالة البحثية، الحياد، الدقة، اللغة العربية الفصيحة، والتوثيق العلمي السليم. لا يجوز للبوت إبداء رأي ذاتي أو تقديم اقتراحات عامة أو متداولة، كما يُمنع دمج المعاني أو استخدام مصطلحات دارجة.",
               "مثال": "\"أدخل فقرة بها أخطاء لغوية، مثل: 'هاذا الكتاب مفيد جداً' وسيصححها البوت فورًا.\"",
               "url": "https://chatgpt.com/g/g-lf64lTcUn-bwt-ltdqyq-llgwy-proofreading",
               "model": {
-                "4o": "https://chatgpt.com/g/g-lf64lTcUn-bwt-ltdqyq-llgwy-proofreading",
-                "5": "https://chatgpt.com/g/g-68c13b315aa48191befd9fe8441bcf3e-bwt-ltdqyq-llgwy-proofreading-mod-5"
+                "5": "https://chatgpt.com/g/g-68c13b315aa48191befd9fe8441bcf3e-bwt-ltdqyq-llgwy-proofreading-mod-5",
+                "4o": "https://chatgpt.com/g/g-lf64lTcUn-bwt-ltdqyq-llgwy-proofreading"
               },
               "models": {
-                "4o": "https://chatgpt.com/g/g-lf64lTcUn-bwt-ltdqyq-llgwy-proofreading",
-                "5": "https://chatgpt.com/g/g-68c13b315aa48191befd9fe8441bcf3e-bwt-ltdqyq-llgwy-proofreading-mod-5"
+                "5": "https://chatgpt.com/g/g-68c13b315aa48191befd9fe8441bcf3e-bwt-ltdqyq-llgwy-proofreading-mod-5",
+                "4o": "https://chatgpt.com/g/g-lf64lTcUn-bwt-ltdqyq-llgwy-proofreading"
               },
               "links": {
-                "4o": "https://chatgpt.com/g/g-lf64lTcUn-bwt-ltdqyq-llgwy-proofreading",
-                "5": "https://chatgpt.com/g/g-68c13b315aa48191befd9fe8441bcf3e-bwt-ltdqyq-llgwy-proofreading-mod-5"
+                "5": "https://chatgpt.com/g/g-68c13b315aa48191befd9fe8441bcf3e-bwt-ltdqyq-llgwy-proofreading-mod-5",
+                "4o": "https://chatgpt.com/g/g-lf64lTcUn-bwt-ltdqyq-llgwy-proofreading"
               },
               "about": "يُعدّ هذا البوت أداة فعّالة في دعم الباحثين لغويًّا وأسلوبيًّا، حيث يُسهِم في رفع جودة النصوص الأكاديمية عبر تدقيقها نحويًّا، صرفيًّا، وإملائيًّا وفق المعايير المعتمدة. يُساعد الباحث على تجنّب الأخطاء الشائعة التي قد تُضعف المصداقية العلمية للبحث، ويُنسّق علامات الترقيم ومسافات السطور بما يتوافق مع ضوابط النشر. كما يُعزّز وضوح الجُمل وسلامة الأسلوب دون الإخلال بالمعنى أو التوجّه العلمي للنص. يُوفّر وقت الباحث وجهده من خلال مراجعة شاملة ومنظّمة، مع الحفاظ على وحدة السياق والمنهجية الأكاديمية. يُفيد أيضًا في إعداد الملخّصات والرسائل الجامعية بصياغة دقيقة ولغة فصيحة. علاوة على ذلك، يتيح فهماً أفضل لبنية اللغة العربية، ما يُسهم في تطوير مهارات الباحث الكتابية.",
               "description": "يُعدّ هذا البوت أداة فعّالة في دعم الباحثين لغويًّا وأسلوبيًّا، حيث يُسهِم في رفع جودة النصوص الأكاديمية عبر تدقيقها نحويًّا، صرفيًّا، وإملائيًّا وفق المعايير المعتمدة. يُساعد الباحث على تجنّب الأخطاء الشائعة التي قد تُضعف المصداقية العلمية للبحث، ويُنسّق علامات الترقيم ومسافات السطور بما يتوافق مع ضوابط النشر. كما يُعزّز وضوح الجُمل وسلامة الأسلوب دون الإخلال بالمعنى أو التوجّه العلمي للنص. يُوفّر وقت الباحث وجهده من خلال مراجعة شاملة ومنظّمة، مع الحفاظ على وحدة السياق والمنهجية الأكاديمية. يُفيد أيضًا في إعداد الملخّصات والرسائل الجامعية بصياغة دقيقة ولغة فصيحة. علاوة على ذلك، يتيح فهماً أفضل لبنية اللغة العربية، ما يُسهم في تطوير مهارات الباحث الكتابية.",
@@ -191,24 +191,24 @@
             {
               "botTitle": "تشكيل النصوص",
               "النموذج": {
-                "4o": "https://chatgpt.com/g/g-GhBmeBZb7-bwt-tshkyl-lnsws-text-formation-mod-4",
-                "5": "https://chatgpt.com/g/g-68c13d4c24948191a2e9912717c302e4-bwt-tshkyl-lnsws-text-formation-mod-5"
+                "5": "https://chatgpt.com/g/g-68c13d4c24948191a2e9912717c302e4-bwt-tshkyl-lnsws-text-formation-mod-5",
+                "4o": "https://chatgpt.com/g/g-GhBmeBZb7-bwt-tshkyl-lnsws-text-formation-mod-4"
               },
               "نبذة": "يُقدِّم هذا البوت قيمة علميّة عالية في المجال البحثي من خلال تمكين الباحثين من تشكيل النصوص بدقّة صوتيّة ونحويّة، مما يعزّز وضوح المعاني ويُسهم في تحسين الفهم القرائي. يُفيد بشكل خاص في تحرير المراجع، والهوامش، والنصوص التوثيقيّة التي تتطلب ضبطًا لغويًّا عالي المستوى. كما يُساعد في إعداد المواد التعليمية والاختبارات اللغويّة بدقّة صوتيّة تُسهم في تعليم النحو والتجويد. يُسهّل أيضًا مقارنة النسخ الآليّة بالبشريّة لضبط جودة النشر. يُتيح أنماط تشكيل متعدّدة، مما يجعله أداة مرنة للباحثين في علوم اللغة، والقراءات، والدراسات الإسلاميّة. ويُعتمد عليه في تحليل النصوص القديمة وتحقيقها لغويًّا. فضلًا عن ذلك، يوفّر آليّات تقييم ذاتي تُعزّز موثوقيّته في الأوساط الأكاديمية.",
               "حدود": "يعمل ضمن نطاق أكاديمي صارم، بوصفه بوتاً ذكاء اصطناعي متخصص في تقديم اقتراحات لعناوين رسائل الماجستير والدكتوراه، ويُشترط عليه الالتزام بالمبادئ التالية: الأصالة البحثية، الحياد، الدقة، اللغة العربية الفصيحة، والتوثيق العلمي السليم. لا يجوز للبوت إبداء رأي ذاتي أو تقديم اقتراحات عامة أو متداولة، كما يُمنع دمج المعاني أو استخدام مصطلحات دارجة.",
               "مثال": "\"أدخل جملة مثل: 'ذهب الطالب إلى المدرسة' وسيظهرها البوت مشكّلة بالكامل.\"",
               "url": "https://chatgpt.com/g/g-GhBmeBZb7-bwt-tshkyl-lnsws-text-formation-mod-4",
               "model": {
-                "4o": "https://chatgpt.com/g/g-GhBmeBZb7-bwt-tshkyl-lnsws-text-formation-mod-4",
-                "5": "https://chatgpt.com/g/g-68c13d4c24948191a2e9912717c302e4-bwt-tshkyl-lnsws-text-formation-mod-5"
+                "5": "https://chatgpt.com/g/g-68c13d4c24948191a2e9912717c302e4-bwt-tshkyl-lnsws-text-formation-mod-5",
+                "4o": "https://chatgpt.com/g/g-GhBmeBZb7-bwt-tshkyl-lnsws-text-formation-mod-4"
               },
               "models": {
-                "4o": "https://chatgpt.com/g/g-GhBmeBZb7-bwt-tshkyl-lnsws-text-formation-mod-4",
-                "5": "https://chatgpt.com/g/g-68c13d4c24948191a2e9912717c302e4-bwt-tshkyl-lnsws-text-formation-mod-5"
+                "5": "https://chatgpt.com/g/g-68c13d4c24948191a2e9912717c302e4-bwt-tshkyl-lnsws-text-formation-mod-5",
+                "4o": "https://chatgpt.com/g/g-GhBmeBZb7-bwt-tshkyl-lnsws-text-formation-mod-4"
               },
               "links": {
-                "4o": "https://chatgpt.com/g/g-GhBmeBZb7-bwt-tshkyl-lnsws-text-formation-mod-4",
-                "5": "https://chatgpt.com/g/g-68c13d4c24948191a2e9912717c302e4-bwt-tshkyl-lnsws-text-formation-mod-5"
+                "5": "https://chatgpt.com/g/g-68c13d4c24948191a2e9912717c302e4-bwt-tshkyl-lnsws-text-formation-mod-5",
+                "4o": "https://chatgpt.com/g/g-GhBmeBZb7-bwt-tshkyl-lnsws-text-formation-mod-4"
               },
               "about": "يُقدِّم هذا البوت قيمة علميّة عالية في المجال البحثي من خلال تمكين الباحثين من تشكيل النصوص بدقّة صوتيّة ونحويّة، مما يعزّز وضوح المعاني ويُسهم في تحسين الفهم القرائي. يُفيد بشكل خاص في تحرير المراجع، والهوامش، والنصوص التوثيقيّة التي تتطلب ضبطًا لغويًّا عالي المستوى. كما يُساعد في إعداد المواد التعليمية والاختبارات اللغويّة بدقّة صوتيّة تُسهم في تعليم النحو والتجويد. يُسهّل أيضًا مقارنة النسخ الآليّة بالبشريّة لضبط جودة النشر. يُتيح أنماط تشكيل متعدّدة، مما يجعله أداة مرنة للباحثين في علوم اللغة، والقراءات، والدراسات الإسلاميّة. ويُعتمد عليه في تحليل النصوص القديمة وتحقيقها لغويًّا. فضلًا عن ذلك، يوفّر آليّات تقييم ذاتي تُعزّز موثوقيّته في الأوساط الأكاديمية.",
               "description": "يُقدِّم هذا البوت قيمة علميّة عالية في المجال البحثي من خلال تمكين الباحثين من تشكيل النصوص بدقّة صوتيّة ونحويّة، مما يعزّز وضوح المعاني ويُسهم في تحسين الفهم القرائي. يُفيد بشكل خاص في تحرير المراجع، والهوامش، والنصوص التوثيقيّة التي تتطلب ضبطًا لغويًّا عالي المستوى. كما يُساعد في إعداد المواد التعليمية والاختبارات اللغويّة بدقّة صوتيّة تُسهم في تعليم النحو والتجويد. يُسهّل أيضًا مقارنة النسخ الآليّة بالبشريّة لضبط جودة النشر. يُتيح أنماط تشكيل متعدّدة، مما يجعله أداة مرنة للباحثين في علوم اللغة، والقراءات، والدراسات الإسلاميّة. ويُعتمد عليه في تحليل النصوص القديمة وتحقيقها لغويًّا. فضلًا عن ذلك، يوفّر آليّات تقييم ذاتي تُعزّز موثوقيّته في الأوساط الأكاديمية.",
@@ -313,24 +313,24 @@
             {
               "botTitle": "البحوث الكاملة من المكتبة الشاملة",
               "النموذج": {
-                "4o": "https://chatgpt.com/g/g-687b1b6691308191a307b9e9654eee1e-lbhwth-lkml-mn-lmktb-lshml",
-                "5": "https://chatgpt.com/g/g-68c122b16b0481918aa00c125a839ab6-lbhwth-lkml-mn-lmktb-lshml-mod-5"
+                "5": "https://chatgpt.com/g/g-68c122b16b0481918aa00c125a839ab6-lbhwth-lkml-mn-lmktb-lshml-mod-5",
+                "4o": "https://chatgpt.com/g/g-687b1b6691308191a307b9e9654eee1e-lbhwth-lkml-mn-lmktb-lshml"
               },
               "نبذة": "يوفر هذا البوت أداة متخصصة للباحثين في العلوم الشرعية والإنسانية، إذ يمكّنهم من الوصول إلى النصوص الكاملة للمصادر المتاحة في مكتبة الشاملة الرقمية. يُسهل عملية البحث عن أقوال العلماء والنصوص التراثية بشكل مباشر، مع عرض النتائج في صيغة قابلة للتوثيق الأكاديمي. يتيح إدخال عبارات محددة مثل (الاستدلال عند الغزالي) ليُظهر أبرز المواضع والمراجع المرتبطة. يُفيد أيضًا في التحقق من النقول وتوثيقها بدقة داخل الرسائل العلمية. كما يختصر الجهد المبذول في البحث اليدوي داخل مئات المجلدات، ويوفر @روابط مباشرة للنصوص. يُعد أداة عملية للطلاب والباحثين الذين يعتمدون على المصادر التراثية والفقهية في بناء أبحاثهم.",
               "حدود": "يعمل ضمن نطاق أكاديمي صارم، بوصفه بوتاً ذكاء اصطناعي متخصص في تقديم اقتراحات لعناوين رسائل الماجستير والدكتوراه، ويُشترط عليه الالتزام بالمبادئ التالية: الأصالة البحثية، الحياد، الدقة، اللغة العربية الفصيحة، والتوثيق العلمي السليم. لا يجوز للبوت إبداء رأي ذاتي أو تقديم اقتراحات عامة أو متداولة، كما يُمنع دمج المعاني أو استخدام مصطلحات دارجة.",
               "مثال": "\"أريد مصدرًا من الشاملة لقول الحافظ ابن حجر عن تقسيمات البدعة.\"",
               "url": "https://chatgpt.com/g/g-687b1b6691308191a307b9e9654eee1e-lbhwth-lkml-mn-lmktb-lshml",
               "model": {
-                "4o": "https://chatgpt.com/g/g-687b1b6691308191a307b9e9654eee1e-lbhwth-lkml-mn-lmktb-lshml",
-                "5": "https://chatgpt.com/g/g-68c122b16b0481918aa00c125a839ab6-lbhwth-lkml-mn-lmktb-lshml-mod-5"
+                "5": "https://chatgpt.com/g/g-68c122b16b0481918aa00c125a839ab6-lbhwth-lkml-mn-lmktb-lshml-mod-5",
+                "4o": "https://chatgpt.com/g/g-687b1b6691308191a307b9e9654eee1e-lbhwth-lkml-mn-lmktb-lshml"
               },
               "models": {
-                "4o": "https://chatgpt.com/g/g-687b1b6691308191a307b9e9654eee1e-lbhwth-lkml-mn-lmktb-lshml",
-                "5": "https://chatgpt.com/g/g-68c122b16b0481918aa00c125a839ab6-lbhwth-lkml-mn-lmktb-lshml-mod-5"
+                "5": "https://chatgpt.com/g/g-68c122b16b0481918aa00c125a839ab6-lbhwth-lkml-mn-lmktb-lshml-mod-5",
+                "4o": "https://chatgpt.com/g/g-687b1b6691308191a307b9e9654eee1e-lbhwth-lkml-mn-lmktb-lshml"
               },
               "links": {
-                "4o": "https://chatgpt.com/g/g-687b1b6691308191a307b9e9654eee1e-lbhwth-lkml-mn-lmktb-lshml",
-                "5": "https://chatgpt.com/g/g-68c122b16b0481918aa00c125a839ab6-lbhwth-lkml-mn-lmktb-lshml-mod-5"
+                "5": "https://chatgpt.com/g/g-68c122b16b0481918aa00c125a839ab6-lbhwth-lkml-mn-lmktb-lshml-mod-5",
+                "4o": "https://chatgpt.com/g/g-687b1b6691308191a307b9e9654eee1e-lbhwth-lkml-mn-lmktb-lshml"
               },
               "about": "يوفر هذا البوت أداة متخصصة للباحثين في العلوم الشرعية والإنسانية، إذ يمكّنهم من الوصول إلى النصوص الكاملة للمصادر المتاحة في مكتبة الشاملة الرقمية. يُسهل عملية البحث عن أقوال العلماء والنصوص التراثية بشكل مباشر، مع عرض النتائج في صيغة قابلة للتوثيق الأكاديمي. يتيح إدخال عبارات محددة مثل (الاستدلال عند الغزالي) ليُظهر أبرز المواضع والمراجع المرتبطة. يُفيد أيضًا في التحقق من النقول وتوثيقها بدقة داخل الرسائل العلمية. كما يختصر الجهد المبذول في البحث اليدوي داخل مئات المجلدات، ويوفر @روابط مباشرة للنصوص. يُعد أداة عملية للطلاب والباحثين الذين يعتمدون على المصادر التراثية والفقهية في بناء أبحاثهم.",
               "description": "يوفر هذا البوت أداة متخصصة للباحثين في العلوم الشرعية والإنسانية، إذ يمكّنهم من الوصول إلى النصوص الكاملة للمصادر المتاحة في مكتبة الشاملة الرقمية. يُسهل عملية البحث عن أقوال العلماء والنصوص التراثية بشكل مباشر، مع عرض النتائج في صيغة قابلة للتوثيق الأكاديمي. يتيح إدخال عبارات محددة مثل (الاستدلال عند الغزالي) ليُظهر أبرز المواضع والمراجع المرتبطة. يُفيد أيضًا في التحقق من النقول وتوثيقها بدقة داخل الرسائل العلمية. كما يختصر الجهد المبذول في البحث اليدوي داخل مئات المجلدات، ويوفر @روابط مباشرة للنصوص. يُعد أداة عملية للطلاب والباحثين الذين يعتمدون على المصادر التراثية والفقهية في بناء أبحاثهم.",
@@ -677,24 +677,24 @@
             {
               "botTitle": "تخريج الأحاديث النبوية",
               "النموذج": {
-                "4o": "https://chatgpt.com/g/g-UEL0GgbkF-tkhryj-lhdyth-lnbwy-graduation-of-hadith-mod-4",
-                "5": "https://chatgpt.com/g/g-68c10fec7f8c8191816ce413d394baeb-tkhryj-lhdyth-lnbwy-graduation-of-hadith-mod-5"
+                "5": "https://chatgpt.com/g/g-68c10fec7f8c8191816ce413d394baeb-tkhryj-lhdyth-lnbwy-graduation-of-hadith-mod-5",
+                "4o": "https://chatgpt.com/g/g-UEL0GgbkF-tkhryj-lhdyth-lnbwy-graduation-of-hadith-mod-4"
               },
               "نبذة": "يُقدّم هذا البوت خدمة علمية متقدمة للباحثين في مجال علوم الحديث، حيث يُتيح لهم تخريج الأحاديث النبوية من مصادرها الأصلية بدقة عالية. يُمكّن الباحث من إدخال نص حديث (مثل: \"إنما الأعمال بالنيات\") ليعرض له مصادر الحديث في كتب السنة، ودرجة صحته وفق أقوال العلماء، مع ذكر الرواة وسلاسل الإسناد الأساسية. يُفيد في التحقق من النصوص المقتبسة داخل الرسائل الجامعية والمقالات العلمية. كما يختصر الوقت الذي يُبذل في مراجعة كتب التخريج الورقية. يُعتبر أداة مساعدة للطلاب والباحثين في الفقه والدراسات الإسلامية، حيث يضمن الاعتماد على نصوص صحيحة وموثوقة. بالإضافة إلى ذلك، يُوفّر للمستخدم بيانات دقيقة عن أقوال المحدّثين مثل البخاري، مسلم، الترمذي، وابن حجر وغيرهم، مما يدعم النزاهة العلمية في البحث.",
               "حدود": "يعمل ضمن نطاق أكاديمي صارم، بوصفه بوتاً ذكاء اصطناعي متخصص في تقديم اقتراحات لعناوين رسائل الماجستير والدكتوراه، ويُشترط عليه الالتزام بالمبادئ التالية: الأصالة البحثية، الحياد، الدقة، اللغة العربية الفصيحة، والتوثيق العلمي السليم. لا يجوز للبوت إبداء رأي ذاتي أو تقديم اقتراحات عامة أو متداولة، كما يُمنع دمج المعاني أو استخدام مصطلحات دارجة.",
               "مثال": "\"أدخل الحديث: 'إنما الأعمال بالنيات' وسيعرض البوت مصادره ودرجته الحديثية.\"",
               "url": "https://chatgpt.com/g/g-UEL0GgbkF-tkhryj-lhdyth-lnbwy-graduation-of-hadith-mod-4",
               "model": {
-                "4o": "https://chatgpt.com/g/g-UEL0GgbkF-tkhryj-lhdyth-lnbwy-graduation-of-hadith-mod-4",
-                "5": "https://chatgpt.com/g/g-68c10fec7f8c8191816ce413d394baeb-tkhryj-lhdyth-lnbwy-graduation-of-hadith-mod-5"
+                "5": "https://chatgpt.com/g/g-68c10fec7f8c8191816ce413d394baeb-tkhryj-lhdyth-lnbwy-graduation-of-hadith-mod-5",
+                "4o": "https://chatgpt.com/g/g-UEL0GgbkF-tkhryj-lhdyth-lnbwy-graduation-of-hadith-mod-4"
               },
               "models": {
-                "4o": "https://chatgpt.com/g/g-UEL0GgbkF-tkhryj-lhdyth-lnbwy-graduation-of-hadith-mod-4",
-                "5": "https://chatgpt.com/g/g-68c10fec7f8c8191816ce413d394baeb-tkhryj-lhdyth-lnbwy-graduation-of-hadith-mod-5"
+                "5": "https://chatgpt.com/g/g-68c10fec7f8c8191816ce413d394baeb-tkhryj-lhdyth-lnbwy-graduation-of-hadith-mod-5",
+                "4o": "https://chatgpt.com/g/g-UEL0GgbkF-tkhryj-lhdyth-lnbwy-graduation-of-hadith-mod-4"
               },
               "links": {
-                "4o": "https://chatgpt.com/g/g-UEL0GgbkF-tkhryj-lhdyth-lnbwy-graduation-of-hadith-mod-4",
-                "5": "https://chatgpt.com/g/g-68c10fec7f8c8191816ce413d394baeb-tkhryj-lhdyth-lnbwy-graduation-of-hadith-mod-5"
+                "5": "https://chatgpt.com/g/g-68c10fec7f8c8191816ce413d394baeb-tkhryj-lhdyth-lnbwy-graduation-of-hadith-mod-5",
+                "4o": "https://chatgpt.com/g/g-UEL0GgbkF-tkhryj-lhdyth-lnbwy-graduation-of-hadith-mod-4"
               },
               "about": "يُقدّم هذا البوت خدمة علمية متقدمة للباحثين في مجال علوم الحديث، حيث يُتيح لهم تخريج الأحاديث النبوية من مصادرها الأصلية بدقة عالية. يُمكّن الباحث من إدخال نص حديث (مثل: \"إنما الأعمال بالنيات\") ليعرض له مصادر الحديث في كتب السنة، ودرجة صحته وفق أقوال العلماء، مع ذكر الرواة وسلاسل الإسناد الأساسية. يُفيد في التحقق من النصوص المقتبسة داخل الرسائل الجامعية والمقالات العلمية. كما يختصر الوقت الذي يُبذل في مراجعة كتب التخريج الورقية. يُعتبر أداة مساعدة للطلاب والباحثين في الفقه والدراسات الإسلامية، حيث يضمن الاعتماد على نصوص صحيحة وموثوقة. بالإضافة إلى ذلك، يُوفّر للمستخدم بيانات دقيقة عن أقوال المحدّثين مثل البخاري، مسلم، الترمذي، وابن حجر وغيرهم، مما يدعم النزاهة العلمية في البحث.",
               "description": "يُقدّم هذا البوت خدمة علمية متقدمة للباحثين في مجال علوم الحديث، حيث يُتيح لهم تخريج الأحاديث النبوية من مصادرها الأصلية بدقة عالية. يُمكّن الباحث من إدخال نص حديث (مثل: \"إنما الأعمال بالنيات\") ليعرض له مصادر الحديث في كتب السنة، ودرجة صحته وفق أقوال العلماء، مع ذكر الرواة وسلاسل الإسناد الأساسية. يُفيد في التحقق من النصوص المقتبسة داخل الرسائل الجامعية والمقالات العلمية. كما يختصر الوقت الذي يُبذل في مراجعة كتب التخريج الورقية. يُعتبر أداة مساعدة للطلاب والباحثين في الفقه والدراسات الإسلامية، حيث يضمن الاعتماد على نصوص صحيحة وموثوقة. بالإضافة إلى ذلك، يُوفّر للمستخدم بيانات دقيقة عن أقوال المحدّثين مثل البخاري، مسلم، الترمذي، وابن حجر وغيرهم، مما يدعم النزاهة العلمية في البحث.",
@@ -2478,24 +2478,24 @@
             {
               "botTitle": "اللقطات الثابتة",
               "النموذج": {
-                "4o": " https://chatgpt.com/g/g-6806708c181c819194d8290081f9fd01-bwt-llqtt-lthbt-still-shots-angles",
-                "5": "https://chatgpt.com/g/g-68d14bf4d2548191a949734105b4ff77-bwt-llqtt-lthbt-still-shots-angles-mod-5"
+                "5": "https://chatgpt.com/g/g-68d14bf4d2548191a949734105b4ff77-bwt-llqtt-lthbt-still-shots-angles-mod-5",
+                "4o": " https://chatgpt.com/g/g-6806708c181c819194d8290081f9fd01-bwt-llqtt-lthbt-still-shots-angles"
               },
               "نبذة": "يُقدّم هذا البوت أداة متخصصة في توليد وتوجيه اللقطات الثابتة (Still Shots). عند إدخال وصف (مثل: كوب قهوة على نافذة مطلة على المطر)، يقوم البوت بإنشاء تصور للّقطة يتضمن التكوين، زاوية التصوير، والإضاءة. يُفيد المصورين وصناع المحتوى في إنتاج لقطات فوتوغرافية ثابتة بجودة عالية. كما يُستخدم في الإعلانات المطبوعة والديجيتال. يُعتبر أداة عملية لتوليد أفكار بصرية غنية.",
               "حدود": "يعمل ضمن نطاق التصوير الفوتوغرافي، مع الالتزام بالدقة البصرية والجمالية. لا يجوز إنتاج لقطات بعيدة عن وصف المستخدم.",
               "مثال": "\"أدخل وصفًا مثل (كوب قهوة على نافذة مطلة على المطر) وسيقترح البوت لقطة ثابتة متكاملة.\"",
               "url": " https://chatgpt.com/g/g-6806708c181c819194d8290081f9fd01-bwt-llqtt-lthbt-still-shots-angles",
               "model": {
-                "4o": " https://chatgpt.com/g/g-6806708c181c819194d8290081f9fd01-bwt-llqtt-lthbt-still-shots-angles",
-                "5": "https://chatgpt.com/g/g-68d14bf4d2548191a949734105b4ff77-bwt-llqtt-lthbt-still-shots-angles-mod-5"
+                "5": "https://chatgpt.com/g/g-68d14bf4d2548191a949734105b4ff77-bwt-llqtt-lthbt-still-shots-angles-mod-5",
+                "4o": " https://chatgpt.com/g/g-6806708c181c819194d8290081f9fd01-bwt-llqtt-lthbt-still-shots-angles"
               },
               "models": {
-                "4o": " https://chatgpt.com/g/g-6806708c181c819194d8290081f9fd01-bwt-llqtt-lthbt-still-shots-angles",
-                "5": "https://chatgpt.com/g/g-68d14bf4d2548191a949734105b4ff77-bwt-llqtt-lthbt-still-shots-angles-mod-5"
+                "5": "https://chatgpt.com/g/g-68d14bf4d2548191a949734105b4ff77-bwt-llqtt-lthbt-still-shots-angles-mod-5",
+                "4o": " https://chatgpt.com/g/g-6806708c181c819194d8290081f9fd01-bwt-llqtt-lthbt-still-shots-angles"
               },
               "links": {
-                "4o": " https://chatgpt.com/g/g-6806708c181c819194d8290081f9fd01-bwt-llqtt-lthbt-still-shots-angles",
-                "5": "https://chatgpt.com/g/g-68d14bf4d2548191a949734105b4ff77-bwt-llqtt-lthbt-still-shots-angles-mod-5"
+                "5": "https://chatgpt.com/g/g-68d14bf4d2548191a949734105b4ff77-bwt-llqtt-lthbt-still-shots-angles-mod-5",
+                "4o": " https://chatgpt.com/g/g-6806708c181c819194d8290081f9fd01-bwt-llqtt-lthbt-still-shots-angles"
               },
               "about": "يُقدّم هذا البوت أداة متخصصة في توليد وتوجيه اللقطات الثابتة (Still Shots). عند إدخال وصف (مثل: كوب قهوة على نافذة مطلة على المطر)، يقوم البوت بإنشاء تصور للّقطة يتضمن التكوين، زاوية التصوير، والإضاءة. يُفيد المصورين وصناع المحتوى في إنتاج لقطات فوتوغرافية ثابتة بجودة عالية. كما يُستخدم في الإعلانات المطبوعة والديجيتال. يُعتبر أداة عملية لتوليد أفكار بصرية غنية.",
               "description": "يُقدّم هذا البوت أداة متخصصة في توليد وتوجيه اللقطات الثابتة (Still Shots). عند إدخال وصف (مثل: كوب قهوة على نافذة مطلة على المطر)، يقوم البوت بإنشاء تصور للّقطة يتضمن التكوين، زاوية التصوير، والإضاءة. يُفيد المصورين وصناع المحتوى في إنتاج لقطات فوتوغرافية ثابتة بجودة عالية. كما يُستخدم في الإعلانات المطبوعة والديجيتال. يُعتبر أداة عملية لتوليد أفكار بصرية غنية.",
@@ -3863,24 +3863,24 @@
             {
               "botTitle": "تعليمات التكوين",
               "النموذج": {
-                "4o": " https://chatgpt.com/g/g-87OFcAcmH-t-lymt-tkwyn-lnmdhj-gpt-instructions",
-                "5": " https://chatgpt.com/g/g-68c317caf6a08191808c32526dc31bd7-t-lymt-tkwyn-lnmdhj-gpt-instructions-mod-5"
+                "5": " https://chatgpt.com/g/g-68c317caf6a08191808c32526dc31bd7-t-lymt-tkwyn-lnmdhj-gpt-instructions-mod-5",
+                "4o": " https://chatgpt.com/g/g-87OFcAcmH-t-lymt-tkwyn-lnmdhj-gpt-instructions"
               },
               "نبذة": "يُقدّم هذا البوت أداة متخصصة لشرح وتنفيذ تعليمات تكوين النموذج (Custom GPT Instructions) بالاعتماد على نسخة GPT-4. عند إدخال استفسار (مثل: كيف أضبط شخصية النموذج؟) يقوم البوت بشرح كيفية استخدام تعليمات النظام، السياق، والتخصيص. يُفيد الباحثين والمطورين في إعداد نماذج دقيقة تخدم أهدافًا محددة. يُعتبر أداة عملية لفهم إمكانيات GPT-4 في تخصيص الشخصية.",
               "حدود": "يعمل ضمن نطاق التعليم التطبيقي مع الالتزام بالدقة والوضوح. لا يجوز تقديم تعليمات بعيدة عن خصائص GPT-4.",
               "مثال": "\"أدخل سؤالًا مثل (كيف أضبط شخصية النموذج؟) وسيشرح البوت الخطوات ضمن GPT-4.\"",
               "url": " https://chatgpt.com/g/g-87OFcAcmH-t-lymt-tkwyn-lnmdhj-gpt-instructions",
               "model": {
-                "4o": " https://chatgpt.com/g/g-87OFcAcmH-t-lymt-tkwyn-lnmdhj-gpt-instructions",
-                "5": " https://chatgpt.com/g/g-68c317caf6a08191808c32526dc31bd7-t-lymt-tkwyn-lnmdhj-gpt-instructions-mod-5"
+                "5": " https://chatgpt.com/g/g-68c317caf6a08191808c32526dc31bd7-t-lymt-tkwyn-lnmdhj-gpt-instructions-mod-5",
+                "4o": " https://chatgpt.com/g/g-87OFcAcmH-t-lymt-tkwyn-lnmdhj-gpt-instructions"
               },
               "models": {
-                "4o": " https://chatgpt.com/g/g-87OFcAcmH-t-lymt-tkwyn-lnmdhj-gpt-instructions",
-                "5": " https://chatgpt.com/g/g-68c317caf6a08191808c32526dc31bd7-t-lymt-tkwyn-lnmdhj-gpt-instructions-mod-5"
+                "5": " https://chatgpt.com/g/g-68c317caf6a08191808c32526dc31bd7-t-lymt-tkwyn-lnmdhj-gpt-instructions-mod-5",
+                "4o": " https://chatgpt.com/g/g-87OFcAcmH-t-lymt-tkwyn-lnmdhj-gpt-instructions"
               },
               "links": {
-                "4o": " https://chatgpt.com/g/g-87OFcAcmH-t-lymt-tkwyn-lnmdhj-gpt-instructions",
-                "5": " https://chatgpt.com/g/g-68c317caf6a08191808c32526dc31bd7-t-lymt-tkwyn-lnmdhj-gpt-instructions-mod-5"
+                "5": " https://chatgpt.com/g/g-68c317caf6a08191808c32526dc31bd7-t-lymt-tkwyn-lnmdhj-gpt-instructions-mod-5",
+                "4o": " https://chatgpt.com/g/g-87OFcAcmH-t-lymt-tkwyn-lnmdhj-gpt-instructions"
               },
               "about": "يُقدّم هذا البوت أداة متخصصة لشرح وتنفيذ تعليمات تكوين النموذج (Custom GPT Instructions) بالاعتماد على نسخة GPT-4. عند إدخال استفسار (مثل: كيف أضبط شخصية النموذج؟) يقوم البوت بشرح كيفية استخدام تعليمات النظام، السياق، والتخصيص. يُفيد الباحثين والمطورين في إعداد نماذج دقيقة تخدم أهدافًا محددة. يُعتبر أداة عملية لفهم إمكانيات GPT-4 في تخصيص الشخصية.",
               "description": "يُقدّم هذا البوت أداة متخصصة لشرح وتنفيذ تعليمات تكوين النموذج (Custom GPT Instructions) بالاعتماد على نسخة GPT-4. عند إدخال استفسار (مثل: كيف أضبط شخصية النموذج؟) يقوم البوت بشرح كيفية استخدام تعليمات النظام، السياق، والتخصيص. يُفيد الباحثين والمطورين في إعداد نماذج دقيقة تخدم أهدافًا محددة. يُعتبر أداة عملية لفهم إمكانيات GPT-4 في تخصيص الشخصية.",
