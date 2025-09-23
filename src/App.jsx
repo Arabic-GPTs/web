@@ -1209,32 +1209,32 @@ export default function App() {
                                                             initial={{ opacity: 0, y: 18 }}
                                                             animate={{ opacity: 1, y: 0 }}
                                                             exit={{ opacity: 0, y: -10 }}
-                                                            transition={{ duration: 0.3, ease: \"easeOut\" }}
-                                                            className=\"pixel-card group relative overflow-hidden rounded-2xl bg-neutral-900/60 p-3 shadow-lg hover:shadow-2xl hover:-translate-y-0.5 transition will-change-transform\"
+                                                            transition={{ duration: 0.3, ease: "easeOut" }}
+                                                            className="pixel-card group relative overflow-hidden rounded-2xl bg-neutral-900/60 p-3 shadow-lg hover:shadow-2xl hover:-translate-y-0.5 transition will-change-transform"
                                                         >
                                                             <div className={`absolute inset-0 opacity-60 bg-gradient-to-br ${getAccent(b)}`} />
-                                                            <div className=\"relative z-10 flex h-full flex-col\">
-                                                                <div className=\"flex items-center gap-2 text-xs\">
-                                                                    <div className=\"ml-auto\" />
+                                                            <div className="relative z-10 flex h-full flex-col">
+                                                                <div className="flex items-center gap-2 text-xs">
+                                                                    <div className="ml-auto" />
                                                                 </div>
-                                                                <h3 className=\"mt-2 line-clamp-2 text-base md:text-lg leading-snug font-bold tracking-tight drop-shadow-sm min-h-[2.75rem] md:min-h-[3.125rem]\">
+                                                                <h3 className="mt-2 line-clamp-2 text-base md:text-lg leading-snug font-bold tracking-tight drop-shadow-sm min-h-[2.75rem] md:min-h-[3.125rem]">
                                                                     {b.title}
                                                                 </h3>
-                                                                <div className=\"mt-2 grid grid-cols-3 gap-3 text-xs pb-2\">
-                                                                    <button onClick={() => setBotModal({ type: \"about\", bot: b })} className=\"rounded-xl border border-white/15 bg-black px-2 py-1.5 font-bold text-white hover:bg-emerald-500 hover:text-black transition\">
-                                                                        ????????
+                                                                <div className="mt-2 grid grid-cols-3 gap-3 text-xs pb-2">
+                                                                    <button onClick={() => setBotModal({ type: "about", bot: b })} className="rounded-xl border border-white/15 bg-black px-2 py-1.5 font-bold text-white hover:bg-emerald-500 hover:text-black transition">
+                                                                        About
                                                                     </button>
-                                                                    <button onClick={() => setBotModal({ type: \"limits\", bot: b })} className=\"rounded-xl border border-white/15 bg-black px-2 py-1.5 font-bold text-white hover:bg-emerald-500 hover:text-black transition\">
-                                                                        ????????
+                                                                    <button onClick={() => setBotModal({ type: "limits", bot: b })} className="rounded-xl border border-white/15 bg-black px-2 py-1.5 font-bold text-white hover:bg-emerald-500 hover:text-black transition">
+                                                                        Limits
                                                                     </button>
-                                                                    <button onClick={() => setBotModal({ type: \"example\", bot: b })} className=\"rounded-xl border border-white/15 bg-black px-2 py-1.5 font-bold text-white hover:bg-emerald-500 hover:text-black transition\">
-                                                                        ???????
+                                                                    <button onClick={() => setBotModal({ type: "example", bot: b })} className="rounded-xl border border-white/15 bg-black px-2 py-1.5 font-bold text-white hover:bg-emerald-500 hover:text-black transition">
+                                                                        Examples
                                                                     </button>
                                                                 </div>
-                                                                {/* ????????? ?????????????? */}
-                                                                <div className=\"mt-auto flex items-center gap-2 text-xs\">
+                                                                {/* Secondary actions */}
+                                                                <div className="mt-auto flex items-center gap-2 text-xs">
                                                                     <button
-                                                                        type=\"button\"
+                                                                        type="button"
                                                                         onMouseEnter={() => {
                                                                             if (primaryLink) warmUp(primaryLink);
                                                                             else if (modelEntries[0]?.[1]) warmUp(modelEntries[0][1]);
@@ -1251,22 +1251,22 @@ export default function App() {
                                                                             openExternal('');
                                                                         }}
                                                                         disabled={!canLaunch}
-                                                                        className=\"flex-1 grid place-items-center rounded-xl bg-gradient-to-br from-lime-400 via-emerald-500 to-lime-400 px-3 py-2 font-bold text-white shadow hover:shadow-lg animate-gradient-slow disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:shadow-none\"
+                                                                        className="flex-1 grid place-items-center rounded-xl bg-gradient-to-br from-lime-400 via-emerald-500 to-lime-400 px-3 py-2 font-bold text-white shadow hover:shadow-lg animate-gradient-slow disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:shadow-none"
                                                                     >
-                                                                        {canLaunch ? '?????? ?????????? ???' : '??????'}
+                                                                        {canLaunch ? 'Open in ChatGPT' : 'Unavailable'}
                                                                     </button>
                                                                     <button
-                                                                        type=\"button\"
+                                                                        type="button"
                                                                         onClick={() => copyLink(fallbackCopyLink)}
                                                                         disabled={copyDisabled}
-                                                                        className=\"rounded-xl border border-white/10 bg-white/10 px-3 py-2 font-bold text-white transition hover:bg-white/15 disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:bg-white/10\"
-                                                                        title=\"?????? ????????????\"
+                                                                        className="rounded-xl border border-white/10 bg-white/10 px-3 py-2 font-bold text-white transition hover:bg-white/15 disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:bg-white/10"
+                                                                        title="Copy link"
                                                                     >
-                                                                        ?????? ????????????
+                                                                        Copy Link
                                                                     </button>
                                                                 </div>
                                                             </div>
-                                                            <div className=\"pointer-events-none absolute -inset-[1px] bg-[conic-gradient(from_180deg_at_50%_50%,transparent_0,rgba(255,255,255,0.12)_20%,transparent_35%)] opacity-0 group-hover:opacity-100 transition duration-700\" />
+                                                            <div className="pointer-events-none absolute -inset-[1px] bg-[conic-gradient(from_180deg_at_50%_50%,transparent_0,rgba(255,255,255,0.12)_20%,transparent_35%)] opacity-0 group-hover:opacity-100 transition duration-700" />
                                                         </motion.div>
                                                     );
                                                 })}
