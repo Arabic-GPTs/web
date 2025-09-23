@@ -54,6 +54,24 @@ const toSafeUrl = (value) => {
     } catch { return ''; }
 };
 
+const formatModelLabel = (name) => {
+    try {
+        const raw = (name ?? '').toString();
+        const lower = raw.toLowerCase();
+        if (!lower) return raw;
+        if (['4o', 'gpt-4o', 'gpt4o'].includes(lower)) return '4o';
+        if (['4o-mini', 'gpt-4o-mini', 'gpt4o-mini'].includes(lower)) return '4o-mini';
+        if (['5', 'gpt-5', 'gpt5'].includes(lower)) return 'GPT-5';
+        if (lower.startsWith('link')) {
+            const match = lower.match(/link[-_]?(\d+)/);
+            return match && match[1] ? `رابط ${match[1]}` : 'رابط';
+        }
+        return raw;
+    } catch {
+        return name;
+    }
+};
+
 // Arabic-insensitive normalization for search
 const normalizeAr = (s) => stripTashkeel((s || "").toString()).toLowerCase();
 const tokenize = (s) => normalizeAr(s).trim().split(/\s+/).filter(Boolean);
@@ -499,20 +517,14 @@ export default function App() {
                             const about = normalizeTextField(b, KEY_ALIAS.about, 24);
                             const limits = normalizeTextField(b, KEY_ALIAS.limits, 8);
                             const example = normalizeTextField(b, KEY_ALIAS.example, 8);
-                            const directLink = normalizeLinkField(b);
-                            const model4o = firstNonEmptyString(models['4O'], models['4o'], models['4o-mini'], models['gpt-4o'], models['gpt4o']);
-                            const model5 = firstNonEmptyString(models['5'], models['gpt-5'], models['gpt5']);
-                            const primaryUrlCandidate = firstNonEmptyString(
-                                directLink,
-                                model4o,
-                                model5,
-                                b?.url,
-                                b?.link
-                            );
-                            const safeUrl = toSafeUrl(primaryUrlCandidate);
+                            const fallbackLinks = Array.isArray(b?.linksList) ? b.linksList : [];
                             const canonicalModels = { ...models };
-                            if (model4o) canonicalModels['4O'] = model4o;
-                            if (model5) canonicalModels['5'] = model5;
+                            fallbackLinks.forEach((link, linkIndex) => {
+                                const key = `link-${linkIndex + 1}`;
+                                if (!canonicalModels[key]) {
+                                    canonicalModels[key] = link;
+                                }
+                            });
                             for (const key in canonicalModels) {
                                 if (!hasOwn(canonicalModels, key)) continue;
                                 const safe = toSafeUrl(canonicalModels[key]);
@@ -522,7 +534,33 @@ export default function App() {
                                     delete canonicalModels[key];
                                 }
                             }
-                            const hasLink = Boolean(safeUrl);
+                            const normalizedModelEntries = Object.entries(canonicalModels)
+                                .map(([model, url]) => [model, toSafeUrl(url)])
+                                .filter(([, url]) => !!url);
+                            const chatModelNames = new Set(['4o', 'gpt-4o', 'gpt4o', '4o-mini', '5', 'gpt-5', 'gpt5']);
+                            const hasMultipleModels = normalizedModelEntries.length > 1;
+                            const primaryLink = toSafeUrl(b?.url);
+                            const fallbackModelLink = normalizedModelEntries[0]?.[1] || '';
+                            const launchLink = primaryLink || fallbackModelLink;
+                            const hasChatModels = normalizedModelEntries.some(([model]) => chatModelNames.has((model || '').toLowerCase()));
+                            const launchHost = (() => {
+                                try {
+                                    return launchLink ? new URL(launchLink).hostname || '' : '';
+                                } catch { return ''; }
+                            })();
+                            const isChatGPTLaunch = launchHost.endsWith('chatgpt.com');
+                            const buttonLabel = (() => {
+                                if (hasMultipleModels) {
+                                    return hasChatModels ? 'اختيار النموذج' : 'عرض الروابط';
+                                }
+                                if (launchLink) {
+                                    return isChatGPTLaunch ? 'تشغيل في ChatGPT' : 'فتح الرابط';
+                                }
+                                return 'غير متاح';
+                            })();
+                            const canLaunch = hasMultipleModels || Boolean(launchLink);
+                            const copyDisabled = !launchLink;
+                            const hasLink = Boolean(launchLink);
                             const accent = pickAccentByCategory(category);
                             const id = `${(packageName || 'pkg').replace(/\s+/g, '-')}-${(category || 'cat').replace(/\s+/g, '-')}-${i}`;
                             flat.push({
@@ -1255,7 +1293,7 @@ export default function App() {
                                                                         disabled={!canLaunch}
                                                                         className="flex-1 grid place-items-center rounded-xl bg-gradient-to-br from-lime-400 via-emerald-500 to-lime-400 px-3 py-2 font-bold text-white shadow hover:shadow-lg animate-gradient-slow disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:shadow-none"
                                                                     >
-                                                                        {canLaunch ? 'افتح في ChatGPT' : 'غير متاح'}
+                                                                        {buttonLabel}
                                                                     </button>
                                                                     <button
                                                                         type="button"
@@ -1337,18 +1375,26 @@ export default function App() {
                                                 <p className="mb-3 font-bold text-white/95">ط§ط®طھط± ط§ظ„ظ†ظ…ظˆط°ط¬:</p>
                                                 <div className="grid grid-cols-2 gap-2">
                                                     {Object.entries(botModal.bot?.models || {})
-                                                        .filter(([, url]) => !!url)
-                                                        .map(([name, url]) => (
-                                                            <a
-                                                                key={name}
-                                                                href={url}
-                                                                target="_blank"
-                                                                rel="noopener"
-                                                                className={`nv-btn px-3 py-2 text-center text-sm ${name.toLowerCase().includes('4') ? '' : 'bg-gradient-to-br from-violet-400 via-fuchsia-500 to-violet-400 animate-gradient-slow'}`}
-                                                            >
-                                                                {name} â†—
-                                                            </a>
-                                                        ))}
+                                                        .map(([name, url]) => {
+                                                            const safe = toSafeUrl(url);
+                                                            if (!safe) return null;
+                                                            const label = formatModelLabel(name);
+                                                            const accentClass = typeof name === 'string' && name.toLowerCase().includes('4')
+                                                                ? ''
+                                                                : 'bg-gradient-to-br from-violet-400 via-fuchsia-500 to-violet-400 animate-gradient-slow';
+                                                            return (
+                                                                <a
+                                                                    key={`${name}-${safe}`}
+                                                                    href={safe}
+                                                                    target="_blank"
+                                                                    rel="noopener"
+                                                                    className={`nv-btn px-3 py-2 text-center text-sm ${accentClass}`}
+                                                                >
+                                                                    {(label || name || 'رابط')} ↗
+                                                                </a>
+                                                            );
+                                                        })
+                                                        .filter(Boolean)}
                                                 </div>
                                             </div>
                                         )}
