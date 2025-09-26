@@ -225,7 +225,7 @@ def build_payload() -> Dict[str, List[Dict[str, object]]]:
                 parts = label.split(maxsplit=1)
                 model_label = parts[1] if len(parts) > 1 else ''
                 pending_model = normalize_model_key(model_label)
-            elif label == LINK_FIELD:
+            elif label.lower() in LINK_FIELD_ALIASES:
                 collecting_links = True
             else:
                 field_name = normalize_field(label)
@@ -274,3 +274,7 @@ def main() -> int:
 
 if __name__ == '__main__':
     sys.exit(main())
+
+
+
+
