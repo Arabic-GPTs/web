@@ -28,16 +28,38 @@ OUTPUT_PATH = REPO_ROOT / 'public' / 'new_bots.json'
 
 PACKAGE_FALLBACK = 'أدوات متنوعة'
 CATEGORY_FALLBACK = 'أدوات دون تصنيف'
-FIELD_NORMALIZATION = {
-    'نبذة': 'نبذة',
-    'النبذة': 'نبذة',
-    'حدود': 'حدود',
-    'الحدود': 'حدود',
-    'مثال': 'مثال',
-    'أمثلة': 'مثال',
-}
-LINK_FIELD = 'روابط'
+ABOUT_FIELD = 'نبذة'
+LIMITS_FIELD = 'حدود'
+EXAMPLE_FIELD = 'مثال'
+LINKS_FIELD = 'روابط'
 
+FIELD_NORMALIZATION = {
+    ABOUT_FIELD: ABOUT_FIELD,
+    'الوصف': ABOUT_FIELD,
+    'وصف': ABOUT_FIELD,
+    'نبذة مختصرة': ABOUT_FIELD,
+    'عن البوت': ABOUT_FIELD,
+    'about': ABOUT_FIELD,
+    'description': ABOUT_FIELD,
+    '����': ABOUT_FIELD,
+    '������': ABOUT_FIELD,
+    LIMITS_FIELD: LIMITS_FIELD,
+    'الحدود': LIMITS_FIELD,
+    'قيود': LIMITS_FIELD,
+    'limits': LIMITS_FIELD,
+    'constraints': LIMITS_FIELD,
+    '����': LIMITS_FIELD,
+    '������': LIMITS_FIELD,
+    EXAMPLE_FIELD: EXAMPLE_FIELD,
+    'أمثلة': EXAMPLE_FIELD,
+    'مثال عملي': EXAMPLE_FIELD,
+    'example': EXAMPLE_FIELD,
+    'examples': EXAMPLE_FIELD,
+    '����': EXAMPLE_FIELD,
+    '�����': EXAMPLE_FIELD,
+}
+LINK_FIELD = LINKS_FIELD
+LINK_FIELD_ALIASES = {alias.lower() for alias in (LINKS_FIELD, 'روابط إضافية', 'links', 'link', 'روابط إضافية', '�����')}
 URL_TOKEN_PATTERN = re.compile(r"https?://[^\s]+", re.IGNORECASE)
 
 
