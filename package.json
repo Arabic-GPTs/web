@@ -1,33 +1,33 @@
 {
-    "name": "bots-hub-2025",
-    "private": true,
-    "version": "0.0.1",
-    "type": "module",
+  "name": "bots-hub-2025",
+  "private": true,
+  "version": "0.0.1",
+  "type": "module",
   "scripts": {
     "dev": "vite",
     "prebuild": "node scripts/build_data.mjs",
-    "build": "vite build",
+    "build": "vite build --base=/web/",
     "preview": "vite preview --open",
     "img:banner": "node scripts/process_images.mjs --task banner",
     "img:covers": "node scripts/process_images.mjs --task covers",
     "img:all": "node scripts/process_images.mjs --task all",
     "data:build": "node scripts/build_data.mjs"
   },
-    "dependencies": {
-        "framer-motion": "^11.2.10",
-        "three": "^0.161.0",
-        "react": "^18.2.0",
-        "react-dom": "^18.2.0"
-    },
+  "dependencies": {
+    "framer-motion": "^11.2.10",
+    "three": "^0.161.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
   "devDependencies": {
-        "@tailwindcss/aspect-ratio": "latest",
-        "@tailwindcss/forms": "latest",
-        "@tailwindcss/line-clamp": "latest",
-        "@tailwindcss/typography": "latest",
-        "@vitejs/plugin-react": "latest",
-        "autoprefixer": "latest",
-        "postcss": "latest",
-        "tailwindcss": "latest",
+    "@tailwindcss/aspect-ratio": "latest",
+    "@tailwindcss/forms": "latest",
+    "@tailwindcss/line-clamp": "latest",
+    "@tailwindcss/typography": "latest",
+    "@vitejs/plugin-react": "latest",
+    "autoprefixer": "latest",
+    "postcss": "latest",
+    "tailwindcss": "latest",
     "vite": "latest",
     "sharp": "^0.33.4"
   }
