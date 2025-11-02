@@ -1,7 +1,6 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useMemo, useRef, useState } from "react";
 import bgVideoUrl from "../1080-60fps-ai.mp4";
-import { BOOKS as STATIC_BOOKS, SERIES as STATIC_SERIES } from "./data/books.js";
 import packagePdfManifest from "./data/packagePdfs.json";
 // Use a base-aware public logo URL (SVG for crisp scaling on all DPIs)
 const BASE_URL = ((import.meta && import.meta.env && import.meta.env.BASE_URL) || "/");
@@ -11,6 +10,8 @@ const resolvePublicPath = (path) => {
     return `${normalizedBase}${normalizedPath}`;
 };
 const logoUrl = resolvePublicPath("og-image.png");
+const PAYHIP_URL = "https://payhip.com/zraiee";
+const PAYHIP_BOOKS_COUNT = 11;
 
 // ترتيب مخصص للباقات على الصفحة الرئيسية
 const PACKAGE_ORDER = [
@@ -759,6 +760,21 @@ export default function App() {
         return () => window.removeEventListener("hashchange", sync);
     }, []);
 
+    useEffect(() => {
+        if (route === "/books" && typeof window !== "undefined") {
+            try {
+                window.open(PAYHIP_URL, "_blank", "noopener,noreferrer");
+            } catch {
+                window.location.assign(PAYHIP_URL);
+            }
+            if (window.location.hash !== "#/") {
+                window.location.hash = "#/";
+            } else {
+                setRoute("/");
+            }
+        }
+    }, [route]);
+
     // تصفية/ترتيب
     const filtered = useMemo(() => {
         const tokens = q.trim().toLowerCase().split(/\s+/).filter(Boolean);
@@ -894,8 +910,6 @@ export default function App() {
         onWinScroll();
         return () => window.removeEventListener('scroll', onWinScroll);
     }, []);
-
-    const isBooks = route === "/books";
 
     return (
         <div
@@ -1498,8 +1512,7 @@ export default function App() {
                 </>
             )}
 
-            {route === "/books" && <BooksPage />}
-            {route === "/about" && <AboutPage botsCount={bots.length} catsCount={categories.length} booksCount={STATIC_BOOKS.length} />}
+            {route === "/about" && <AboutPage botsCount={bots.length} catsCount={categories.length} booksCount={PAYHIP_BOOKS_COUNT} />}
 
             {/* تذييل */}
             <footer className="mx-auto max-w-7xl px-4 md:px-6 py-12 md:py-16">
@@ -1680,130 +1693,10 @@ export default function App() {
     );
 }
 
-// ————————————————————————————————————————————
-// صفحة الكتب: بطاقات + نوافذ منبثقة متحركة
-function BooksPage() {
-    const [books, setBooks] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const handleDownload = async (url, name = "file") => {
-        try {
-            if (!isSafeUrl(url)) return;
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = name;
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-            setTimeout(() => {
-                try { if (isSafeUrl(url)) window.open(url, '_blank', 'noopener,noreferrer'); } catch { }
-            }, 350);
-        } catch { }
-    };
-
-    useEffect(() => {
-        let mounted = true;
-        try {
-            if (mounted) {
-                setBooks(Array.isArray(STATIC_BOOKS) ? STATIC_BOOKS : SAMPLE_BOOKS);
-            }
-        } catch (e) {
-            if (mounted) setBooks(SAMPLE_BOOKS);
-        } finally {
-            if (mounted) setLoading(false);
-        }
-        return () => (mounted = false);
-    }, []);
-
-    // تجميع الكتب حسب السلسلة/الفئة
-    const seriesById = useMemo(() => {
-        const map = new Map();
-        (STATIC_SERIES || []).forEach((s) => map.set(s.id, s));
-        return map;
-    }, []);
-    const groupedBooks = useMemo(() => {
-        const m = new Map();
-        for (const b of books) {
-            const sid = b.seriesId || 'default';
-            if (!m.has(sid)) m.set(sid, []);
-            m.get(sid).push(b);
-        }
-        return m;
-    }, [books]);
-
-    return (
-        <main className="mx-auto max-w-7xl px-4 md:px-6 py-10 md:py-14">
-            <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-neutral-900/70 to-neutral-950 p-6 md:p-10 shadow-xl">
-                <div className="relative z-10">
-                    <motion.h1 initial={{ opacity: 0, y: 12 }} animate={{ opacity: [0.95, 1, 0.95], y: 0 }} transition={{ duration: 0.6, ease: 'easeOut', opacity: { duration: 8, repeat: Infinity, repeatType: 'mirror', ease: 'easeInOut' } }} className="text-2xl md:text-4xl font-extrabold tracking-tight bg-gradient-to-r from-lime-200 via-emerald-300 to-lime-200 text-transparent bg-clip-text animate-gradient-slow">
-                        من المؤلف إلى القارئ — منشورات مختارة
-                    </motion.h1>
-                    <motion.p initial={{ opacity: 0, y: 8 }} animate={{ opacity: [0.9, 1, 0.9], y: 0 }} transition={{ duration: 0.6, ease: 'easeOut', delay: 0.05, opacity: { duration: 10, repeat: Infinity, repeatType: 'mirror', ease: 'easeInOut', delay: 0.8 } }} className="mt-2 text-white/70 text-sm md:text-base max-w-2xl">
-                        استكشف أعمالاً صُنعت بعناية لتضيف قيمة حقيقية إلى تجربتك. لكل إصدار قصة ومنهج وأثر — ابدأ القراءة أو حمّل النسخة المناسبة لك.
-                    </motion.p>
-                </div>
-                <div className="pointer-events-none absolute -inset-[1px] bg-[conic-gradient(from_180deg_at_50%_50%,transparent_0,rgba(255,255,255,0.08)_20%,transparent_35%)]" />
-            </div>
-
-            {/* مجموعات حسب السلسلة */}
-            {loading && (
-                <div className="mt-6 text-center py-12 text-white/60">جارٍ التحميل…</div>
-            )}
-            {!loading && (
-                (STATIC_SERIES || []).map((s) => {
-                    const rows = groupedBooks.get(s.id) || [];
-                    if (!rows.length) return null;
-                    return (
-                        <section key={s.id} className="mt-6">
-                            <h2 className="text-lg md:text-xl font-extrabold tracking-tight bg-gradient-to-r from-lime-200 via-emerald-300 to-lime-200 text-transparent bg-clip-text animate-gradient-slow">{s.title}</h2>
-                            <p className="mt-1 text-white/70 text-sm">سلسلة مختارة تضم إصدارات متخصصة بعناية.</p>
-                            <div className="mt-3 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-                                {rows.map((b) => (
-                                    <article
-                                        key={b.id}
-                                        className="group relative overflow-hidden rounded-2xl bg-neutral-900/60 shadow-lg hover:shadow-2xl hover:-translate-y-0.5 transition"
-                                    >
-                                        <div className={`absolute inset-0 opacity-50 bg-gradient-to-br ${pickAccentByCategory(b.category)}`} />
-                                        <div className="relative z-10">
-                                            <div className="relative overflow-hidden rounded-xl bg-black/40">
-                                                <div className="relative aspect-[4/5]">
-                                                    <PdfCover pdfUrl={b.pdfUrl} coverUrl={b.coverUrl} title={b.title} />
-                                                    <div className="absolute inset-0 pointer-events-none bg-gradient-to-t from-black/30 to-transparent" />
-                                                    <div className="absolute inset-x-0 bottom-3 z-10 mx-3 grid grid-cols-2 gap-2">
-                                                        <a
-                                                            href={b.viewUrl || '#'}
-                                                            target="_blank"
-                                                            rel="noopener"
-                                                            className={`rounded-xl px-3 py-2 text-center text-xs font-bold text-white ${b.viewUrl ? 'bg-white/10 hover:bg-white/15 border border-white/10' : 'bg-white/5 opacity-60 cursor-not-allowed'}`}
-                                                        >
-                                                            مشاهدة
-                                                        </a>
-                                                        <button
-                                                            onClick={() => b.downloadUrl && handleDownload(b.downloadUrl, `${b.slug || b.id}.pdf`)}
-                                                            className={`px-3 py-2 text-center text-xs font-bold text-white rounded-xl ${b.downloadUrl ? 'nv-btn' : 'bg-white/5 opacity-60 cursor-not-allowed'}`}
-                                                            disabled={!b.downloadUrl}
-                                                        >
-                                                            تحميل
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </article>
-                                ))}
-                            </div>
-                        </section>
-                    );
-                })
-            )}
-        </main>
-    );
-}
-
-// شريط تنقل Gooey بسيط لروابط الصفحات
 function GooeyNav({ route }) {
     const items = [
         { href: "#/", label: "الرئيسية" },
-        { href: "#/books", label: "الكتب" },
+        { href: PAYHIP_URL, label: "الكتب", external: true },
         { href: "#/about", label: "من نحن" },
         { href: "https://wa.me/966552191598", label: "اشتراك", external: true },
     ];
@@ -1811,57 +1704,73 @@ function GooeyNav({ route }) {
         <div className="mx-auto mt-3 max-w-7xl px-4 md:px-6">
             {/* Removed gooey filter and transitions/hover effects from nav buttons */}
             <div className="relative mx-auto flex w-full items-center gap-2 rounded-2xl border border-white/10 bg-white/5 p-2">
-                {items.map((it) => (
-                    <a
-                        key={it.href}
-                        href={it.href}
-                        target={it.external ? "_blank" : undefined}
-                        rel={it.external ? "noopener" : undefined}
-                        className={`relative grid flex-1 place-items-center rounded-xl px-3 py-2 text-sm ${(route === "/" && it.href === "#/") || (route !== "/" && `#${route}` === it.href)
-                            ? "bg-white/20 text-white"
-                            : "bg-transparent text-white/80"
-                            }`}
-                    >
-                        {it.label}
-                    </a>
-                ))}
+                {items.map((it) => {
+                    const isActive = !it.external && ((route === "/" && it.href === "#/") || (route !== "/" && `#${route}` === it.href));
+                    return (
+                        <a
+                            key={`${it.href}-${it.label}`}
+                            href={it.href}
+                            target={it.external ? "_blank" : undefined}
+                            rel={it.external ? "noopener noreferrer" : undefined}
+                            className={`relative grid flex-1 place-items-center rounded-xl px-3 py-2 text-sm ${isActive
+                                ? "bg-white/20 text-white"
+                                : "bg-transparent text-white/80"
+                                }`}
+                        >
+                            {it.label}
+                        </a>
+                    );
+                })}
                 <div className="pointer-events-none absolute inset-0 -z-10" />
             </div>
         </div>
     );
 }
 
-// صفحة من نحن بتخطيط Bento متحرك
 function AboutPage({ botsCount = 0, catsCount = 0, booksCount = 0 }) {
     const [bc, setBc] = useState(0);
     const [cc, setCc] = useState(0);
     const [bk, setBk] = useState(0);
     useEffect(() => {
-        let i1, i2, i3;
+        let i1;
+        let i2;
+        let i3;
         const easeIn = (to, setter) => {
             let n = 0;
             const step = Math.max(1, Math.ceil(to / 60));
             const tick = () => {
                 n = Math.min(to, n + step);
                 setter(n);
-                if (n < to) requestAnimationFrame(tick);
+                if (n < to) {
+                    const id = requestAnimationFrame(tick);
+                    if (setter === setBc) i1 = id;
+                    if (setter === setCc) i2 = id;
+                    if (setter === setBk) i3 = id;
+                }
             };
-            requestAnimationFrame(tick);
+            const id = requestAnimationFrame(tick);
+            if (setter === setBc) i1 = id;
+            if (setter === setCc) i2 = id;
+            if (setter === setBk) i3 = id;
         };
         easeIn(botsCount, setBc);
         easeIn(catsCount, setCc);
         easeIn(booksCount, setBk);
-        return () => { cancelAnimationFrame(i1); cancelAnimationFrame(i2); cancelAnimationFrame(i3); };
+        return () => {
+            if (i1) cancelAnimationFrame(i1);
+            if (i2) cancelAnimationFrame(i2);
+            if (i3) cancelAnimationFrame(i3);
+        };
     }, [botsCount, catsCount, booksCount]);
     return (
         <main className="mx-auto max-w-7xl px-4 md:px-6 py-10 md:py-14">
             {/* Hero */}
             <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-neutral-900/70 to-neutral-950 p-6 md:p-10">
                 <div className="relative z-10">
-                    <motion.h1 initial={{ opacity: 0, y: 12 }} animate={{ opacity: [0.95, 1, 0.95], y: 0 }} transition={{ duration: 0.6, ease: 'easeOut', opacity: { duration: 8, repeat: Infinity, repeatType: 'mirror', ease: 'easeInOut' } }} className="text-2xl md:text-4xl font-extrabold tracking-tight bg-gradient-to-r from-lime-200 via-emerald-300 to-lime-200 text-transparent bg-clip-text animate-gradient-slow">
+                    <motion.h1 initial={{ opacity: 0, y: 12 }} animate={{ opacity: [0.95, 1, 0.95], y: 0 }} transition={{ duration: 0.6, ease: "easeOut", opacity: { duration: 8, repeat: Infinity, repeatType: "mirror", ease: "easeInOut" } }} className="text-2xl md:text-4xl font-extrabold tracking-tight bg-gradient-to-r from-lime-200 via-emerald-300 to-lime-200 text-transparent bg-clip-text animate-gradient-slow">
                         من نحن
                     </motion.h1>
-                    <motion.p initial={{ opacity: 0, y: 8 }} animate={{ opacity: [0.9, 1, 0.9], y: 0 }} transition={{ duration: 0.6, ease: 'easeOut', delay: 0.05, opacity: { duration: 10, repeat: Infinity, repeatType: 'mirror', ease: 'easeInOut', delay: 0.8 } }} className="mt-3 text-white/80 text-sm md:text-base leading-relaxed">
+                    <motion.p initial={{ opacity: 0, y: 8 }} animate={{ opacity: [0.9, 1, 0.9], y: 0 }} transition={{ duration: 0.6, ease: "easeOut", delay: 0.05, opacity: { duration: 10, repeat: Infinity, repeatType: "mirror", ease: "easeInOut", delay: 0.8 } }} className="mt-3 text-white/80 text-sm md:text-base leading-relaxed">
                         أسّس هذه المنصة د. عبدالرحمن الزراعي، مشرف أكاديمي وباحث متخصص في مجالات البحوث العلمية، مهتم بالفنون البصرية ونماذج الذكاء الاصطناعي، عمل من وقت طويل على تطوير تعليمات دقيقة ومخصصة للنماذج العربية الذكية GPT، وهذه التعليمات تهدف إلى إنشاء نماذج ذكية تعمل على تحقيق أداء متسق وعالي الجودة في مختلف التخصصات، فضلاً عن استضافة فريق من الباحثين والأكاديميين والمهتمين في العمل لبناء رؤية تحليلية عميقة ومنهجية وصارمة في تصميم كل نموذج، وهذا يضمن توافق تلك النماذج مع المعايير العلمية واللغوية، وتقييم أدائها على نحو منهجي بهدف تحسينها وتطويرها، كما يسعى الفريق إلى تمكين المجتمع العربي من الإفادة الكاملة من قدرات الذكاء الاصطناعي بلغته وثقافته، إيمانًا منه بأن التقنية المصممة بعناية قادرة على أن تكون أداة فعالة، وأن تسهم بقوة في تعزيز الكفاءة والإنتاجية.
                     </motion.p>
                     {/* Counters */}
@@ -1882,22 +1791,18 @@ function AboutPage({ botsCount = 0, catsCount = 0, booksCount = 0 }) {
                         </div>
                         <div className="rounded-2xl border border-white/10 bg-white/5 p-3">
                             <div className="mx-auto mb-1 grid h-7 w-7 place-items-center rounded-lg bg-gradient-to-br from-amber-400/20 to-orange-500/20 text-amber-300">
-                                <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M5 2h14a1 1 0 011 1v18l-8-4-8 4V3a1 1 0 011-1z" /></svg>
+                                <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M2 5a3 3 0 013-3h14a3 3 0 013 3v12a3 3 0 01-3 3H5a3 3 0 01-3-3V5zm14 6h3v6h-3v-6zm-5 0h3v6h-3v-6zm-5 0h3v6H6v-6z" /></svg>
                             </div>
                             <div className="text-2xl font-extrabold">{fmt(bk)}</div>
-                            <div className="text-white/60">كتاب</div>
+                            <div className="text-white/60">إصدار</div>
                         </div>
                     </div>
-                    {/* أزلنا الشرائح/الوسوم من قسم من نحن بناءً على الطلب */}
                 </div>
                 <div className="pointer-events-none absolute -inset-[1px] bg-[conic-gradient(from_180deg_at_50%_50%,transparent_0,rgba(255,255,255,0.08)_20%,transparent_35%)]" />
-                <div aria-hidden className="pointer-events-none absolute -top-24 -right-24 h-72 w-72 rounded-full bg-gradient-to-br from-lime-400/15 to-emerald-500/0 blur-3xl" />
-                <div aria-hidden className="pointer-events-none absolute -bottom-24 -left-24 h-72 w-72 rounded-full bg-gradient-to-br from-emerald-400/15 to-lime-500/0 blur-3xl" />
             </div>
 
-            {/* Sections */}
-            <section className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-3">
-                {/* وصف */}
+            {/* Content */}
+            <section className="mt-6 grid grid-cols-1 gap-3 md:grid-cols-2">
                 <motion.article
                     initial={{ opacity: 0, y: 18 }}
                     whileInView={{ opacity: 1, y: 0 }}
@@ -1906,38 +1811,36 @@ function AboutPage({ botsCount = 0, catsCount = 0, booksCount = 0 }) {
                     className="pixel-card relative overflow-hidden rounded-2xl border border-white/10 bg-white/5 p-5"
                 >
                     <div className="relative z-10">
-                        <h2 className="flex items-center gap-2 text-lg md:text-xl font-extrabold tracking-tight bg-gradient-to-r from-lime-200 via-emerald-300 to-lime-200 text-transparent bg-clip-text animate-gradient-slow">
-                            <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" className="text-lime-300"><path d="M12 2l9 4-9 4-9-4 9-4zm9 7l-9 4-9-4v7l9 4 9-4V9z" /></svg>
-                            وصف المنصة
+                        <h2 className="flex items-center gap-2 text-lg md:text-xl font-bold tracking-tight">
+                            <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" className="text-lime-300"><path d="M12 2a10 10 0 100 20 10 10 0 000-20zm0 5a3 3 0 110 6 3 3 0 010-6zm0 14a8 8 0 01-6.32-3.07c.03-1.99 4-3.08 6.32-3.08 2.33 0 6.29 1.09 6.32 3.08A8 8 0 0112 21z" /></svg>
+                            الفريق
                         </h2>
                         <p className="mt-2 text-white/80 text-sm md:text-base leading-relaxed">
-                            تضم بوابة «النماذج العربية الذكية» حزمة متكاملة من الباقات والبوتات المصممة خصيصًا لدعم المستخدم العربي في مجالات عدة، تشمل: البحث العلمي، والتعليم، والتصميم، والإدارة، والتسويق، والقانون، والبرمجة، وغيرها. تحتوي كل باقة على مجموعة من البوتات التي تؤدي مهامًا ذكية محددة بدقة وسرعة، مثل: إعداد العنوان والفكرة، وصناعة الخطة، وإعداد البحث العلمي، وتوثيق النصوص، وتنسيق المراجع، وإعادة الصياغة، والترجمة الاصطلاحية، وتحليل النصوص، وغيرها.
+                            نعمل باستمرار على تطوير نماذج ذكية جديدة تواكب الاحتياجات المتغيرة للمستخدمين. من أحدث ما أُضيف: «اقتراح عنوان وفكرة بحث»، «دليل فهارس المخطوطات»، «تعليمات تكوين النموذج»، «علم العروض والأوزان الشعرية»، «المساعد في تأليف الكتب»، «نظام الزكاة»، و«الرد الفوري على الفتوى الشرعية». تأتي هذه النماذج ضمن باقات جاهزة للاستخدام، مع فيديوهات شرح وتوجيهات مخصصة.
                         </p>
                     </div>
-                    <div className="pointer-events-none absolute -inset-[1px] bg-[conic-gradient(from_180deg_at_50%_50%,transparent_0,rgba(255,255,255,0.10)_20%,transparent_35%)]" />
+                    <div className="pointer-events-none absolute -inset-[1px] bg-[conic-gradient(from_180deg_at_50%_50%,transparent_0,rgba(255,255,255,0.15)_20%,transparent_35%)]" />
                 </motion.article>
 
-                {/* دوراتنا */}
                 <motion.article
                     initial={{ opacity: 0, y: 18 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, margin: "-10%" }}
-                    transition={{ duration: 0.4, delay: 0.05 }}
+                    transition={{ duration: 0.4 }}
                     className="pixel-card relative overflow-hidden rounded-2xl border border-white/10 bg-white/5 p-5"
                 >
                     <div className="relative z-10">
-                        <h2 className="flex items-center gap-2 text-lg md:text-xl font-extrabold tracking-tight bg-gradient-to-r from-lime-200 via-emerald-300 to-lime-200 text-transparent bg-clip-text animate-gradient-slow">
-                            <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" className="text-sky-300"><path d="M4 4h16v2H4V4zm0 4h10v2H4V8zm0 4h16v2H4v-2zm0 4h10v2H4v-2z" /></svg>
-                            دوراتنا
+                        <h2 className="flex items-center gap-2 text-lg md:text-xl font-bold tracking-tight">
+                            <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" className="text-sky-300"><path d="M12 2a10 10 0 00-3.16 19.45c.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.15-1.11-1.46-1.11-1.46-.9-.62.07-.61.07-.61 1 .07 1.53 1.06 1.53 1.06.89 1.52 2.34 1.08 2.91.82.09-.66.35-1.08.64-1.33-2.22-.25-4.55-1.11-4.55-4.95a3.87 3.87 0 011.03-2.68 3.59 3.59 0 01.1-2.65s.84-.27 2.75 1.02a9.34 9.34 0 015 0c1.91-1.29 2.75-1.02 2.75-1.02a3.59 3.59 0 01.1 2.65 3.87 3.87 0 011.03 2.68c0 3.86-2.34 4.7-4.57 4.95.36.3.68.89.68 1.8v2.66c0 .26.18.58.69.48A10 10 0 0012 2z" /></svg>
+                            المجتمع
                         </h2>
                         <p className="mt-2 text-white/80 text-sm md:text-base leading-relaxed">
-                            نقدم مجموعة من الدورات التدريبية المصممة بعناية لتعريف المستخدمين بواجهة ChatGPT وطرق التعامل معها باحتراف، وتشمل الدورات محاور أساسية مثل: كيفية طرح الأسئلة، وإدارة الحوار، وهندسة التعليمات وتوجيهها بطريقة صحيحة، كما نقدم دورات في البحث العلمي تتناول كيفية إنشاء نماذج مخصصة للعمل البحثي، وتتناول أيضاً مفاهيم مثل النماذج التوليدية، وتعليمات التكوين، وتدريب النماذج، وفهم آليات التفكير الآلي. تُعقد الدورات بأسلوب تطبيقي مع مواد تعليمية تساعد على التطبيق الفوري، ويمكن طلب الدورات بشكل فردي أو جماعي حسب الحاجة.
+                            نبني مجتمعاً من الباحثين والمبدعين والمهتمين بالذكاء الاصطناعي، حيث يتعاون الجميع على تصميم تجارب دقيقة وفعّالة للنماذج السردية والتفاعلية. نركز على الجودة اللغوية وسلامة المخرجات، مع الالتزام بالمعايير الأخلاقية والأكاديمية في كل ما نقدمه من أدوات تعليمية ومنهجيات عمل.
                         </p>
                     </div>
-                    <div className="pointer-events-none absolute -inset-[1px] bg-[conic-gradient(from_180deg_at_50%_50%,transparent_0,rgba(255,255,255,0.10)_20%,transparent_35%)]" />
+                    <div className="pointer-events-none absolute -inset-[1px] bg-[conic-gradient(from_180deg_at_50%_50%,transparent_0,rgba(255,255,255,0.15)_20%,transparent_35%)]" />
                 </motion.article>
 
-                {/* جديدنا */}
                 <motion.article
                     initial={{ opacity: 0, y: 18 }}
                     whileInView={{ opacity: 1, y: 0 }}
@@ -1948,16 +1851,15 @@ function AboutPage({ botsCount = 0, catsCount = 0, booksCount = 0 }) {
                     <div className="relative z-10">
                         <h2 className="flex items-center gap-2 text-lg md:text-xl font-bold tracking-tight">
                             <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" className="text-rose-300"><path d="M12 2a10 10 0 100 20 10 10 0 000-20zm1 5v6h5v2h-7V7h2z" /></svg>
-                            جديدنا
+                            رسالة
                         </h2>
                         <p className="mt-2 text-white/80 text-sm md:text-base leading-relaxed">
-                            نعمل باستمرار على تطوير نماذج ذكية جديدة تواكب الاحتياجات المتغيرة للمستخدمين. من أحدث ما أُضيف: «اقتراح عنوان وفكرة بحث»، «دليل فهارس المخطوطات»، «تعليمات تكوين النموذج»، «علم العروض والأوزان الشعرية»، «المساعد في تأليف الكتب»، «نظام الزكاة»، و«الرد الفوري على الفتوى الشرعية». تأتي هذه النماذج ضمن باقات جاهزة للاستخدام، مع فيديوهات شرح وتوجيهات مخصصة.
+                            نهدف إلى إنشاء مكتبة من الحلول الذكية التي تراعي الخصوصية الثقافية واللغوية للمستخدم العربي، مع التركيز على تقديم محتوى تدريبي شامل يضمن الاستخدام الآمن والمسؤول للذكاء الاصطناعي. نؤمن بأن المعرفة المتاحة باللغة العربية هي مفتاح تمكين الأفراد والمؤسسات من استخدام التقنيات الحديثة بثقة وكفاءة.
                         </p>
                     </div>
                     <div className="pointer-events-none absolute -inset-[1px] bg-[conic-gradient(from_180deg_at_50%_50%,transparent_0,rgba(255,255,255,0.10)_20%,transparent_35%)]" />
                 </motion.article>
 
-                {/* روابط */}
                 <motion.article
                     initial={{ opacity: 0, y: 18 }}
                     whileInView={{ opacity: 1, y: 0 }}
@@ -1975,12 +1877,12 @@ function AboutPage({ botsCount = 0, catsCount = 0, booksCount = 0 }) {
                         </p>
                         <div className="mt-3">
                             <a
-                                href="https://alzarraei-gpts.github.io/Arabic-GPT-Hub-books/"
+                                href={PAYHIP_URL}
                                 target="_blank"
-                                rel="noopener"
+                                rel="noopener noreferrer"
                                 className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-br from-lime-400 to-emerald-500 px-4 py-2 text-sm font-bold text-white shadow hover:shadow-lg"
                             >
-                                روابط الكتب ↗
+                                متجر الكتب ↗
                             </a>
                         </div>
                     </div>
@@ -1997,21 +1899,21 @@ function AboutPage({ botsCount = 0, catsCount = 0, booksCount = 0 }) {
                             <div className="absolute inset-0 opacity-20 bg-gradient-to-br from-rose-400 to-pink-500 animate-gradient-slow" />
                             <div className="relative z-10">
                                 <span className="inline-flex items-center rounded-full bg-gradient-to-br from-rose-400 to-pink-500 px-2 py-0.5 text-[11px] font-bold text-white animate-gradient-slow">الفكرة</span>
-                                <p className="mt-2 text-sm text-white/85">تصميم تجربة عربية فاخرة للبوتات.</p>
+                                <p className="mt-2 text-sm text-white/85">إطلاق مبادرة عربية لتصميم بوتات دقيقة.</p>
                             </div>
                         </div>
                         <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-white/5 p-4">
                             <div className="absolute inset-0 opacity-20 bg-gradient-to-br from-sky-400 to-cyan-500 animate-gradient-slow" />
                             <div className="relative z-10">
                                 <span className="inline-flex items-center rounded-full bg-gradient-to-br from-sky-400 to-cyan-500 px-2 py-0.5 text-[11px] font-bold text-white animate-gradient-slow">التطوير</span>
-                                <p className="mt-2 text-sm text-white/85">هندسة التعليمات ونماذج مخصّصة عالية الجودة.</p>
+                                <p className="mt-2 text-sm text-white/85">بناء منهجيات متخصصة للذكاء الاصطناعي التوليدي.</p>
                             </div>
                         </div>
                         <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-white/5 p-4">
                             <div className="absolute inset-0 opacity-20 bg-gradient-to-br from-amber-400 to-orange-500 animate-gradient-slow" />
                             <div className="relative z-10">
-                                <span className="inline-flex items-center rounded-full bg-gradient-to-br from-amber-400 to-orange-500 px-2 py-0.5 text-[11px] font-bold text-white animate-gradient-slow">الإطلاق</span>
-                                <p className="mt-2 text-sm text-white/85">بوابة النماذج العربية الذكية.</p>
+                                <span className="inline-flex items-center rounded-full bg-gradient-to-br from-amber-400 to-orange-500 px-2 py-0.5 text-[11px] font-bold text-white animate-gradient-slow">المستقبل</span>
+                                <p className="mt-2 text-sm text-white/85">إطلاق مزيد من الحلول الموجهة للباحثين والمبدعين.</p>
                             </div>
                         </div>
                     </div>
@@ -2020,120 +1922,7 @@ function AboutPage({ botsCount = 0, catsCount = 0, booksCount = 0 }) {
         </main>
     );
 }
-// غلاف PDF: يحاول استخراج الصفحة الأولى، وإلا يستخدم صورة احتياطية
-function PdfCover({ pdfUrl, coverUrl, title }) {
-    const containerRef = useRef(null);
-    const canvasRef = useRef(null);
-    const [dataUrl, setDataUrl] = useState(null);
-    const [coverOk, setCoverOk] = useState(true);
-    const triedRef = useRef(false);
-    const [inView, setInView] = useState(false);
 
-    // Observe the container entering viewport
-    useEffect(() => {
-        const node = containerRef.current;
-        if (!node) return;
-        const io = new IntersectionObserver((entries) => {
-            for (const e of entries) {
-                if (e.isIntersecting) {
-                    setInView(true);
-                    io.disconnect();
-                    break;
-                }
-            }
-        }, { rootMargin: '120px' });
-        io.observe(node);
-        return () => io.disconnect();
-    }, []);
-
-    useEffect(() => {
-        let cancelled = false;
-        const prefersReduced = typeof window !== 'undefined' && window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-        const isMobile = typeof window !== 'undefined' && window.matchMedia && window.matchMedia('(max-width: 768px)').matches;
-        (async () => {
-            if (!inView) return;
-            if (!pdfUrl || typeof window === 'undefined' || !window.pdfjsLib || triedRef.current) return;
-            if (prefersReduced) return; // avoid heavy work
-            triedRef.current = true;
-            try {
-                const pdf = await window.pdfjsLib.getDocument({ url: pdfUrl, withCredentials: false }).promise;
-                const page = await pdf.getPage(1);
-                const scale = isMobile ? 1.2 : 1.6;
-                const viewport = page.getViewport({ scale });
-                const canvas = canvasRef.current;
-                if (!canvas) return;
-                const ctx = canvas.getContext('2d');
-                canvas.width = viewport.width;
-                canvas.height = viewport.height;
-                await page.render({ canvasContext: ctx, viewport }).promise;
-                if (!cancelled) setDataUrl(canvas.toDataURL('image/png'));
-            } catch (e) { }
-        })();
-        return () => { cancelled = true; };
-    }, [pdfUrl, inView]);
-
-    return (
-        <div ref={containerRef} className="relative h-full w-full">
-            {dataUrl ? (
-                <motion.img
-                    src={dataUrl}
-                    alt={title}
-                    className="h-full w-full object-contain transition-transform duration-300 group-hover:scale-[1.02]"
-                    initial={{ scale: 1.01, opacity: 0 }}
-                    animate={{ scale: 1, opacity: 1 }}
-                    transition={{ duration: 0.4 }}
-                />
-            ) : (coverUrl && coverOk) ? (
-                <motion.img
-                    src={coverUrl}
-                    alt={title}
-                    className="h-full w-full object-contain transition-transform duration-300 group-hover:scale-[1.02]"
-                    initial={{ scale: 1.01, opacity: 0 }}
-                    animate={{ scale: 1, opacity: 1 }}
-                    transition={{ duration: 0.4 }}
-                    onError={() => setCoverOk(false)}
-                />
-            ) : null}
-            {/* Hidden canvas used to render first page snapshot */}
-            <canvas ref={canvasRef} className="hidden" />
-        </div>
-    );
-}
-
-const SAMPLE_BOOKS = [
-    {
-        id: "bk-01",
-        title: "اقتراح العناوين البحثية — دليل عملي",
-        author: "د. الزرّاعي",
-        category: "الباحث العلمي",
-        tags: ["ماجستير", "دكتوراه"],
-        coverUrl: logoUrl,
-        viewUrl: "#",
-        downloadUrl: "#"
-    },
-    {
-        id: "bk-02",
-        title: "أساسيات المنهجية العلمية",
-        author: "د. الزرّاعي",
-        category: "الباحث العلمي",
-        tags: ["منهجية", "توثيق"],
-        coverUrl: logoUrl,
-        viewUrl: "#",
-        downloadUrl: "#"
-    },
-    {
-        id: "bk-03",
-        title: "دليل كتابة المحتوى العربي",
-        author: "د. الزرّاعي",
-        category: "المحتوى واللغة",
-        tags: ["تحرير", "صياغة"],
-        coverUrl: logoUrl,
-        viewUrl: "#",
-        downloadUrl: "#"
-    },
-];
-
-// افتراضيات لنوافذ البطاقات في الصفحة الرئيسية
 const DEFAULT_BOT_ABOUT =
     "يُعدُّ هذا البوت أداةً ذكية متخصصة في دعم الباحثين وطلاب الدراسات العليا في اختيار عناوين أصيلة ومتميزة لرسائل الماجستير والدكتوراه، من خلال تحليل التخصصات الأكاديمية واستنباط الفرص البحثية غير المستكشفة.";
 const DEFAULT_BOT_LIMITS =
