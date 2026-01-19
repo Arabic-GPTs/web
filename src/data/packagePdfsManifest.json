@@ -1,0 +1,42 @@
+[
+  {
+    "title": "باقة الباحث",
+    "file": "categorysPdf/manifest/01 Searcher.pdf"
+  },
+  {
+    "title": "باقة التعليم والتدريب",
+    "file": "categorysPdf/manifest/02 Learn.pdf"
+  },
+  {
+    "title": "باقة القانون",
+    "file": "categorysPdf/manifest/03 Law.pdf"
+  },
+  {
+    "title": "باقة المصمم الذكي",
+    "file": "categorysPdf/manifest/04 Design.pdf"
+  },
+  {
+    "title": "باقة صناعة الأفلام",
+    "file": "categorysPdf/manifest/05 Film.pdf"
+  },
+  {
+    "title": "باقة تصميم الملابس والأزياء",
+    "file": "categorysPdf/manifest/06 Fashion.pdf"
+  },
+  {
+    "title": "باقة العمارة والتصميم",
+    "file": "categorysPdf/manifest/07 Building.pdf"
+  },
+  {
+    "title": "باقة الإدارة والتسويق",
+    "file": "categorysPdf/manifest/08 Marketing.pdf"
+  },
+  {
+    "title": "باقة الصحة والأسرة",
+    "file": "categorysPdf/manifest/09 Health.pdf"
+  },
+  {
+    "title": "باقة تكوين النماذج",
+    "file": "categorysPdf/manifest/10 instructions.pdf"
+  }
+]
