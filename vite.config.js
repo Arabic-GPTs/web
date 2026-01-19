@@ -69,7 +69,7 @@ const forceUtf8HeadersPlugin = () => ({
 
 
 export default defineConfig({
-    base: process.env.BASE_PATH || "/", // <-- SET THE CORRECT BASE PATH HERE
+    base: "/web/", // <-- SET THE CORRECT BASE PATH HERE
     plugins: [
         /* forceUtf8HeadersPlugin() can be removed unless you specifically need it for local dev */
         react()
