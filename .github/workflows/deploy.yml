@@ -54,7 +54,7 @@ jobs:
           fi
 
       - name: Build
-        run: npm run build -- --base=$BASE_PATH
+        run: npm run build -- --base=/web/
 
       - name: Add SPA fallback (404.html)
         run: cp dist/index.html dist/404.html
