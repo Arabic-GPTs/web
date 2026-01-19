@@ -48,7 +48,7 @@ jobs:
           OWNER=${{ github.repository_owner }}
           # User/Org pages repo uses root base, project pages use /<repo>/
           if [ "$REPO_NAME" = "$OWNER.github.io" ]; then
-            echo "BASE_PATH=/" >> $GITHUB_ENV
+            echo "BASE_PATH=/web/" >> $GITHUB_ENV
           else
             echo "BASE_PATH=/$REPO_NAME/" >> $GITHUB_ENV
           fi
