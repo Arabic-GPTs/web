@@ -4,39 +4,43 @@
     "file": "categorysPdf/with-info/01 Searcher info.pdf"
   },
   {
-    "title": "باقة التعليم والتدريب",
-    "file": "categorysPdf/with-info/02 Learn info.pdf"
+    "title": "باقة الشريعة والدعوة",
+    "file": "categorysPdf/with-info/02 Islam info.pdf"
   },
   {
-    "title": "باقة القانون",
+    "title": "باقة التعليم والتدريب",
     "file": "categorysPdf/with-info/03 Law info.pdf"
   },
   {
+    "title": "باقة القانون",
+    "file": "categorysPdf/with-info/03 Learn info.pdf"
+  },
+  {
     "title": "باقة المصمم الذكي",
-    "file": "categorysPdf/with-info/04 Design info.pdf"
+    "file": "categorysPdf/with-info/05 Design info.pdf"
   },
   {
     "title": "باقة صناعة الأفلام",
-    "file": "categorysPdf/with-info/05 Film info.pdf"
+    "file": "categorysPdf/with-info/06 Film info.pdf"
   },
   {
     "title": "باقة تصميم الملابس والأزياء",
-    "file": "categorysPdf/with-info/06 Fashion info.pdf"
+    "file": "categorysPdf/with-info/07 Fashion info.pdf"
   },
   {
     "title": "باقة العمارة والتصميم",
-    "file": "categorysPdf/with-info/07 Building info.pdf"
+    "file": "categorysPdf/with-info/08 Building info.pdf"
   },
   {
     "title": "باقة الإدارة والتسويق",
-    "file": "categorysPdf/with-info/08 Marketing info.pdf"
+    "file": "categorysPdf/with-info/09 Marketing info.pdf"
   },
   {
     "title": "باقة الصحة والأسرة",
-    "file": "categorysPdf/with-info/09 Health info.pdf"
+    "file": "categorysPdf/with-info/10 Health info.pdf"
   },
   {
     "title": "باقة تكوين النماذج",
-    "file": "categorysPdf/with-info/10 instructions info.pdf"
+    "file": "categorysPdf/with-info/11 instructions info.pdf"
   }
 ]
