@@ -28,7 +28,7 @@ const PACKAGE_ORDER = [
   "باقة العمارة والتصميم",
   "باقة الإدارة والتسويق",
   "باقة الصحة والأسرة",
-  "باقة تكوين النماذج",
+  "باقة تعليمات النماذج",
 ];
 const PACKAGE_ORDER_INDEX = new Map(PACKAGE_ORDER.map((name, i) => [name, i]));
 const PACKAGE_KEYWORDS = [
@@ -2222,6 +2222,7 @@ function GooeyNav({ route }) {
     { href: "#/", label: "الرئيسية" },
     { href: PAYHIP_URL, label: "الكتب", external: true },
     { href: "#/about", label: "من نحن" },
+    { href: "https://chatgpt.com/g/g-681f47498138819197d357982c29544c-mns-lnmdhj-ldhky-lbwtt-arabic-gpts", label: "منصة النماذج الذكية", external: true },
     { href: "https://wa.me/966552191598", label: "اشتراك", external: true },
   ];
   return (
