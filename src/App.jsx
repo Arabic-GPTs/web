@@ -28,7 +28,7 @@ const PACKAGE_ORDER = [
   "باقة العمارة والتصميم",
   "باقة الإدارة والتسويق",
   "باقة الصحة والأسرة",
-  "باقة تكوين النماذج",
+  "باقة تعليمات النماذج",
 ];
 const PACKAGE_ORDER_INDEX = new Map(PACKAGE_ORDER.map((name, i) => [name, i]));
 const PACKAGE_KEYWORDS = [
