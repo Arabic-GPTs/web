@@ -4,43 +4,23 @@
     "file": "categorysPdf/manifest/01 Searcher.pdf"
   },
   {
-    "title": "باقة الشريعة والدعوة",
-    "file": "categorysPdf/manifest/02 Islam.pdf"
-  },
-  {
-    "title": "باقة التعليم والتدريب",
-    "file": "categorysPdf/manifest/03 Learn.pdf"
-  },
-  {
-    "title": "باقة القانون",
-    "file": "categorysPdf/manifest/04 Law.pdf"
+    "title": "باقة التعليم والشريعة",
+    "file": "categorysPdf/manifest/02 Education & Sharia.pdf"
   },
   {
     "title": "باقة المصمم الذكي",
-    "file": "categorysPdf/manifest/05 Design.pdf"
+    "file": "categorysPdf/manifest/03 Design.pdf"
   },
   {
     "title": "باقة صناعة الأفلام",
-    "file": "categorysPdf/manifest/06 Film.pdf"
-  },
-  {
-    "title": "باقة تصميم الملابس والأزياء",
-    "file": "categorysPdf/manifest/07 Fashion.pdf"
-  },
-  {
-    "title": "باقة العمارة والتصميم",
-    "file": "categorysPdf/manifest/08 Building.pdf"
+    "file": "categorysPdf/manifest/04 Film.pdf"
   },
   {
     "title": "باقة الإدارة والتسويق",
-    "file": "categorysPdf/manifest/09 Marketing.pdf"
-  },
-  {
-    "title": "باقة الصحة والأسرة",
-    "file": "categorysPdf/manifest/10 Health.pdf"
+    "file": "categorysPdf/manifest/05 Marketing.pdf"
   },
   {
     "title": "باقة تعليمات النماذج",
-    "file": "categorysPdf/manifest/11 instructions.pdf"
+    "file": "categorysPdf/manifest/06 instructions.pdf"
   }
 ]
