@@ -17,6 +17,33 @@ const PACKAGE_PDFS_MANIFEST_URL = resolvePublicPath(
   "data/packagePdfsManifest.json",
 );
 const NEW_BOTS_URL = resolvePublicPath("new_bots.json");
+
+const PACKAGE_PDF_FALLBACKS = {
+  "باقة الباحث": {
+    full: "01 Searcher info.pdf",
+    summary: "01 Searcher.pdf",
+  },
+  "باقة التعليم والشريعة": {
+    full: "02 Education & Sharia info.pdf",
+    summary: "02 Education & Sharia.pdf",
+  },
+  "باقة المصمم الذكي": {
+    full: "03 Design info.pdf",
+    summary: "03 Designer.pdf",
+  },
+  "باقة صناعة الأفلام": {
+    full: "04 Film info.pdf",
+    summary: "04 Film.pdf",
+  },
+  "باقة الإدارة والتسويق": {
+    full: "05 Marketing info.pdf",
+    summary: "05 Marketing.pdf",
+  },
+  "باقة تعليمات النماذج": {
+    full: "06 instructions info.pdf",
+    summary: "06 instructions.pdf",
+  },
+};
 const PAYHIP_URL = "https://payhip.com/zraiee";
 const PAYHIP_BOOKS_COUNT = 11;
 
@@ -220,8 +247,21 @@ function getPdfFile(packageName, lookup) {
   return lookup.normalized.get(normalizedKey) || null;
 }
 
-function getPdfUrl(packageName, lookup) {
-  const file = getPdfFile(packageName, lookup);
+function getPdfFallbackFile(packageName, variant = "full") {
+  const direct = PACKAGE_PDF_FALLBACKS[packageName];
+  if (direct?.[variant]) return direct[variant];
+
+  const normalizedPackage = normalizeKeyName(packageName);
+  for (const [name, variants] of Object.entries(PACKAGE_PDF_FALLBACKS)) {
+    if (normalizeKeyName(name) === normalizedPackage) {
+      return variants?.[variant] || null;
+    }
+  }
+  return null;
+}
+
+function getPdfUrl(packageName, lookup, variant = "full") {
+  const file = getPdfFile(packageName, lookup) || getPdfFallbackFile(packageName, variant);
   if (!file) return null;
   return resolvePublicPath(file);
 }
@@ -257,8 +297,15 @@ function runDevAssertions() {
 
   const emptyLookup = buildPdfLookup([]);
   console.assert(
-    getPdfUrl("باقة الباحث", emptyLookup) === null,
-    "getPdfUrl should return null when the package is missing",
+    getPdfUrl("باقة الباحث", emptyLookup, "full")?.includes("01%20Searcher%20info.pdf") ||
+      getPdfUrl("باقة الباحث", emptyLookup, "full")?.includes("01 Searcher info.pdf"),
+    "getPdfUrl should fall back to the default full PDF path for باقة الباحث",
+  );
+
+  console.assert(
+    getPdfUrl("باقة تعليمات النماذج", emptyLookup, "summary")?.includes("06%20instructions.pdf") ||
+      getPdfUrl("باقة تعليمات النماذج", emptyLookup, "summary")?.includes("06 instructions.pdf"),
+    "getPdfUrl should fall back to the default summary PDF path for باقة تعليمات النماذج",
   );
 }
 
@@ -1087,8 +1134,12 @@ export default function App() {
 
             <div className="mt-4 space-y-8">
               {groupedPackages.map((pkg) => {
-                const packagePdfUrl = getPdfUrl(pkg.name, pdfLookup);
-                const packagePdfManifestUrl = getPdfUrl(pkg.name, pdfManifestLookup);
+                const packagePdfUrl = getPdfUrl(pkg.name, pdfLookup, "full");
+                const packagePdfManifestUrl = getPdfUrl(
+                  pkg.name,
+                  pdfManifestLookup,
+                  "summary",
+                );
                 const botsCount = pkg.cats?.reduce((sum, c) => sum + (c.rows?.length || 0), 0) || 0;
                 const pkgPanelId = `pkg-panel-${(pkg.key || pkg.name || "")
                   .toString()
@@ -1387,7 +1438,7 @@ export default function App() {
           <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
             <div className="flex-1">
               <p className="text-sm text-white/70">
-                نصنع تجارب عربية متقنة في الذكاء الاصطناعي. شاركنا اقتراحاتك وروابط البوتات التي تود أن نقوم بإضافتها.
+                نصنع تجارب عربية متقنة في الذكاء الاصطناعي. شاركنا اقتراحاتك وروابط البوتات التي تود إضافتها.
               </p>
 
               <div className="mt-4 flex flex-wrap items-center gap-2">
