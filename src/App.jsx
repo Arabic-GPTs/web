@@ -2626,7 +2626,7 @@ function AboutPage({ botsCount = 0, catsCount = 0, booksCount = 0 }) {
                 >
                   <div className="flex items-center justify-between">
                     <span className="text-sm md:text-base font-medium group-hover:text-white">
-                      باقة الباحث الذكي
+                      باقة الباحث الذكي: 
                     </span>
                     <span className="text-white/40 group-hover:text-white/80 transition">
                       ↗
