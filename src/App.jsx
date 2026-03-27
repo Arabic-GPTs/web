@@ -402,6 +402,7 @@ export default function App() {
   );
   const bgRef = useRef(null);
   const [showTop, setShowTop] = useState(false);
+  const [heroVideoReady, setHeroVideoReady] = useState(true);
 
   const openExternal = (url) => {
     try {
@@ -953,17 +954,32 @@ export default function App() {
                   transition={{ duration: 0.7, ease: "easeOut", delay: 0.05 }}
                   className="relative aspect-[5/3] overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-b from-neutral-900 to-neutral-950 shadow-2xl"
                 >
-                  <video
-                    className="absolute inset-0 h-full w-full object-cover"
-                    src={bgVideoUrl}
-                    autoPlay
-                    muted
-                    loop
-                    playsInline
-                    preload="auto"
-                  >
-                    <source src={bgVideoUrl} type="video/mp4" />
-                  </video>
+                  {heroVideoReady ? (
+                    <video
+                      className="absolute inset-0 h-full w-full object-cover"
+                      src={bgVideoUrl}
+                      autoPlay
+                      muted
+                      loop
+                      playsInline
+                      preload="metadata"
+                      onError={() => setHeroVideoReady(false)}
+                    >
+                      <source src={bgVideoUrl} type="video/mp4" />
+                    </video>
+                  ) : (
+                    <div className="absolute inset-0 bg-[radial-gradient(75%_75%_at_50%_35%,rgba(16,185,129,0.24),transparent),linear-gradient(135deg,rgba(15,23,42,0.9),rgba(10,10,10,1))]">
+                      <div className="absolute inset-0 bg-[conic-gradient(from_180deg_at_50%_50%,transparent_0,rgba(255,255,255,0.08)_20%,transparent_35%)]" />
+                      <div className="relative z-10 flex h-full items-end justify-start p-6">
+                        <div className="rounded-2xl border border-white/10 bg-black/35 px-4 py-3 backdrop-blur">
+                          <p className="text-sm font-bold text-white/90">تعذّر تحميل الفيديو التمهيدي</p>
+                          <p className="mt-1 text-xs text-white/65">
+                            أضف الملف داخل public باسم 1080-60fps-ai.mp4 ليظهر تلقائيًا.
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  )}
                   <div className="absolute inset-0 bg-[radial-gradient(60%_60%_at_70%_30%,rgba(163,230,53,0.15),transparent)]" />
                   <div className="pointer-events-none absolute -inset-[1px] bg-[conic-gradient(from_180deg_at_50%_50%,transparent_0,rgba(255,255,255,0.08)_20%,transparent_35%)]" />
                 </motion.div>
@@ -1670,24 +1686,238 @@ function AboutPage({ botsCount = 0, catsCount = 0, booksCount = 0 }) {
               من نحن
             </motion.h1>
             <p className="mt-3 text-white/80 text-sm md:text-base leading-relaxed">
-              تضم بوابة النماذج العربية الذكية حزمة متكاملة من الباقات والبوتات المصممة خصيصًا لدعم المستخدم العربي في مجالات متعددة.
+              تضم بوابة النماذج العربية الذكية حزمة متكاملة من الباقات والبوتات المصممة خصيصًا لدعم المستخدم العربي في مجالات متعددة، تشمل البحث العلمي، والتعليم، والشريعة، والتصميم، وصناعة الأفلام، والإدارة، والتسويق، وتعليمات تكوين النماذج. وتُبنى هذه المنظومة لتسهيل الوصول السريع إلى الأدوات المناسبة، مع الحفاظ على جودة العرض وسهولة الاستخدام واتساق التجربة البصرية.
             </p>
-            <div className="mt-5 grid grid-cols-3 gap-2 text-center text-sm">
-              <div className="rounded-2xl border border-white/10 bg-white/5 p-3">
-                <div className="text-2xl font-extrabold">{fmt(botsCount)}</div>
-                <div className="text-white/60">بوت</div>
-              </div>
-              <div className="rounded-2xl border border-white/10 bg-white/5 p-3">
-                <div className="text-2xl font-extrabold">{fmt(catsCount)}</div>
-                <div className="text-white/60">فئة</div>
-              </div>
-              <div className="rounded-2xl border border-white/10 bg-white/5 p-3">
-                <div className="text-2xl font-extrabold">{fmt(booksCount)}</div>
-                <div className="text-white/60">إصدار</div>
-              </div>
+          </div>
+        </motion.article>
+      </section>
+
+      <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-neutral-900/70 to-neutral-950 p-6 md:p-10">
+        <div className="relative z-10">
+          <motion.h2
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: [0.95, 1, 0.95], y: 0 }}
+            transition={{
+              duration: 0.6,
+              ease: "easeOut",
+              opacity: {
+                duration: 8,
+                repeat: Infinity,
+                repeatType: "mirror",
+                ease: "easeInOut",
+              },
+            }}
+            className="text-2xl md:text-4xl font-extrabold tracking-tight bg-gradient-to-r from-lime-200 via-emerald-300 to-lime-200 text-transparent bg-clip-text animate-gradient-slow"
+          >
+            عنّي
+          </motion.h2>
+          <p className="mt-3 text-white/80 text-sm md:text-base leading-relaxed">
+            أسّس هذه المنصة د. عبدالرحمن الزراعي، مشرف أكاديمي وباحث متخصص في مجالات البحوث العلمية، ومهتم ببناء النماذج العربية الذكية وصياغة تعليماتها بطريقة تضمن الاتساق والجودة والموثوقية. ويعمل ضمن هذه الرؤية على تطوير واجهات عربية ميسّرة، وبوتات تخصصية، ومواد تعليمية تساعد المستخدم العربي على الاستفادة العملية من الذكاء الاصطناعي داخل سياقه العلمي والمهني.
+          </p>
+
+          <div className="mt-5 grid grid-cols-3 gap-2 text-center text-sm">
+            <div className="rounded-2xl border border-white/10 bg-white/5 p-3">
+              <div className="text-2xl font-extrabold">{fmt(botsCount)}</div>
+              <div className="text-white/60">بوت</div>
+            </div>
+            <div className="rounded-2xl border border-white/10 bg-white/5 p-3">
+              <div className="text-2xl font-extrabold">{fmt(catsCount)}</div>
+              <div className="text-white/60">فئة</div>
+            </div>
+            <div className="rounded-2xl border border-white/10 bg-white/5 p-3">
+              <div className="text-2xl font-extrabold">{fmt(booksCount)}</div>
+              <div className="text-white/60">إصدار</div>
+            </div>
+          </div>
+        </div>
+        <div className="pointer-events-none absolute -inset-[1px] bg-[conic-gradient(from_180deg_at_50%_50%,transparent_0,rgba(255,255,255,0.08)_20%,transparent_35%)]" />
+      </div>
+
+      <section className="mt-6 grid grid-cols-1 gap-3 md:grid-cols-2">
+        <motion.article
+          initial={{ opacity: 0, y: 18 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-10%" }}
+          transition={{ duration: 0.4 }}
+          className="pixel-card relative overflow-hidden rounded-2xl border border-white/10 bg-white/5 p-5"
+        >
+          <div className="relative z-10">
+            <h2 className="text-lg md:text-xl font-bold tracking-tight">الفريق</h2>
+            <p className="mt-2 text-white/80 text-sm md:text-base leading-relaxed">
+              يعمل المشروع ضمن توجه يزاوج بين البعد الأكاديمي والتقني، ويستند إلى تطوير نماذج متخصصة في البحث، والتحليل، والتعليم، والتصميم، وغيرها، مع الحرص على ضبط المخرجات باللغة العربية الفصحى، ورفع جودة الأداء عبر تعليمات تكوين دقيقة ومواد مساندة منظّمة.
+            </p>
+          </div>
+        </motion.article>
+
+        <motion.article
+          initial={{ opacity: 0, y: 18 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-10%" }}
+          transition={{ duration: 0.4 }}
+          className="pixel-card relative overflow-hidden rounded-2xl border border-white/10 bg-white/5 p-5"
+        >
+          <div className="relative z-10">
+            <h2 className="text-lg md:text-xl font-bold tracking-tight">المجتمع</h2>
+            <p className="mt-2 text-white/80 text-sm md:text-base leading-relaxed">
+              نبني مجتمعًا عربيًا مهتمًا باستخدام الذكاء الاصطناعي في ميادين المعرفة والعمل والإبداع، مع التركيز على التطبيقات العملية، وجودة اللغة، وسلامة البناء المنهجي، وتبادل الخبرات داخل بيئة تعليمية موجهة.
+            </p>
+          </div>
+        </motion.article>
+
+        <motion.article
+          initial={{ opacity: 0, y: 18 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-10%" }}
+          transition={{ duration: 0.4 }}
+          className="pixel-card relative overflow-hidden rounded-2xl border border-white/10 bg-white/5 p-5 md:col-span-2"
+        >
+          <div className="relative z-10">
+            <h2 className="text-lg md:text-xl font-bold tracking-tight">رسالتنا</h2>
+            <p className="mt-2 text-white/80 text-sm md:text-base leading-relaxed">
+              نهدف إلى بناء مكتبة عربية من الحلول الذكية التي تراعي الخصوصية الثقافية واللغوية، وتدعم الاستخدام المسؤول للذكاء الاصطناعي عبر مواد تدريبية، وواجهات منظمة، وروابط مباشرة، ونماذج متخصصة قابلة للتطبيق العملي في السياقات الأكاديمية والمؤسسية.
+            </p>
+          </div>
+        </motion.article>
+      </section>
+
+      <section className="mt-6 grid grid-cols-1 gap-3 md:grid-cols-2">
+        <motion.article
+          initial={{ opacity: 0, y: 18 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-10%" }}
+          transition={{ duration: 0.4 }}
+          className="pixel-card relative overflow-hidden rounded-2xl border border-white/10 bg-white/5 p-5 md:col-span-2"
+        >
+          <div className="relative z-10">
+            <h2 className="text-lg md:text-xl font-bold tracking-tight">دوراتنا</h2>
+            <p className="mt-2 text-white/80 text-sm md:text-base leading-relaxed">
+              نقدم دورات تدريبية فردية وجماعية لتعريف المستخدم بواجهة ChatGPT وآليات العمل معها، وبناء التعليمات، وتخصيص النماذج، وفهم منطق التفاعل مع الأنظمة الذكية، إلى جانب دورات متخصصة في مجالات البحث العلمي، والتعليم، والقانون، والتصميم، وصناعة الأفلام، والتسويق، وغيرها.
+            </p>
+            <p className="mt-2 text-white/80 text-sm md:text-base leading-relaxed">
+              تعتمد هذه الدورات أسلوبًا تطبيقيًا مباشرًا، وتُدعم بمحتوى تعليمي منظم ومواد مساندة ونقاشات تفاعلية، مع تحديث مستمر يواكب تطور النماذج والأدوات.
+            </p>
+          </div>
+        </motion.article>
+
+        <motion.article
+          initial={{ opacity: 0, y: 18 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-10%" }}
+          transition={{ duration: 0.4 }}
+          className="pixel-card relative overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-br from-white/5 to-white/[0.02] p-6"
+        >
+          <div className="relative z-10">
+            <h2 className="text-lg md:text-xl font-bold tracking-tight mb-4">روابطنا الرسمية</h2>
+            <ul className="space-y-4">
+              <li>
+                <a
+                  href="https://alzarraei-gpts.github.io/Arabic-GPT-Hub/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group block rounded-xl border border-white/10 bg-white/5 p-4 transition hover:bg-white/10"
+                >
+                  <div className="flex items-center justify-between">
+                    <span className="text-sm md:text-base font-medium group-hover:text-white">باقة الباحث الذكي</span>
+                    <span className="text-white/40 group-hover:text-white/80 transition">↗</span>
+                  </div>
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://chatgpt.com/g/g-681f47498138819197d357982c29544c-mns-lnmdhj-ldhky-lbwtt-arabic-gpts"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group block rounded-xl border border-white/10 bg-white/5 p-4 transition hover:bg-white/10"
+                >
+                  <div className="flex items-center justify-between">
+                    <span className="text-sm md:text-base font-medium group-hover:text-white">منصة النماذج الذكية</span>
+                    <span className="text-white/40 group-hover:text-white/80 transition">↗</span>
+                  </div>
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://www.skool.com/zraiee-3956"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group block rounded-xl border border-white/10 bg-white/5 p-4 transition hover:bg-white/10"
+                >
+                  <div className="flex items-center justify-between">
+                    <span className="text-sm md:text-base font-medium group-hover:text-white">منصة سكول التعليمية</span>
+                    <span className="text-white/40 group-hover:text-white/80 transition">↗</span>
+                  </div>
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://wa.me/966552191598"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group block rounded-xl border border-white/10 bg-white/5 p-4 transition hover:bg-white/10"
+                >
+                  <div className="flex items-center justify-between">
+                    <span className="text-sm md:text-base font-medium group-hover:text-white">الاشتراك عبر واتساب</span>
+                    <span className="text-white/40 group-hover:text-white/80 transition">↗</span>
+                  </div>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </motion.article>
+
+        <motion.article
+          initial={{ opacity: 0, y: 18 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-10%" }}
+          transition={{ duration: 0.4 }}
+          className="pixel-card relative overflow-hidden rounded-2xl border border-white/10 bg-white/5 p-5"
+        >
+          <div className="relative z-10 flex h-full flex-col">
+            <h2 className="text-lg md:text-xl font-bold tracking-tight">روابط الكتب والمراجع</h2>
+            <p className="mt-2 text-white/80 text-sm md:text-base leading-relaxed">
+              نوفر مجموعة من الروابط التعليمية والكتب والمراجع والملفات الإرشادية التي تساعد المستخدم على فهم آلية عمل الذكاء الاصطناعي وطريقة التعامل مع النماذج المخصصة والاستفادة منها في بناء نماذجه الخاصة وتطويرها.
+            </p>
+            <div className="mt-auto pt-4 flex flex-wrap gap-3">
+              <a
+                href="https://alzarraei-gpts.github.io/Arabic-GPT-Hub-books/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="rounded-xl bg-white/10 px-4 py-2 text-sm font-bold hover:bg-white/20"
+              >
+                الكتب المجانية
+              </a>
+              <a
+                href="https://payhip.com/zraiee"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="rounded-xl bg-gradient-to-br from-lime-400 to-emerald-500 px-4 py-2 text-sm font-bold text-white"
+              >
+                الكتب المدفوعة
+              </a>
+              <a
+                href="https://wa.me/966552191598"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="rounded-xl bg-gradient-to-br from-blue-400 to-cyan-400 px-4 py-2 text-sm font-bold text-blue-950"
+              >
+                اشتراك
+              </a>
             </div>
           </div>
         </motion.article>
+      </section>
+
+      <section className="mt-6">
+        <div className="mx-auto max-w-6xl">
+          <h3 className="mb-3 text-base md:text-lg font-extrabold bg-gradient-to-r from-lime-200 via-emerald-300 to-lime-200 text-transparent bg-clip-text animate-gradient-slow">
+            جديدنا
+          </h3>
+          <div className="rounded-2xl border border-white/10 bg-white/5 p-5">
+            <p className="text-white/80 text-sm md:text-base leading-relaxed">
+              نعمل باستمرار على تطوير نماذج ذكية جديدة وتحديث الباقات القائمة، مع إضافة مزيد من الأدوات والروابط والمحتوى التعليمي المساند، بما يعزز تجربة المستخدم ويجعل الوصول إلى الحلول التخصصية أكثر سرعة ووضوحًا.
+            </p>
+          </div>
+        </div>
       </section>
     </main>
   );
