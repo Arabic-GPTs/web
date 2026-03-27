@@ -344,6 +344,11 @@ function runDevAssertions() {
     ) === "categorysPdf/manifest/01 Searcher.pdf",
     "normalizePdfFileCandidate should place a bare PDF filename inside the real manifest folder",
   );
+
+  console.assert(
+    Boolean(SOCIAL_ICONS.whatsapp) && Boolean(SOCIAL_ICONS.books) && Boolean(SOCIAL_ICONS.bots),
+    "Inline SVG icon set should be available without external icon libraries",
+  );
 }
 
 runDevAssertions();
@@ -416,6 +421,84 @@ const pickAccentByCategory = (category) => {
 
 const getAccent = (b) => pickAccentByCategory(b?.category);
 const fmt = (n) => new Intl.NumberFormat("ar-SA").format(n);
+
+const SOCIAL_ICONS = {
+  whatsapp: (
+    <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true">
+      <path d="M20.52 3.48A11.86 11.86 0 0012.07 0C5.56 0 .25 5.3.25 11.82c0 2.08.54 4.11 1.58 5.9L0 24l6.45-1.69a11.76 11.76 0 005.62 1.43h.01c6.51 0 11.82-5.3 11.82-11.82 0-3.16-1.23-6.12-3.38-8.44zM12.08 21.7a9.8 9.8 0 01-5-1.37l-.36-.21-3.83 1 1.02-3.73-.23-.38a9.83 9.83 0 01-1.5-5.2c0-5.43 4.42-9.85 9.86-9.85 2.63 0 5.1 1.02 6.96 2.89a9.78 9.78 0 012.89 6.97c0 5.43-4.42 9.85-9.85 9.85zm5.4-7.37c-.3-.15-1.78-.88-2.05-.98-.27-.1-.47-.15-.67.15-.2.3-.77.98-.95 1.18-.17.2-.35.23-.65.08-.3-.15-1.28-.47-2.43-1.5a9.03 9.03 0 01-1.68-2.1c-.18-.3-.02-.46.13-.6.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.38-.02-.53-.08-.15-.67-1.62-.92-2.22-.24-.58-.48-.5-.67-.5h-.57c-.2 0-.53.08-.8.38-.27.3-1.03 1-1.03 2.44 0 1.44 1.05 2.83 1.2 3.03.15.2 2.06 3.15 5 4.41.7.3 1.25.48 1.68.61.7.22 1.34.19 1.85.11.56-.08 1.78-.73 2.03-1.44.25-.71.25-1.32.17-1.44-.07-.12-.27-.2-.57-.35z" />
+    </svg>
+  ),
+  telegram: (
+    <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true">
+      <path d="M9.04 15.47l-.38 5.34c.54 0 .78-.23 1.06-.5l2.55-2.44 5.28 3.87c.97.53 1.66.25 1.92-.9l3.48-16.3h.01c.31-1.45-.52-2.02-1.47-1.67L1.78 10.3C.4 10.84.42 11.6 1.55 11.95l5.05 1.58L18.32 6.2c.55-.34 1.05-.15.63.19" />
+    </svg>
+  ),
+  x: (
+    <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true">
+      <path d="M18.9 2H22l-6.77 7.74L23.2 22h-6.26l-4.9-6.42L6.42 22H3.3l7.24-8.27L.8 2h6.42l4.43 5.85L18.9 2zm-1.1 18h1.73L6.3 3.9H4.45L17.8 20z" />
+    </svg>
+  ),
+  youtube: (
+    <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true">
+      <path d="M23.5 6.2a3.02 3.02 0 00-2.12-2.14C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.38.56A3.02 3.02 0 00.5 6.2 31.3 31.3 0 000 12a31.3 31.3 0 00.5 5.8 3.02 3.02 0 002.12 2.14C4.5 20.5 12 20.5 12 20.5s7.5 0 9.38-.56a3.02 3.02 0 002.12-2.14A31.3 31.3 0 0024 12a31.3 31.3 0 00-.5-5.8zM9.6 15.5v-7L15.8 12l-6.2 3.5z" />
+    </svg>
+  ),
+  instagram: (
+    <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true">
+      <path d="M7 2h10a5 5 0 015 5v10a5 5 0 01-5 5H7a5 5 0 01-5-5V7a5 5 0 015-5zm0 2.2A2.8 2.8 0 004.2 7v10A2.8 2.8 0 007 19.8h10a2.8 2.8 0 002.8-2.8V7A2.8 2.8 0 0017 4.2H7zm10.25 1.65a1.1 1.1 0 110 2.2 1.1 1.1 0 010-2.2zM12 7a5 5 0 110 10 5 5 0 010-10zm0 2.2a2.8 2.8 0 100 5.6 2.8 2.8 0 000-5.6z" />
+    </svg>
+  ),
+  facebook: (
+    <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true">
+      <path d="M13.5 22v-8h2.7l.4-3h-3.1V9.1c0-.87.25-1.46 1.5-1.46h1.6V4.96c-.28-.04-1.23-.12-2.34-.12-2.31 0-3.89 1.41-3.89 4v2.24H7.5v3h2.87v8h3.13z" />
+    </svg>
+  ),
+  tiktok: (
+    <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true">
+      <path d="M16.5 2c.43 1.72 1.46 3.2 2.95 4.2A7.3 7.3 0 0022 7.3v3.1a10.5 10.5 0 01-5.5-1.55v6.48a5.83 5.83 0 11-5.83-5.83c.33 0 .66.03.98.08v3.18a2.7 2.7 0 101.72 2.57V2h3.13z" />
+    </svg>
+  ),
+  email: (
+    <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true">
+      <path d="M3 5h18a2 2 0 012 2v10a2 2 0 01-2 2H3a2 2 0 01-2-2V7a2 2 0 012-2zm0 2v.51l9 5.63 9-5.63V7H3zm18 10V9.86l-8.48 5.3a1 1 0 01-1.04 0L3 9.86V17h18z" />
+    </svg>
+  ),
+  paypal: (
+    <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true">
+      <path d="M7.2 3H14c2.86 0 4.86.6 5.75 2 .78 1.23.84 2.76.36 4.75-.55 2.25-1.63 3.54-3.24 4.17-.99.38-2.22.54-3.72.54H12l-.73 4.54H6.5L7.2 3zm2.6 2.2L8.2 15h2.35l.42-2.6h1.84c1.27 0 2.2-.13 2.87-.44.96-.44 1.6-1.36 1.92-2.83.3-1.33.12-2.23-.5-2.8-.6-.55-1.56-.73-3.2-.73H9.8z" />
+    </svg>
+  ),
+  linkedin: (
+    <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true">
+      <path d="M4.98 3.5a2.49 2.49 0 11.02 4.98 2.49 2.49 0 01-.02-4.98zM3 9h4v12H3V9zm7 0h3.83v1.64h.05c.53-1 1.84-2.05 3.8-2.05 4.07 0 4.82 2.68 4.82 6.16V21h-4v-5.52c0-1.32-.03-3.02-1.84-3.02-1.84 0-2.12 1.44-2.12 2.93V21h-4V9z" />
+    </svg>
+  ),
+  books: (
+    <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true">
+      <path d="M4 4.5A2.5 2.5 0 016.5 2H20v17.5a2.5 2.5 0 01-2.5 2.5H6.5A2.5 2.5 0 014 19.5v-15zM6.5 4A.5.5 0 006 4.5V18h11.5a.5.5 0 00.5-.5V4H6.5zm1.5 2h7v2H8V6zm0 4h7v2H8v-2z" />
+    </svg>
+  ),
+  download: (
+    <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true">
+      <path d="M11 3h2v9.17l2.59-2.58L17 11l-5 5-5-5 1.41-1.41L11 12.17V3zm-7 14h16v4H4v-4z" />
+    </svg>
+  ),
+  subscribe: (
+    <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true">
+      <path d="M12 2l2.83 5.74L21 8.63l-4.5 4.39 1.06 6.22L12 16.77 6.44 19.24 7.5 13.02 3 8.63l6.17-.89L12 2z" />
+    </svg>
+  ),
+  categories: (
+    <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true">
+      <path d="M3 3h8v8H3V3zm10 0h8v8h-8V3zM3 13h8v8H3v-8zm10 0h8v8h-8v-8z" />
+    </svg>
+  ),
+  bots: (
+    <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true">
+      <path d="M12 2a2 2 0 012 2v1h1.5A3.5 3.5 0 0119 8.5V13a3 3 0 01-3 3h-1.1l1.55 2.06A1 1 0 0115.65 20H8.35a1 1 0 01-.8-1.6L9.1 16H8a3 3 0 01-3-3V8.5A3.5 3.5 0 018.5 5H10V4a2 2 0 012-2zm-2 3h4V4h-4v1zm-1.5 2A1.5 1.5 0 007 8.5V13a1 1 0 001 1h8a1 1 0 001-1V8.5A1.5 1.5 0 0015.5 7h-7zM9 9.5A1.5 1.5 0 1010.5 11 1.5 1.5 0 009 9.5zm6 0A1.5 1.5 0 1016.5 11 1.5 1.5 0 0015 9.5z" />
+    </svg>
+  ),
+};
 
 const CATEGORY_ICONS = {
   "الباحث العلمي": (
@@ -1263,10 +1346,12 @@ export default function App() {
 
                     <div className="mt-1 flex flex-wrap items-center gap-3 text-xs md:text-sm text-white/70">
                       <div className="inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/5 px-3 py-1 backdrop-blur">
+                        <span className="text-emerald-400">{SOCIAL_ICONS.categories}</span>
                         <span className="font-semibold text-white">{pkg.cats.length}</span>
                         <span>فئات</span>
                       </div>
                       <div className="inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/5 px-3 py-1 backdrop-blur">
+                        <span className="text-sky-400">{SOCIAL_ICONS.bots}</span>
                         <span className="font-semibold text-white">{botsCount}</span>
                         <span>بوت</span>
                       </div>
@@ -1489,7 +1574,7 @@ export default function App() {
                   className="grid h-9 w-9 place-items-center rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 transition"
                   title="واتساب"
                 >
-                  <i className="fa-brands fa-whatsapp fa-lg text-white"></i>
+                  {SOCIAL_ICONS.whatsapp}
                 </a>
                 <a
                   href="https://t.me/zraiee"
@@ -1499,7 +1584,7 @@ export default function App() {
                   className="grid h-9 w-9 place-items-center rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 transition"
                   title="تيليغرام"
                 >
-                  <i className="fa-brands fa-telegram fa-lg text-white"></i>
+                  {SOCIAL_ICONS.telegram}
                 </a>
                 <a
                   href="https://x.com/Arab_Ai_"
@@ -1509,7 +1594,7 @@ export default function App() {
                   className="grid h-9 w-9 place-items-center rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 transition"
                   title="منصة إكس"
                 >
-                  <i className="fa-brands fa-x-twitter fa-lg text-white"></i>
+                  {SOCIAL_ICONS.x}
                 </a>
                 <a
                   href="https://www.youtube.com/@shaifarah"
@@ -1519,7 +1604,7 @@ export default function App() {
                   className="grid h-9 w-9 place-items-center rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 transition"
                   title="يوتيوب"
                 >
-                  <i className="fa-brands fa-youtube fa-lg text-white"></i>
+                  {SOCIAL_ICONS.youtube}
                 </a>
                 <a
                   href="https://www.instagram.com/alzarraei.gpts/"
@@ -1529,7 +1614,7 @@ export default function App() {
                   className="grid h-9 w-9 place-items-center rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 transition"
                   title="إنستغرام"
                 >
-                  <i className="fa-brands fa-instagram fa-lg text-white"></i>
+                  {SOCIAL_ICONS.instagram}
                 </a>
                 <a
                   href="https://www.facebook.com/alzarraei.gpts/"
@@ -1539,7 +1624,7 @@ export default function App() {
                   className="grid h-9 w-9 place-items-center rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 transition"
                   title="فيسبوك"
                 >
-                  <i className="fa-brands fa-facebook-f fa-lg text-white"></i>
+                  {SOCIAL_ICONS.facebook}
                 </a>
                 <a
                   href="https://www.tiktok.com/@alzarraei"
@@ -1549,7 +1634,7 @@ export default function App() {
                   className="grid h-9 w-9 place-items-center rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 transition"
                   title="تيك توك"
                 >
-                  <i className="fa-brands fa-tiktok fa-lg text-white"></i>
+                  {SOCIAL_ICONS.tiktok}
                 </a>
                 <a
                   href="https://mail.google.com/mail/?extsrc=mailto&url=mailto:zraieee@gmail.com"
@@ -1559,7 +1644,7 @@ export default function App() {
                   className="grid h-9 w-9 place-items-center rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 transition"
                   title="البريد الإلكتروني"
                 >
-                  <i className="fa-solid fa-envelope fa-lg text-white"></i>
+                  {SOCIAL_ICONS.email}
                 </a>
                 <a
                   href="https://www.paypal.com/paypalme/zraiee"
@@ -1569,7 +1654,7 @@ export default function App() {
                   className="grid h-9 w-9 place-items-center rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 transition"
                   title="باي بال"
                 >
-                  <i className="fa-brands fa-paypal fa-lg text-white"></i>
+                  {SOCIAL_ICONS.paypal}
                 </a>
                 <a
                   href="https://www.linkedin.com/in/abdulrahman-alzarraei/"
@@ -1579,7 +1664,7 @@ export default function App() {
                   className="grid h-9 w-9 place-items-center rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 transition"
                   title="لينكدإن"
                 >
-                  <i className="fa-brands fa-linkedin-in fa-lg text-white"></i>
+                  {SOCIAL_ICONS.linkedin}
                 </a>
               </div>
             </div>
@@ -1972,24 +2057,27 @@ function AboutPage({ botsCount = 0, catsCount = 0, booksCount = 0 }) {
                 href="https://alzarraei-gpts.github.io/Arabic-GPT-Hub-books/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="rounded-xl bg-white/10 px-4 py-2 text-sm font-bold hover:bg-white/20"
+                className="inline-flex items-center gap-2 rounded-xl bg-white/10 px-4 py-2 text-sm font-bold hover:bg-white/20"
               >
+                <span className="text-white/90">{SOCIAL_ICONS.books}</span>
                 الكتب المجانية
               </a>
               <a
                 href="https://payhip.com/zraiee"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="rounded-xl bg-gradient-to-br from-lime-400 to-emerald-500 px-4 py-2 text-sm font-bold text-white"
+                className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-br from-lime-400 to-emerald-500 px-4 py-2 text-sm font-bold text-white"
               >
+                <span className="text-white/95">{SOCIAL_ICONS.download}</span>
                 الكتب المدفوعة
               </a>
               <a
                 href="https://wa.me/966552191598"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="rounded-xl bg-gradient-to-br from-blue-400 to-cyan-400 px-4 py-2 text-sm font-bold text-blue-950"
+                className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-br from-blue-400 to-cyan-400 px-4 py-2 text-sm font-bold text-blue-950"
               >
+                <span className="text-blue-950">{SOCIAL_ICONS.subscribe}</span>
                 اشتراك
               </a>
             </div>
