@@ -2619,14 +2619,14 @@ function AboutPage({ botsCount = 0, catsCount = 0, booksCount = 0 }) {
               {/* رابط 1 */}
               <li>
                 <a
-                  href="https://arabic-gpts.github.io/web/"
+                  href="https://alzarraei-gpts.github.io/Arabic-GPT-Hub/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="group block rounded-xl border border-white/10 bg-white/5 p-4 transition hover:bg-white/10"
                 >
                   <div className="flex items-center justify-between">
                     <span className="text-sm md:text-base font-medium group-hover:text-white">
-                      جميع الباقات الذكية
+                      باقة الباحث الذكي
                     </span>
                     <span className="text-white/40 group-hover:text-white/80 transition">
                       ↗
@@ -2645,7 +2645,7 @@ function AboutPage({ botsCount = 0, catsCount = 0, booksCount = 0 }) {
                 >
                   <div className="flex items-center justify-between">
                     <span className="text-sm md:text-base font-medium group-hover:text-white">
-                      جميع نماذج وبوتات التصميم على ChatGPT:
+                      منصة النماذج الذكية:
                     </span>
                     <span className="text-white/40 group-hover:text-white/80 transition">
                       ↗
@@ -2664,7 +2664,7 @@ function AboutPage({ botsCount = 0, catsCount = 0, booksCount = 0 }) {
                 >
                   <div className="flex items-center justify-between">
                     <span className="text-sm md:text-base font-medium group-hover:text-white">
-                      منصة Skool التعليمية (المجتمع والدورات):
+                      منصة سكول التعليمية:
                     </span>
                     <span className="text-white/40 group-hover:text-white/80 transition">
                       ↗
