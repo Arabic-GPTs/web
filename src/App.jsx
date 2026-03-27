@@ -77,7 +77,7 @@ const formatModelLabel = (name) => {
     if (["4o", "gpt-4o", "gpt4o"].includes(lower)) return "4o";
     if (["4o-mini", "gpt-4o-mini", "gpt4o-mini"].includes(lower))
       return "4o-mini";
-    if (["5", "جيميناي", "gpt5"].includes(lower)) return "جيميناي";
+    if (["5", "gpt-5", "gpt5"].includes(lower)) return "GPT-5";
     if (lower.startsWith("link")) {
       const match = lower.match(/link[-_]?(\d+)/);
       return match && match[1] ? `رابط ${match[1]}` : "رابط";
@@ -1723,7 +1723,7 @@ export default function App() {
                                       "gpt4o",
                                       "4o-mini",
                                       "mini",
-                                      "جيميناي",
+                                      "gpt-5",
                                       "gpt5",
                                       "5",
                                     ]);
@@ -2616,7 +2616,7 @@ function AboutPage({ botsCount = 0, catsCount = 0, booksCount = 0 }) {
             </h2>
 
             <ul className="space-y-4">
-              {/* تشات جي بي تي */}
+              {/* رابط 1 */}
               <li>
                 <a
                   href="https://alzarraei-gpts.github.io/Arabic-GPT-Hub/"
@@ -2635,7 +2635,7 @@ function AboutPage({ botsCount = 0, catsCount = 0, booksCount = 0 }) {
                 </a>
               </li>
 
-              {/* جيميناي */}
+              {/* رابط 2 */}
               <li>
                 <a
                   href="https://chatgpt.com/g/g-681f47498138819197d357982c29544c-mns-lnmdhj-ldhky-lbwtt-arabic-gpts"
