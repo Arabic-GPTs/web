@@ -260,8 +260,20 @@ function getPdfFallbackFile(packageName, variant = "full") {
   return null;
 }
 
+function normalizePdfFileCandidate(candidate, fallbackFile = null) {
+  const raw = (candidate || "").toString().trim();
+  const fallback = (fallbackFile || "").toString().trim();
+
+  if (!raw) return fallback || null;
+  if (/\.pdf$/i.test(raw)) return raw;
+  if (/\.html?$/i.test(raw)) return fallback || null;
+  return fallback || raw || null;
+}
+
 function getPdfUrl(packageName, lookup, variant = "full") {
-  const file = getPdfFile(packageName, lookup) || getPdfFallbackFile(packageName, variant);
+  const fallbackFile = getPdfFallbackFile(packageName, variant);
+  const lookedUpFile = getPdfFile(packageName, lookup);
+  const file = normalizePdfFileCandidate(lookedUpFile, fallbackFile);
   if (!file) return null;
   return resolvePublicPath(file);
 }
@@ -306,6 +318,12 @@ function runDevAssertions() {
     getPdfUrl("باقة تعليمات النماذج", emptyLookup, "summary")?.includes("06%20instructions.pdf") ||
       getPdfUrl("باقة تعليمات النماذج", emptyLookup, "summary")?.includes("06 instructions.pdf"),
     "getPdfUrl should fall back to the default summary PDF path for باقة تعليمات النماذج",
+  );
+
+  console.assert(
+    normalizePdfFileCandidate("06 instructions info.htm", "06 instructions info.pdf") ===
+      "06 instructions info.pdf",
+    "normalizePdfFileCandidate should prefer the PDF fallback when JSON returns an HTML file",
   );
 }
 
@@ -1202,8 +1220,9 @@ export default function App() {
                         {packagePdfUrl && (
                           <a
                             href={packagePdfUrl}
-                            download
-                            title="تحميل النسخة الكاملة مع الشرح"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            title="فتح النسخة الكاملة PDF مباشرة"
                             className="group inline-flex items-center gap-2 rounded-xl px-3 py-2 text-xs md:text-sm font-bold bg-gradient-to-br from-emerald-400 to-lime-400 text-emerald-950 shadow hover:shadow-lg transition"
                           >
                             الشرح الكامل
@@ -1212,8 +1231,9 @@ export default function App() {
                         {packagePdfManifestUrl && (
                           <a
                             href={packagePdfManifestUrl}
-                            download
-                            title="تحميل النسخة المختصرة"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            title="فتح النسخة المختصرة PDF مباشرة"
                             className="group inline-flex items-center gap-2 rounded-xl px-3 py-2 text-xs md:text-sm font-bold bg-gradient-to-br from-blue-400 to-cyan-400 text-blue-950 shadow hover:shadow-lg transition"
                           >
                             مختصر
