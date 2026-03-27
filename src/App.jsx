@@ -1387,7 +1387,7 @@ export default function App() {
           <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
             <div className="flex-1">
               <p className="text-sm text-white/70">
-                نصنع تجارب عربية متقنة في الذكاء الاصطناعي. شاركنا اقتراحاتك وروابط البوتات التي تود إضافتها.
+                نصنع تجارب عربية متقنة في الذكاء الاصطناعي. شاركنا اقتراحاتك وروابط البوتات التي تود أن نقوم بإضافتها.
               </p>
 
               <div className="mt-4 flex flex-wrap items-center gap-2">
