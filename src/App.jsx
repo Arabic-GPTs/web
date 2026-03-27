@@ -2011,7 +2011,7 @@ export default function App() {
                   <i className="fa-brands fa-x-twitter fa-lg text-white"></i>
                 </a>
                 <a
-                  href="https://www.youtube.com/@alzarraei-gpts"
+                  href="https://www.youtube.com/@shaifarah"
                   target="_blank"
                   rel="noopener"
                   aria-label="يوتيوب"
@@ -2051,7 +2051,7 @@ export default function App() {
                 </a>
                 {/* Email */}
                 <a
-                  href="mailto:zraieee@gmail.com"
+                  href="https://mail.google.com/mail/?extsrc=mailto&url=mailto:zraieee@gmail.com"
                   target="_blank"
                   rel="noopener"
                   aria-label="البريد الإلكتروني"
