@@ -1797,7 +1797,7 @@ function GooeyNav({ route }) {
     { href: "#/about", label: "من نحن" },
     {
       href: "https://chatgpt.com/g/g-681f47498138819197d357982c29544c-mns-lnmdhj-ldhky-lbwtt-arabic-gpts",
-      label: "منصة النماذج الذكية",
+      label: "منصة النماذج",
       external: true,
     },
     { href: "https://wa.me/966552191598", label: "اشتراك", external: true },
@@ -2005,7 +2005,7 @@ function AboutPage({ botsCount = 0, catsCount = 0, booksCount = 0 }) {
                   className="group block rounded-xl border border-white/10 bg-white/5 p-4 transition hover:bg-white/10"
                 >
                   <div className="flex items-center justify-between">
-                    <span className="text-sm md:text-base font-medium group-hover:text-white">منصة النماذج الذكية</span>
+                    <span className="text-sm md:text-base font-medium group-hover:text-white">منصة النماذج</span>
                     <span className="text-white/40 group-hover:text-white/80 transition">↗</span>
                   </div>
                 </a>
