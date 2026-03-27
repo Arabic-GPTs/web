@@ -1680,84 +1680,161 @@ export default function App() {
                           exit={{ height: 0, opacity: 0 }}
                           transition={{ duration: 0.35, ease: "easeInOut" }}
                           className="overflow-hidden mt-3 space-y-5"
-                        >
-                          {pkg.cats.map((cat, idx) => (
-                            <div
-                              key={`${pkg.name}-${cat.name}`}
-                              className="space-y-2"
-                            >
-                              <div className="flex items-center gap-2 mb-1 justify-end">
-                                <div className="hidden md:block h-px flex-1 bg-gradient-to-l from-white/10 to-transparent" />
-                                <span
-                                  className={`inline-flex items-center gap-1 text-sm md:text-base text-white/90 rounded-full border border-white/10 px-2 py-0.5 bg-gradient-to-br ${cat.accent} shadow-[0_0_18px_rgba(0,0,0,0.35)] ring-1 ring-white/10 backdrop-blur-sm animate-gradient-slow`}
-                                >
-                                  {cat.name}
-                                </span>
-                                <span className="hidden md:inline text-xs text-white/60">
-                                  {cat.rows.length} بوت
-                                </span>
-                                <div className="hidden md:block h-px flex-1 bg-gradient-to-r from-white/10 to-transparent" />
-                              </div>
-                              <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-                                <AnimatePresence mode="popLayout">
-                                  {cat.rows.map((b) => {
-                                    const rawModelEntries = Object.entries(
-                                      b?.models || {},
-                                    );
-                                    const validModelEntries = rawModelEntries
-                                      .map(([model, url]) => [
-                                        model,
-                                        toSafeUrl(url),
-                                      ])
-                                      .filter(([, url]) => !!url);
-                                    const hasMultipleModels =
-                                      validModelEntries.length > 1;
-                                    const primaryLink = toSafeUrl(b?.url);
-                                    const launchLink =
-                                      primaryLink ||
-                                      validModelEntries[0]?.[1] ||
-                                      "";
-                                    const chatModelNames = new Set([
-                                      "4o",
-                                      "gpt-4o",
-                                      "gpt4o",
-                                      "4o-mini",
-                                      "mini",
-                                      "gpt-5",
-                                      "gpt5",
-                                      "5",
-                                    ]);
-                                    const hasChatModels =
-                                      validModelEntries.some(([model]) =>
-                                        chatModelNames.has(
-                                          (model || "")
-                                            .toString()
-                                            .toLowerCase(),
-                                        ),
-                                      );
-                                    const launchHost = (() => {
-                                      try {
-                                        return launchLink
-                                          ? new URL(launchLink).hostname || ""
-                                          : "";
-                                      } catch {
-                                        return "";
-                                      }
-                                    })();
-                                    const isChatGPTLaunch = launchHost.endsWith("chatgpt.com");
-                                    const buttonLabel = (() => {
-                                    return "اختيار المنصة";
-                                    })();
-                                      if (launchLink) {
-                                        return isChatGPTLaunch
-                                          ? "تشغيل في ChatGPT"
-                                          : "فتح الرابط";
-                                      }
-                                      return "غير متاح";
-                                    })();
-                                    const canLaunch =
-                                      hasMultipleModels || Boolean(launchLink);
-                                    const copyDisabled = !launchLink;
+                       {pkg.cats.map((cat, idx) => (
+  <div
+    key={`${pkg.name}-${cat.name}`}
+    className="space-y-2"
+  >
+    <div className="flex items-center gap-2 mb-1 justify-end">
+      <div className="hidden md:block h-px flex-1 bg-gradient-to-l from-white/10 to-transparent" />
+      <span
+        className={`inline-flex items-center gap-1 text-sm md:text-base text-white/90 rounded-full border border-white/10 px-2 py-0.5 bg-gradient-to-br ${cat.accent} shadow-[0_0_18px_rgba(0,0,0,0.35)] ring-1 ring-white/10 backdrop-blur-sm animate-gradient-slow`}
+      >
+        {cat.name}
+      </span>
+      <span className="hidden md:inline text-xs text-white/60">
+        {cat.rows.length} بوت
+      </span>
+      <div className="hidden md:block h-px flex-1 bg-gradient-to-r from-white/10 to-transparent" />
+    </div>
+
+    <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+      <AnimatePresence mode="popLayout">
+        {cat.rows.map((b) => {
+          const rawModelEntries = Object.entries(b?.models || {});
+
+          const validModelEntries = rawModelEntries
+            .map(([model, url]) => [model, toSafeUrl(url)])
+            .filter(([, url]) => Boolean(url));
+
+          const primaryLink = toSafeUrl(b?.url);
+
+          const getHost = (url) => {
+            try {
+              return url ? new URL(url).hostname.toLowerCase() : "";
+            } catch {
+              return "";
+            }
+          };
+
+          const chatModelNames = new Set([
+            "4o",
+            "gpt-4o",
+            "gpt4o",
+            "4o-mini",
+            "mini",
+            "gpt-5",
+            "gpt5",
+            "5",
+            "chatgpt",
+          ]);
+
+          const geminiModelNames = new Set([
+            "gemini",
+            "gemini-pro",
+            "gemini flash",
+            "gemini-flash",
+            "flash",
+            "1.5-pro",
+            "1.5-flash",
+            "2.0-flash",
+          ]);
+
+          let chatgptLink = "";
+          let geminiLink = "";
+
+          validModelEntries.forEach(([model, url]) => {
+            const modelName = (model || "").toString().toLowerCase().trim();
+            const host = getHost(url);
+
+            if (
+              !chatgptLink &&
+              (
+                host.endsWith("chatgpt.com") ||
+                host.includes("openai.com") ||
+                chatModelNames.has(modelName)
+              )
+            ) {
+              chatgptLink = url;
+              return;
+            }
+
+            if (
+              !geminiLink &&
+              (
+                host.includes("gemini.google.com") ||
+                host.includes("bard.google.com") ||
+                host.includes("google.com") ||
+                geminiModelNames.has(modelName) ||
+                modelName.includes("gemini")
+              )
+            ) {
+              geminiLink = url;
+            }
+          });
+
+          if (primaryLink) {
+            const primaryHost = getHost(primaryLink);
+
+            if (
+              !chatgptLink &&
+              (primaryHost.endsWith("chatgpt.com") || primaryHost.includes("openai.com"))
+            ) {
+              chatgptLink = primaryLink;
+            }
+
+            if (
+              !geminiLink &&
+              (
+                primaryHost.includes("gemini.google.com") ||
+                primaryHost.includes("bard.google.com") ||
+                primaryHost.includes("google.com")
+              )
+            ) {
+              geminiLink = primaryLink;
+            }
+          }
+
+          const platformLinks = [];
+
+          if (chatgptLink) {
+            platformLinks.push({
+              label: "تشات جي بي تي",
+              url: chatgptLink,
+            });
+          }
+
+          if (geminiLink) {
+            platformLinks.push({
+              label: "جيميناي",
+              url: geminiLink,
+            });
+          }
+
+          const hasPlatforms = platformLinks.length > 0;
+          const hasMultiplePlatforms = platformLinks.length > 1;
+          const launchLink = platformLinks[0]?.url || "";
+          const buttonLabel = hasPlatforms ? "اختيار المنصة" : "غير متاح";
+          const canLaunch = hasPlatforms;
+          const copyDisabled = !launchLink;
+
+          return (
+            <YourCardComponent
+              key={b.name}
+              bot={b}
+              launchLink={launchLink}
+              buttonLabel={buttonLabel}
+              canLaunch={canLaunch}
+              copyDisabled={copyDisabled}
+              hasMultipleModels={hasMultiplePlatforms}
+              platformLinks={platformLinks}
+            />
+          );
+        })}
+      </AnimatePresence>
+    </div>
+  </div>
+))}
 
                                     return (
                                       <motion.div
