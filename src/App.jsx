@@ -1744,14 +1744,10 @@ export default function App() {
                                         return "";
                                       }
                                     })();
-                                    const isChatGPTLaunch =
-                                      launchHost.endsWith("chatgpt.com");
+                                    const isChatGPTLaunch = launchHost.endsWith("chatgpt.com");
                                     const buttonLabel = (() => {
-                                      if (hasMultipleModels) {
-                                        return hasChatModels
-                                          ? "اختيار النموذج"
-                                          : "عرض الروابط";
-                                      }
+                                    return "اختيار المنصة";
+                                    })();
                                       if (launchLink) {
                                         return isChatGPTLaunch
                                           ? "تشغيل في ChatGPT"
