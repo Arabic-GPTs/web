@@ -1,8 +1,5 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useMemo, useRef, useState } from "react";
-import bgVideoUrl from "../1080-60fps-ai.mp4";
-import packagePdfs from "./data/packagePdfs.json";
-import packagePdfsManifest from "./data/packagePdfsManifest.json";
 
 const BASE_URL =
   (import.meta && import.meta.env && import.meta.env.BASE_URL) || "/";
@@ -14,6 +11,12 @@ const resolvePublicPath = (path) => {
 };
 
 const logoUrl = resolvePublicPath("og-image.png");
+const bgVideoUrl = resolvePublicPath("1080-60fps-ai.mp4");
+const PACKAGE_PDFS_URL = resolvePublicPath("data/packagePdfs.json");
+const PACKAGE_PDFS_MANIFEST_URL = resolvePublicPath(
+  "data/packagePdfsManifest.json",
+);
+const NEW_BOTS_URL = resolvePublicPath("new_bots.json");
 const PAYHIP_URL = "https://payhip.com/zraiee";
 const PAYHIP_BOOKS_COUNT = 11;
 
@@ -77,7 +80,9 @@ const formatModelLabel = (name) => {
     const lower = raw.toLowerCase();
     if (!lower) return raw;
     if (["4o", "gpt-4o", "gpt4o"].includes(lower)) return "4o";
-    if (["4o-mini", "gpt-4o-mini", "gpt4o-mini"].includes(lower)) return "4o-mini";
+    if (["4o-mini", "gpt-4o-mini", "gpt4o-mini"].includes(lower)) {
+      return "4o-mini";
+    }
     if (["5", "gpt-5", "gpt5"].includes(lower)) return "GPT-5";
     if (lower.startsWith("link")) {
       const match = lower.match(/link[-_]?(\d+)/);
@@ -182,10 +187,16 @@ const getPlatformLinks = (bot) => {
   return links;
 };
 
-const packagePdfEntries = Array.isArray(packagePdfs) ? packagePdfs : [];
-const packagePdfManifestEntries = Array.isArray(packagePdfsManifest)
-  ? packagePdfsManifest
-  : [];
+async function loadJsonArray(url) {
+  try {
+    const res = await fetch(url, { cache: "no-store" });
+    if (!res.ok) return [];
+    const data = await res.json();
+    return Array.isArray(data) ? data : [];
+  } catch {
+    return [];
+  }
+}
 
 function buildPdfLookup(entries) {
   const direct = new Map();
@@ -201,22 +212,57 @@ function buildPdfLookup(entries) {
   return { direct, normalized };
 }
 
-const PACKAGE_PDF_LOOKUP = buildPdfLookup(packagePdfEntries);
-const PACKAGE_PDF_MANIFEST_LOOKUP = buildPdfLookup(packagePdfManifestEntries);
-
-function getPdfFile(packageName, lookup = PACKAGE_PDF_LOOKUP) {
-  if (!packageName) return null;
+function getPdfFile(packageName, lookup) {
+  if (!packageName || !lookup) return null;
   if (lookup.direct.has(packageName)) return lookup.direct.get(packageName);
   const normalizedKey = normalizeKeyName(packageName);
   if (!normalizedKey) return null;
   return lookup.normalized.get(normalizedKey) || null;
 }
 
-function getPdfUrl(packageName, lookup = PACKAGE_PDF_LOOKUP) {
+function getPdfUrl(packageName, lookup) {
   const file = getPdfFile(packageName, lookup);
   if (!file) return null;
   return resolvePublicPath(file);
 }
+
+function runDevAssertions() {
+  if (typeof window === "undefined") return;
+  if (typeof import.meta === "undefined" || !import.meta.env?.DEV) return;
+
+  console.assert(
+    resolvePublicPath("data/packagePdfs.json").includes("packagePdfs.json"),
+    "resolvePublicPath should build a usable public URL for packagePdfs.json",
+  );
+
+  console.assert(
+    Array.isArray(getPlatformLinks({ models: {} })),
+    "getPlatformLinks should always return an array",
+  );
+
+  const bothPlatforms = getPlatformLinks({
+    url: "",
+    models: {
+      "gpt-5": "https://chatgpt.com/g/test",
+      gemini: "https://gemini.google.com/app/test",
+    },
+  });
+
+  console.assert(
+    bothPlatforms.length === 2 &&
+      bothPlatforms[0].label === "تشات جي بي تي" &&
+      bothPlatforms[1].label === "جيميناي",
+    "getPlatformLinks should detect ChatGPT and Gemini correctly",
+  );
+
+  const emptyLookup = buildPdfLookup([]);
+  console.assert(
+    getPdfUrl("باقة الباحث", emptyLookup) === null,
+    "getPdfUrl should return null when the package is missing",
+  );
+}
+
+runDevAssertions();
 
 const DEFAULT_BOT_ABOUT =
   "يُعدُّ هذا البوت أداةً ذكية متخصصة في دعم الباحثين وطلاب الدراسات العليا في اختيار عناوين أصيلة ومتميزة لرسائل الماجستير والدكتوراه، من خلال تحليل التخصصات الأكاديمية واستنباط الفرص البحثية غير المستكشفة.";
@@ -350,6 +396,10 @@ export default function App() {
       return new Set();
     }
   });
+  const [pdfLookup, setPdfLookup] = useState(() => buildPdfLookup([]));
+  const [pdfManifestLookup, setPdfManifestLookup] = useState(() =>
+    buildPdfLookup([]),
+  );
   const bgRef = useRef(null);
   const [showTop, setShowTop] = useState(false);
 
@@ -374,21 +424,41 @@ export default function App() {
 
   useEffect(() => {
     try {
-      localStorage.setItem("bots:expandedPkgs", JSON.stringify(Array.from(expandedPkgs)));
+      localStorage.setItem(
+        "bots:expandedPkgs",
+        JSON.stringify(Array.from(expandedPkgs)),
+      );
     } catch {
       // no-op
     }
   }, [expandedPkgs]);
 
   useEffect(() => {
+    let active = true;
+    (async () => {
+      const [pdfs, manifest] = await Promise.all([
+        loadJsonArray(PACKAGE_PDFS_URL),
+        loadJsonArray(PACKAGE_PDFS_MANIFEST_URL),
+      ]);
+      if (!active) return;
+      setPdfLookup(buildPdfLookup(pdfs));
+      setPdfManifestLookup(buildPdfLookup(manifest));
+    })();
+    return () => {
+      active = false;
+    };
+  }, []);
+
+  useEffect(() => {
     let isMounted = true;
     (async () => {
       try {
-        const res = await fetch(resolvePublicPath("new_bots.json"), { cache: "no-store" });
+        const res = await fetch(NEW_BOTS_URL, { cache: "no-store" });
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
         const data = await res.json();
         const flat = [];
-        const packages = data && typeof data === "object" && !Array.isArray(data) ? data : {};
+        const packages =
+          data && typeof data === "object" && !Array.isArray(data) ? data : {};
 
         const deriveModelLabel = (link, index, total) => {
           try {
@@ -399,7 +469,9 @@ export default function App() {
             const gptMatch = slug.match(/(gpt[-_]?\w+)/i);
             if (gptMatch && gptMatch[1]) return formatModelLabel(gptMatch[1]);
             const simpleMatch = slug.match(/(4o-mini|4o|5|mini|plus)/i);
-            if (simpleMatch && simpleMatch[1]) return formatModelLabel(simpleMatch[1]);
+            if (simpleMatch && simpleMatch[1]) {
+              return formatModelLabel(simpleMatch[1]);
+            }
           } catch {
             // no-op
           }
@@ -414,30 +486,52 @@ export default function App() {
             .map((line) => line.trim())
             .filter(Boolean);
 
-          const packageTitle = sanitizeText(packageLines[0] ?? "", 160) || "حزمة";
-          const packageSubtitle = sanitizeText(packageLines.slice(1).join(" — "), 260);
+          const packageTitle =
+            sanitizeText(packageLines[0] ?? "", 160) || "حزمة";
+          const packageSubtitle = sanitizeText(
+            packageLines.slice(1).join(" — "),
+            260,
+          );
           const packageName = packageTitle;
 
           Object.entries(categoriesObj).forEach(([categoryRaw, botsArr]) => {
-            const category = sanitizeText(categoryRaw ?? "", 160) || "غير مصنّف";
+            const category =
+              sanitizeText(categoryRaw ?? "", 160) || "غير مصنّف";
             if (!Array.isArray(botsArr)) return;
 
             for (let i = 0; i < botsArr.length; i += 1) {
               const entry = botsArr[i] || {};
-              const title = sanitizeText(entry?.title || entry?.name || `بوت ${i + 1}`, 200) || `بوت ${i + 1}`;
-              const details = entry?.details && typeof entry.details === "object" ? entry.details : {};
+              const title =
+                sanitizeText(
+                  entry?.title || entry?.name || `بوت ${i + 1}`,
+                  200,
+                ) || `بوت ${i + 1}`;
+              const details =
+                entry?.details && typeof entry.details === "object"
+                  ? entry.details
+                  : {};
               const about = sanitizeText(details["نبذة"], 2000) || DEFAULT_BOT_ABOUT;
-              const limits = sanitizeText(details["حدود"], 1600) || DEFAULT_BOT_LIMITS;
-              const example = sanitizeText(details["مثال"], 600) || DEFAULT_BOT_EXAMPLE;
-              const rawLinks = Array.isArray(details["روابط"]) ? details["روابط"] : [];
+              const limits =
+                sanitizeText(details["حدود"], 1600) || DEFAULT_BOT_LIMITS;
+              const example =
+                sanitizeText(details["مثال"], 600) || DEFAULT_BOT_EXAMPLE;
+              const rawLinks = Array.isArray(details["روابط"])
+                ? details["روابط"]
+                : [];
               const cleanedLinks = rawLinks
-                .map((rawLink) => (rawLink ?? "").toString().replace(/^[:\s]+/, "").trim())
+                .map((rawLink) =>
+                  (rawLink ?? "").toString().replace(/^[:\s]+/, "").trim(),
+                )
                 .map((link) => toSafeUrl(link))
                 .filter(Boolean);
 
               const canonicalModels = {};
               cleanedLinks.forEach((link, linkIndex) => {
-                let label = deriveModelLabel(link, linkIndex, cleanedLinks.length);
+                let label = deriveModelLabel(
+                  link,
+                  linkIndex,
+                  cleanedLinks.length,
+                );
                 if (canonicalModels[label]) {
                   let suffix = 2;
                   while (canonicalModels[`${label} ${suffix}`]) suffix += 1;
@@ -597,7 +691,9 @@ export default function App() {
       }
       if (paletteOpen) {
         if (e.key === "Escape") setPaletteOpen(false);
-        if (e.key === "ArrowDown") setSelectedIndex((i) => Math.min(i + 1, filtered.length - 1));
+        if (e.key === "ArrowDown") {
+          setSelectedIndex((i) => Math.min(i + 1, filtered.length - 1));
+        }
         if (e.key === "ArrowUp") setSelectedIndex((i) => Math.max(i - 1, 0));
         if (e.key === "Enter") {
           const item = filtered[selectedIndex];
@@ -953,7 +1049,13 @@ export default function App() {
 
                 <select
                   value={sort}
-                  onChange={(e) => setSort(SORTS.some((s) => s.id === e.target.value) ? e.target.value : SORTS[0].id)}
+                  onChange={(e) =>
+                    setSort(
+                      SORTS.some((s) => s.id === e.target.value)
+                        ? e.target.value
+                        : SORTS[0].id,
+                    )
+                  }
                   className="nv-select text-sm border-0 bg-transparent shadow-none focus:ring-0 appearance-none"
                 >
                   {SORTS.map((s) => (
@@ -969,8 +1071,8 @@ export default function App() {
 
             <div className="mt-4 space-y-8">
               {groupedPackages.map((pkg) => {
-                const packagePdfUrl = getPdfUrl(pkg.name, PACKAGE_PDF_LOOKUP);
-                const packagePdfManifestUrl = getPdfUrl(pkg.name, PACKAGE_PDF_MANIFEST_LOOKUP);
+                const packagePdfUrl = getPdfUrl(pkg.name, pdfLookup);
+                const packagePdfManifestUrl = getPdfUrl(pkg.name, pdfManifestLookup);
                 const botsCount = pkg.cats?.reduce((sum, c) => sum + (c.rows?.length || 0), 0) || 0;
                 const pkgPanelId = `pkg-panel-${(pkg.key || pkg.name || "")
                   .toString()
@@ -1017,7 +1119,9 @@ export default function App() {
                           </span>
                           <span
                             className={`ms-1 inline-flex h-6 w-6 items-center justify-center rounded-full bg-black/30 border border-white/10 text-white/80 transition-transform ${
-                              expandedPkgs.has(pkg.key || pkg.name) ? "rotate-180" : "rotate-0"
+                              expandedPkgs.has(pkg.key || pkg.name)
+                                ? "rotate-180"
+                                : "rotate-0"
                             }`}
                           >
                             <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
@@ -1264,12 +1368,116 @@ export default function App() {
 
       <footer className="mx-auto max-w-7xl px-4 md:px-6 py-12 md:py-16">
         <div className="rounded-3xl border border-white/10 bg-white/5 p-6 md:p-8">
-          <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+          <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
             <div className="flex-1">
               <p className="text-sm text-white/70">
                 نصنع تجارب عربية متقنة في الذكاء الاصطناعي. شاركنا اقتراحاتك وروابط البوتات التي تود إضافتها.
               </p>
+
+              <div className="mt-4 flex flex-wrap items-center gap-2">
+                <a
+                  href="https://wa.me/966552191598"
+                  target="_blank"
+                  rel="noopener"
+                  aria-label="واتساب"
+                  className="grid h-9 w-9 place-items-center rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 transition"
+                  title="واتساب"
+                >
+                  <i className="fa-brands fa-whatsapp fa-lg text-white"></i>
+                </a>
+                <a
+                  href="https://t.me/zraiee"
+                  target="_blank"
+                  rel="noopener"
+                  aria-label="تيليغرام"
+                  className="grid h-9 w-9 place-items-center rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 transition"
+                  title="تيليغرام"
+                >
+                  <i className="fa-brands fa-telegram fa-lg text-white"></i>
+                </a>
+                <a
+                  href="https://x.com/Arab_Ai_"
+                  target="_blank"
+                  rel="noopener"
+                  aria-label="منصة إكس"
+                  className="grid h-9 w-9 place-items-center rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 transition"
+                  title="منصة إكس"
+                >
+                  <i className="fa-brands fa-x-twitter fa-lg text-white"></i>
+                </a>
+                <a
+                  href="https://www.youtube.com/@shaifarah"
+                  target="_blank"
+                  rel="noopener"
+                  aria-label="يوتيوب"
+                  className="grid h-9 w-9 place-items-center rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 transition"
+                  title="يوتيوب"
+                >
+                  <i className="fa-brands fa-youtube fa-lg text-white"></i>
+                </a>
+                <a
+                  href="https://www.instagram.com/alzarraei.gpts/"
+                  target="_blank"
+                  rel="noopener"
+                  aria-label="إنستغرام"
+                  className="grid h-9 w-9 place-items-center rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 transition"
+                  title="إنستغرام"
+                >
+                  <i className="fa-brands fa-instagram fa-lg text-white"></i>
+                </a>
+                <a
+                  href="https://www.facebook.com/alzarraei.gpts/"
+                  target="_blank"
+                  rel="noopener"
+                  aria-label="فيسبوك"
+                  className="grid h-9 w-9 place-items-center rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 transition"
+                  title="فيسبوك"
+                >
+                  <i className="fa-brands fa-facebook-f fa-lg text-white"></i>
+                </a>
+                <a
+                  href="https://www.tiktok.com/@alzarraei"
+                  target="_blank"
+                  rel="noopener"
+                  aria-label="تيك توك"
+                  className="grid h-9 w-9 place-items-center rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 transition"
+                  title="تيك توك"
+                >
+                  <i className="fa-brands fa-tiktok fa-lg text-white"></i>
+                </a>
+                <a
+                  href="https://mail.google.com/mail/?extsrc=mailto&url=mailto:zraieee@gmail.com"
+                  target="_blank"
+                  rel="noopener"
+                  aria-label="البريد الإلكتروني"
+                  className="grid h-9 w-9 place-items-center rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 transition"
+                  title="البريد الإلكتروني"
+                >
+                  <i className="fa-solid fa-envelope fa-lg text-white"></i>
+                </a>
+                <a
+                  href="https://www.paypal.com/paypalme/zraiee"
+                  target="_blank"
+                  rel="noopener"
+                  aria-label="باي بال"
+                  className="grid h-9 w-9 place-items-center rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 transition"
+                  title="باي بال"
+                >
+                  <i className="fa-brands fa-paypal fa-lg text-white"></i>
+                </a>
+                <a
+                  href="https://www.linkedin.com/in/abdulrahman-alzarraei/"
+                  target="_blank"
+                  rel="noopener"
+                  aria-label="لينكدإن"
+                  className="grid h-9 w-9 place-items-center rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 transition"
+                  title="لينكدإن"
+                >
+                  <i className="fa-brands fa-linkedin-in fa-lg text-white"></i>
+                </a>
+              </div>
             </div>
+
             <button
               onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
               className="nv-btn text-sm"
@@ -1410,7 +1618,8 @@ function GooeyNav({ route }) {
         {items.map((it) => {
           const isActive =
             !it.external &&
-            ((route === "/" && it.href === "#/") || (route !== "/" && `#${route}` === it.href));
+            ((route === "/" && it.href === "#/") ||
+              (route !== "/" && `#${route}` === it.href));
 
           return (
             <a
