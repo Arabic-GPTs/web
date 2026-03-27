@@ -20,28 +20,28 @@ const NEW_BOTS_URL = resolvePublicPath("new_bots.json");
 
 const PACKAGE_PDF_FALLBACKS = {
   "باقة الباحث": {
-    full: "01 Searcher info.pdf",
-    summary: "01 Searcher.pdf",
+    full: "categorysPdf/with-info/01 Searcher info.pdf",
+    summary: "categorysPdf/manifest/01 Searcher.pdf",
   },
   "باقة التعليم والشريعة": {
-    full: "02 Education & Sharia info.pdf",
-    summary: "02 Education & Sharia.pdf",
+    full: "categorysPdf/with-info/02 Education & Sharia info.pdf",
+    summary: "categorysPdf/manifest/02 Education & Sharia.pdf",
   },
   "باقة المصمم الذكي": {
-    full: "03 Design info.pdf",
-    summary: "03 Designer.pdf",
+    full: "categorysPdf/with-info/03 Design info.pdf",
+    summary: "categorysPdf/manifest/03 Design.pdf",
   },
   "باقة صناعة الأفلام": {
-    full: "04 Film info.pdf",
-    summary: "04 Film.pdf",
+    full: "categorysPdf/with-info/04 Film info.pdf",
+    summary: "categorysPdf/manifest/04 Film.pdf",
   },
   "باقة الإدارة والتسويق": {
-    full: "05 Marketing info.pdf",
-    summary: "05 Marketing.pdf",
+    full: "categorysPdf/with-info/05 Marketing info.pdf",
+    summary: "categorysPdf/manifest/05 Marketing.pdf",
   },
   "باقة تعليمات النماذج": {
-    full: "06 instructions info.pdf",
-    summary: "06 instructions.pdf",
+    full: "categorysPdf/with-info/06 instructions info.pdf",
+    summary: "categorysPdf/manifest/06 instructions.pdf",
   },
 };
 const PAYHIP_URL = "https://payhip.com/zraiee";
@@ -265,8 +265,17 @@ function normalizePdfFileCandidate(candidate, fallbackFile = null) {
   const fallback = (fallbackFile || "").toString().trim();
 
   if (!raw) return fallback || null;
-  if (/\.pdf$/i.test(raw)) return raw;
   if (/\.html?$/i.test(raw)) return fallback || null;
+
+  if (/\.pdf$/i.test(raw)) {
+    if (raw.includes("/")) return raw;
+    if (fallback && fallback.includes("/")) {
+      const baseDir = fallback.split("/").slice(0, -1).join("/");
+      return `${baseDir}/${raw}`;
+    }
+    return raw;
+  }
+
   return fallback || raw || null;
 }
 
@@ -309,21 +318,31 @@ function runDevAssertions() {
 
   const emptyLookup = buildPdfLookup([]);
   console.assert(
-    getPdfUrl("باقة الباحث", emptyLookup, "full")?.includes("01%20Searcher%20info.pdf") ||
-      getPdfUrl("باقة الباحث", emptyLookup, "full")?.includes("01 Searcher info.pdf"),
-    "getPdfUrl should fall back to the default full PDF path for باقة الباحث",
+    getPdfUrl("باقة الباحث", emptyLookup, "full")?.includes("categorysPdf/with-info/01%20Searcher%20info.pdf") ||
+      getPdfUrl("باقة الباحث", emptyLookup, "full")?.includes("categorysPdf/with-info/01 Searcher info.pdf"),
+    "getPdfUrl should fall back to the actual full PDF path for باقة الباحث",
   );
 
   console.assert(
-    getPdfUrl("باقة تعليمات النماذج", emptyLookup, "summary")?.includes("06%20instructions.pdf") ||
-      getPdfUrl("باقة تعليمات النماذج", emptyLookup, "summary")?.includes("06 instructions.pdf"),
-    "getPdfUrl should fall back to the default summary PDF path for باقة تعليمات النماذج",
+    getPdfUrl("باقة تعليمات النماذج", emptyLookup, "summary")?.includes("categorysPdf/manifest/06%20instructions.pdf") ||
+      getPdfUrl("باقة تعليمات النماذج", emptyLookup, "summary")?.includes("categorysPdf/manifest/06 instructions.pdf"),
+    "getPdfUrl should fall back to the actual summary PDF path for باقة تعليمات النماذج",
   );
 
   console.assert(
-    normalizePdfFileCandidate("06 instructions info.htm", "06 instructions info.pdf") ===
-      "06 instructions info.pdf",
-    "normalizePdfFileCandidate should prefer the PDF fallback when JSON returns an HTML file",
+    normalizePdfFileCandidate(
+      "06 instructions info.htm",
+      "categorysPdf/with-info/06 instructions info.pdf",
+    ) === "categorysPdf/with-info/06 instructions info.pdf",
+    "normalizePdfFileCandidate should prefer the actual PDF fallback when JSON returns an HTML file",
+  );
+
+  console.assert(
+    normalizePdfFileCandidate(
+      "01 Searcher.pdf",
+      "categorysPdf/manifest/01 Searcher.pdf",
+    ) === "categorysPdf/manifest/01 Searcher.pdf",
+    "normalizePdfFileCandidate should place a bare PDF filename inside the real manifest folder",
   );
 }
 
