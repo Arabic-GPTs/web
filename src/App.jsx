@@ -2635,7 +2635,7 @@ function AboutPage({ botsCount = 0, catsCount = 0, booksCount = 0 }) {
                 </a>
               </li>
 
-              {/* رابط 2 */}
+              {/* جيميناي */}
               <li>
                 <a
                   href="https://chatgpt.com/g/g-681f47498138819197d357982c29544c-mns-lnmdhj-ldhky-lbwtt-arabic-gpts"
