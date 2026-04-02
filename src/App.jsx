@@ -1034,7 +1034,7 @@ export default function App() {
       </div>
 
       <div
-        className="fixed inset-x-0 top-0 z-50 h-[3px] bg-gradient-to-r from-lime-300 via-emerald-400 to-lime-300 origin-left"
+        className="fixed inset-x-0 top-0 z-50 h-[3px] bg-gradient-to-r from-lime-300 via-emerald-400 to-lime-300 origin-right"
         style={{ transform: `scaleX(${progress})` }}
       />
 
