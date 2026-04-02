@@ -1480,7 +1480,7 @@ export default function App() {
                                                 className="flex-1 rounded-xl border border-white/10 bg-white/10 px-3 py-2 font-bold text-white transition hover:bg-white/15 disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:bg-white/10"
                                                 title="نسخ الرابط"
                                               >
-                                                انسخ الرابط
+                                                نسخ الرابط
                                               </button>
                                             </div>
                                           </div>
