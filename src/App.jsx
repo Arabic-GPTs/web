@@ -1412,19 +1412,19 @@ export default function App() {
                                               onClick={() => setBotModal({ type: "about", bot: b })}
                                               className="rounded-xl border border-white/10 bg-white/10 px-3 py-2 font-bold text-white transition hover:bg-white/15"
                                             >
-                                              حول البوت
+                                              نبذة
                                             </button>
                                             <button
                                               onClick={() => setBotModal({ type: "limits", bot: b })}
                                               className="rounded-xl border border-white/10 bg-white/10 px-3 py-2 font-bold text-white transition hover:bg-white/15"
                                             >
-                                              قيود الاستخدام
+                                              حدود البوت
                                             </button>
                                             <button
                                               onClick={() => setBotModal({ type: "example", bot: b })}
                                               className="rounded-xl border border-white/10 bg-white/10 px-3 py-2 font-bold text-white transition hover:bg-white/15"
                                             >
-                                              أمثلة
+                                              مثال
                                             </button>
                                           </div>
 
