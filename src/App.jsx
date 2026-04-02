@@ -1318,7 +1318,7 @@ export default function App() {
                         </button>
                       </div>
 
-                      <div className="flex items-center gap-2">
+                      <div className="flex items-center justify-end gap-2 md:gap-3 pl-2 md:pl-4">
                         {packagePdfUrl && (
                           <a
                             href={packagePdfUrl}
@@ -1341,6 +1341,15 @@ export default function App() {
                             مختصر
                           </a>
                         )}
+                        <a
+                          href="https://www.youtube.com/watch?v=cB5VyUtnyzY&t=200s"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          title="فتح الفيديو مباشرة"
+                          className="group inline-flex items-center gap-2 rounded-xl px-3 py-2 text-xs md:text-sm font-bold bg-gradient-to-br from-sky-300 to-blue-400 text-slate-950 shadow hover:shadow-lg transition"
+                        >
+                          فيديو
+                        </a>
                       </div>
                     </motion.div>
 
@@ -1471,7 +1480,7 @@ export default function App() {
                                                 className="flex-1 rounded-xl border border-white/10 bg-white/10 px-3 py-2 font-bold text-white transition hover:bg-white/15 disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:bg-white/10"
                                                 title="نسخ الرابط"
                                               >
-                                                نسخ الرابط
+                                                انسخ الرابط
                                               </button>
                                             </div>
                                           </div>
