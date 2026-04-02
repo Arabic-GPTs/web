@@ -1281,7 +1281,7 @@ export default function App() {
                         expandedPkgs.has(pkg.key || pkg.name)
                           ? "sticky top-16 md:top-20 z-10 -mx-3 md:-mx-5 px-3 md:px-5 py-2 rounded-2xl bg-neutral-950/70 backdrop-blur supports-[backdrop-filter]:bg-neutral-900/55"
                           : ""
-                      } flex flex-col-reverse items-end gap-3 md:flex-row md:items-center md:justify-between`}
+                      } flex flex-col items-stretch gap-3 md:flex-row md:items-center md:justify-between`}
                     >
                       <div className="flex items-center justify-end gap-2 self-end ms-auto md:self-auto">
                         <button
@@ -1318,7 +1318,7 @@ export default function App() {
                         </button>
                       </div>
 
-                      <div className="flex w-full md:w-auto flex-wrap items-center justify-start gap-2 md:justify-end md:gap-3 max-w-full self-start">
+                      <div className="flex w-full md:w-auto flex-wrap items-center justify-start gap-2 md:justify-end md:gap-3 max-w-full self-start md:self-auto">
                         {packagePdfUrl && (
                           <a
                             href={packagePdfUrl}
@@ -1353,7 +1353,7 @@ export default function App() {
                       </div>
                     </motion.div>
 
-                    <div className="mt-1 flex flex-wrap items-center gap-3 text-xs md:text-sm text-white/70">
+                    <div className="mt-1 flex flex-wrap items-center justify-end gap-3 text-xs md:text-sm text-white/70">
                       <div className="inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/5 px-3 py-1 backdrop-blur">
                         <span className="text-emerald-400">{SOCIAL_ICONS.categories}</span>
                         <span className="font-semibold text-white">{pkg.cats.length}</span>
@@ -1472,7 +1472,7 @@ export default function App() {
                                               </button>
                                             </div>
 
-                                            <div className="flex w-full md:w-auto items-center justify-end gap-2 text-right ms-auto self-end">
+                                            <div className="flex w-full md:w-auto items-center justify-end gap-2 text-right self-end md:self-auto md:ms-auto">
                                               <button
                                                 type="button"
                                                 onClick={() => copyLink(launchLink)}
