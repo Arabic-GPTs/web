@@ -1346,7 +1346,7 @@ export default function App() {
                           target="_blank"
                           rel="noopener noreferrer"
                           title="فتح الفيديو مباشرة"
-                          className="group inline-flex items-center gap-2 rounded-xl px-3 py-2 text-xs md:text-sm font-bold bg-gradient-to-br from-blue-500 to-cyan-500 text-white shadow hover:shadow-lg transition"
+                          className="group inline-flex items-center gap-2 rounded-xl px-3 py-2 text-xs md:text-sm font-bold text-white shadow hover:shadow-lg transition bg-[linear-gradient(to_right,#1E3A8A,#3B82F6)]"
                         >
                           فيديو
                         </a>
