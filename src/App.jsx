@@ -1387,9 +1387,7 @@ export default function App() {
                                 <AnimatePresence mode="popLayout">
                                   {catItem.rows.map((b) => {
                                     const platformLinks = getPlatformLinks(b);
-                                    const hasPlatforms = platformLinks.length > 0;
                                     const launchLink = platformLinks[0]?.url || "";
-                                    const buttonLabel = hasPlatforms ? "اختيار المنصة" : "غير متاح";
                                     const copyDisabled = !launchLink;
 
                                     return (
@@ -1428,35 +1426,54 @@ export default function App() {
                                             </button>
                                           </div>
 
-                                          <div className="mt-auto flex items-center gap-2 text-xs">
-                                            <button
-                                              type="button"
-                                              onMouseEnter={() => {
-                                                if (launchLink) warmUp(launchLink);
-                                              }}
-                                              onClick={() => {
-                                                if (!hasPlatforms) return;
-                                                setBotModal({
-                                                  type: "choose-platform",
-                                                  bot: b,
-                                                  platformLinks,
-                                                });
-                                              }}
-                                              disabled={!hasPlatforms}
-                                              className="flex-1 grid place-items-center rounded-xl bg-gradient-to-br from-lime-400 via-emerald-500 to-lime-400 px-3 py-2 font-bold text-white shadow hover:shadow-lg animate-gradient-slow disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:shadow-none"
-                                            >
-                                              {buttonLabel}
-                                            </button>
+                                          <div className="mt-auto space-y-2 text-xs">
+                                            <div className="grid grid-cols-2 gap-2">
+                                              <button
+                                                type="button"
+                                                onMouseEnter={() => {
+                                                  const chatgptUrl = platformLinks.find((p) => p.id === "chatgpt")?.url;
+                                                  if (chatgptUrl) warmUp(chatgptUrl);
+                                                }}
+                                                onClick={() => {
+                                                  const chatgptUrl = platformLinks.find((p) => p.id === "chatgpt")?.url;
+                                                  if (!chatgptUrl) return;
+                                                  openExternal(chatgptUrl);
+                                                }}
+                                                disabled={!platformLinks.some((p) => p.id === "chatgpt")}
+                                                className="grid place-items-center rounded-2xl bg-gradient-to-br from-lime-400 via-emerald-500 to-lime-400 px-3 py-3 font-bold text-white shadow hover:shadow-lg animate-gradient-slow disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:shadow-none"
+                                              >
+                                                ChatGPT
+                                              </button>
 
-                                            <button
-                                              type="button"
-                                              onClick={() => copyLink(launchLink)}
-                                              disabled={copyDisabled}
-                                              className="rounded-xl border border-white/10 bg-white/10 px-3 py-2 font-bold text-white transition hover:bg-white/15 disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:bg-white/10"
-                                              title="نسخ الرابط"
-                                            >
-                                              انسخ الرابط
-                                            </button>
+                                              <button
+                                                type="button"
+                                                onMouseEnter={() => {
+                                                  const geminiUrl = platformLinks.find((p) => p.id === "gemini")?.url;
+                                                  if (geminiUrl) warmUp(geminiUrl);
+                                                }}
+                                                onClick={() => {
+                                                  const geminiUrl = platformLinks.find((p) => p.id === "gemini")?.url;
+                                                  if (!geminiUrl) return;
+                                                  openExternal(geminiUrl);
+                                                }}
+                                                disabled={!platformLinks.some((p) => p.id === "gemini")}
+                                                className="grid place-items-center rounded-2xl border border-blue-400/30 bg-gradient-to-br from-blue-900/90 to-sky-900/80 px-3 py-3 font-bold text-white shadow hover:shadow-lg disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:shadow-none"
+                                              >
+                                                Gemini
+                                              </button>
+                                            </div>
+
+                                            <div className="flex items-center gap-2">
+                                              <button
+                                                type="button"
+                                                onClick={() => copyLink(launchLink)}
+                                                disabled={copyDisabled}
+                                                className="flex-1 rounded-xl border border-white/10 bg-white/10 px-3 py-2 font-bold text-white transition hover:bg-white/15 disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:bg-white/10"
+                                                title="نسخ الرابط"
+                                              >
+                                                انسخ الرابط
+                                              </button>
+                                            </div>
                                           </div>
                                         </div>
 
