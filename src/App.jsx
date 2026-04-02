@@ -1252,7 +1252,7 @@ export default function App() {
 
             <p className="mt-3 text-xs md:text-sm text-white/70">نتائج: {fmt(filtered.length)} بوت</p>
 
-            <div className="mt-4 space-y-8">
+            <div className="mt-4 space-y-8 w-full">
               {groupedPackages.map((pkg) => {
                 const packagePdfUrl = getPdfUrl(pkg.name, pdfLookup, "full");
                 const packagePdfManifestUrl = getPdfUrl(
@@ -1270,7 +1270,7 @@ export default function App() {
                   <section
                     key={pkg.key || pkg.name}
                     aria-label={pkg.name}
-                    className="space-y-3 rounded-3xl border border-white/10 bg-white/5 p-3 md:p-5 shadow"
+                    className="space-y-3 rounded-3xl border border-white/10 bg-white/5 p-3 md:p-5 shadow w-full"
                   >
                     <motion.div
                       initial={{ opacity: 0, y: 6 }}
@@ -1281,7 +1281,7 @@ export default function App() {
                         expandedPkgs.has(pkg.key || pkg.name)
                           ? "sticky top-16 md:top-20 z-10 -mx-3 md:-mx-5 px-3 md:px-5 py-2 rounded-2xl bg-neutral-950/70 backdrop-blur supports-[backdrop-filter]:bg-neutral-900/55"
                           : ""
-                      } flex flex-col items-stretch gap-3 md:flex-row md:items-center md:justify-between`}
+                      } flex flex-col items-stretch gap-3 md:flex-row md:items-center md:justify-between w-full`}
                     >
                       <div className="flex items-center justify-end gap-2 self-end ms-auto md:self-auto">
                         <button
@@ -1472,7 +1472,7 @@ export default function App() {
                                               </button>
                                             </div>
 
-                                            <div className="flex w-full md:w-auto items-center justify-start md:justify-end gap-2 text-right self-start md:self-auto md:ms-auto">
+                                            <div className="flex w-full md:w-auto items-center justify-start md:justify-end gap-2 text-right self-start md:self-auto md:ms-auto max-w-full">
                                               <button
                                                 type="button"
                                                 onClick={() => copyLink(launchLink)}
