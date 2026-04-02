@@ -1472,7 +1472,7 @@ export default function App() {
                                               </button>
                                             </div>
 
-                                            <div className="flex w-full md:w-auto items-center justify-end gap-2 text-right self-end md:self-auto md:ms-auto">
+                                            <div className="flex w-full md:w-auto items-center justify-start md:justify-end gap-2 text-right self-start md:self-auto md:ms-auto">
                                               <button
                                                 type="button"
                                                 onClick={() => copyLink(launchLink)}
