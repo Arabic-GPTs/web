@@ -1281,7 +1281,7 @@ export default function App() {
                         expandedPkgs.has(pkg.key || pkg.name)
                           ? "sticky top-16 md:top-20 z-10 -mx-3 md:-mx-5 px-3 md:px-5 py-2 rounded-2xl bg-neutral-950/70 backdrop-blur supports-[backdrop-filter]:bg-neutral-900/55"
                           : ""
-                      } flex flex-col-reverse items-stretch gap-3 md:flex-row md:items-center md:justify-between`}
+                      } flex flex-col-reverse items-end gap-3 md:flex-row md:items-center md:justify-between`}
                     >
                       <div className="flex items-center justify-end gap-2 self-end ms-auto md:self-auto">
                         <button
@@ -1472,7 +1472,7 @@ export default function App() {
                                               </button>
                                             </div>
 
-                                            <div className="flex w-full md:w-auto items-center justify-end gap-2 text-right ms-auto">
+                                            <div className="flex w-full md:w-auto items-center justify-end gap-2 text-right ms-auto self-end">
                                               <button
                                                 type="button"
                                                 onClick={() => copyLink(launchLink)}
