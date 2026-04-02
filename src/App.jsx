@@ -1283,7 +1283,7 @@ export default function App() {
                           : ""
                       } flex flex-col-reverse items-stretch gap-3 md:flex-row md:items-center md:justify-between`}
                     >
-                      <div className="flex items-center justify-end gap-2 self-end ms-auto md:self-auto">
+                      <div className="flex items-center justify-end gap-2 self-end md:self-auto">
                         <button
                           type="button"
                           onClick={() => {
@@ -1318,7 +1318,7 @@ export default function App() {
                         </button>
                       </div>
 
-                      <div className="flex flex-wrap items-center justify-start md:justify-end gap-2 md:gap-3 w-full md:w-auto max-w-full">
+                      <div className="flex flex-wrap items-center justify-start gap-2 md:justify-end md:gap-3 pl-0 md:pl-4 max-w-full">
                         {packagePdfUrl && (
                           <a
                             href={packagePdfUrl}
@@ -1327,7 +1327,7 @@ export default function App() {
                             title="فتح النسخة الكاملة PDF مباشرة"
                             className="group inline-flex items-center gap-2 rounded-xl px-3 py-2 text-xs md:text-sm font-bold bg-gradient-to-br from-emerald-400 to-lime-400 text-emerald-950 shadow hover:shadow-lg transition"
                           >
-                            شرح كامل
+                            الشرح الكامل
                           </a>
                         )}
                         {packagePdfManifestUrl && (
@@ -1472,7 +1472,7 @@ export default function App() {
                                               </button>
                                             </div>
 
-                                            <div className="flex items-center justify-end gap-2 text-right ms-auto">
+                                            <div className="flex items-center gap-2">
                                               <button
                                                 type="button"
                                                 onClick={() => copyLink(launchLink)}
@@ -1480,7 +1480,7 @@ export default function App() {
                                                 className="flex-1 rounded-xl border border-white/10 bg-white/10 px-3 py-2 font-bold text-white transition hover:bg-white/15 disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:bg-white/10"
                                                 title="نسخ الرابط"
                                               >
-                                                نسخ الرابط
+                                                انسخ الرابط
                                               </button>
                                             </div>
                                           </div>
@@ -1823,7 +1823,7 @@ function GooeyNav({ route }) {
     { href: "#/about", label: "من نحن" },
     {
       href: "https://chatgpt.com/g/g-681f47498138819197d357982c29544c-mns-lnmdhj-ldhky-lbwtt-arabic-gpts",
-      label: "النماذج",
+      label: "منصة النماذج",
       external: true,
     },
     { href: "https://wa.me/966552191598", label: "اشتراك", external: true },
@@ -2031,7 +2031,7 @@ function AboutPage({ botsCount = 0, catsCount = 0, booksCount = 0 }) {
                   className="group block rounded-xl border border-white/10 bg-white/5 p-4 transition hover:bg-white/10"
                 >
                   <div className="flex items-center justify-between">
-                    <span className="text-sm md:text-base font-medium group-hover:text-white">النماذج</span>
+                    <span className="text-sm md:text-base font-medium group-hover:text-white">منصة النماذج</span>
                     <span className="text-white/40 group-hover:text-white/80 transition">↗</span>
                   </div>
                 </a>
