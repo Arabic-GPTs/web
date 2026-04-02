@@ -1283,7 +1283,7 @@ export default function App() {
                           : ""
                       } flex flex-col-reverse items-stretch gap-3 md:flex-row md:items-center md:justify-between`}
                     >
-                      <div className="flex items-center justify-end gap-2 self-end md:self-auto">
+                      <div className="flex items-center justify-end gap-2 self-end ms-auto md:self-auto">
                         <button
                           type="button"
                           onClick={() => {
@@ -1318,7 +1318,7 @@ export default function App() {
                         </button>
                       </div>
 
-                      <div className="flex flex-wrap items-center justify-start gap-2 md:justify-end md:gap-3 pl-0 md:pl-4 max-w-full">
+                      <div className="flex flex-wrap items-center justify-start md:justify-end gap-2 md:gap-3 w-full md:w-auto max-w-full">
                         {packagePdfUrl && (
                           <a
                             href={packagePdfUrl}
@@ -1472,7 +1472,7 @@ export default function App() {
                                               </button>
                                             </div>
 
-                                            <div className="flex items-center gap-2">
+                                            <div className="flex items-center justify-end gap-2 text-right ms-auto">
                                               <button
                                                 type="button"
                                                 onClick={() => copyLink(launchLink)}
