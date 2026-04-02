@@ -1318,7 +1318,7 @@ export default function App() {
                         </button>
                       </div>
 
-                      <div className="flex w-full md:w-auto flex-wrap items-center justify-start gap-2 md:justify-end md:gap-3 max-w-full self-start">
+                      <div className="flex flex-wrap items-center justify-start md:justify-end gap-2 md:gap-3 w-full md:w-auto max-w-full">
                         {packagePdfUrl && (
                           <a
                             href={packagePdfUrl}
@@ -1472,7 +1472,7 @@ export default function App() {
                                               </button>
                                             </div>
 
-                                            <div className="flex w-full md:w-auto items-center justify-end gap-2 text-right ms-auto">
+                                            <div className="flex items-center justify-end gap-2 text-right ms-auto">
                                               <button
                                                 type="button"
                                                 onClick={() => copyLink(launchLink)}
