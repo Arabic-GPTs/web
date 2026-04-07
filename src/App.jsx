@@ -1613,7 +1613,7 @@ export default function App() {
                   {SOCIAL_ICONS.x}
                 </a>
                 <a
-                  href="https://www.youtube.com/@shaifarah"
+                  href="https://www.youtube.com/@ArabicAIModels"
                   target="_blank"
                   rel="noopener"
                   aria-label="يوتيوب"
