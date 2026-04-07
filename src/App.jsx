@@ -1623,7 +1623,7 @@ export default function App() {
                   {SOCIAL_ICONS.youtube}
                 </a>
                 <a
-                  href="https://https://www.instagram.com/ArabicAIModels"
+                  href="https://www.instagram.com/ArabicAIModels"
                   target="_blank"
                   rel="noopener"
                   aria-label="إنستغرام"
