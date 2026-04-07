@@ -1603,23 +1603,13 @@ export default function App() {
                   {SOCIAL_ICONS.whatsapp}
                 </a>
                 <a
-                  href="https://t.me/zraiee"
+                  href="https://t.me/ArabicAIModels"
                   target="_blank"
                   rel="noopener"
                   aria-label="تيليغرام"
                   className="grid h-9 w-9 place-items-center rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 transition"
                   title="تيليغرام"
-                >
-                  {SOCIAL_ICONS.telegram}
-                </a>
-                <a
-                  href="https://x.com/Arab_Ai_"
-                  target="_blank"
-                  rel="noopener"
-                  aria-label="منصة إكس"
-                  className="grid h-9 w-9 place-items-center rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 transition"
-                  title="منصة إكس"
-                >
+               >
                   {SOCIAL_ICONS.x}
                 </a>
                 <a
