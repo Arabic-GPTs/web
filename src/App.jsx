@@ -1633,7 +1633,7 @@ export default function App() {
                   {SOCIAL_ICONS.youtube}
                 </a>
                 <a
-                  href="https://www.instagram.com/alzarraei.gpts/"
+                  href="https://https://www.instagram.com/ArabicAIModels"
                   target="_blank"
                   rel="noopener"
                   aria-label="إنستغرام"
@@ -1643,7 +1643,7 @@ export default function App() {
                   {SOCIAL_ICONS.instagram}
                 </a>
                 <a
-                  href="https://www.facebook.com/alzarraei.gpts/"
+                  href="https://www.facebook.com/ArabicAIModels"
                   target="_blank"
                   rel="noopener"
                   aria-label="فيسبوك"
@@ -1653,7 +1653,7 @@ export default function App() {
                   {SOCIAL_ICONS.facebook}
                 </a>
                 <a
-                  href="https://www.tiktok.com/@alzarraei"
+                  href="https://www.tiktok.com/@ArabicAIModels"
                   target="_blank"
                   rel="noopener"
                   aria-label="تيك توك"
@@ -1683,7 +1683,7 @@ export default function App() {
                   {SOCIAL_ICONS.paypal}
                 </a>
                 <a
-                  href="https://www.linkedin.com/in/abdulrahman-alzarraei/"
+                  href="https://www.linkedin.com/in/ArabicAIModels"
                   target="_blank"
                   rel="noopener"
                   aria-label="لينكدإن"
