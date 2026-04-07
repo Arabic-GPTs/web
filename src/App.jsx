@@ -1682,8 +1682,18 @@ export default function App() {
                 >
                   {SOCIAL_ICONS.linkedin}
                 </a>
-              </div>
-            </div>
+                <a
+                    href="https://www.skool.com/zraiee-3956/about"
+                    target="_blank"
+                    rel="noopener"
+                    aria-label="سكول"
+                    className="grid h-9 w-9 place-items-center rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 transition"
+                    title="سكول"
+                    >
+                      {SOCIAL_ICONS.skool}
+                     </a>
+                     </div>
+                     </div>
 
             <button
               onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
