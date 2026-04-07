@@ -472,10 +472,9 @@ const SOCIAL_ICONS = {
     <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true">
       <path d="M4.98 3.5a2.49 2.49 0 11.02 4.98 2.49 2.49 0 01-.02-4.98zM3 9h4v12H3V9zm7 0h3.83v1.64h.05c.53-1 1.84-2.05 3.8-2.05 4.07 0 4.82 2.68 4.82 6.16V21h-4v-5.52c0-1.32-.03-3.02-1.84-3.02-1.84 0-2.12 1.44-2.12 2.93V21h-4V9z" />
     </svg>
-  ),
-  skool: (
+   skool: (
     <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true">
-      <path d="M4 5.5A2.5 2.5 0 0 1 6.5 3h11A2.5 2.5 0 0 1 20 5.5v13a2.5 2.5 0 0 1-2.5 2.5h-11A2.5 2.5 0 0 1 4 18.5v-13ZM7 7.25c0 .41.34.75.75.75h8.5a.75.75 0 0 0 0-1.5h-8.5a.75.75 0 0 0-.75.75Zm0 4c0 .41.34.75.75.75h5.5a.75.75 0 0 0 0-1.5h-5.5a.75.75 0 0 0-.75.75Zm0 4c0 .41.34.75.75.75h8.5a.75.75 0 0 0 0-1.5h-8.5a.75.75 0 0 0-.75.75Z" />
+      <path d="M6 3h12a3 3 0 0 1 3 3v12a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3V6a3 3 0 0 1 3-3Zm2.2 4.6c0 1.1.7 1.8 2.5 2.2l1.3.3c.9.2 1.2.4 1.2.9 0 .5-.5.8-1.4.8-.9 0-1.7-.3-2.5-.9l-.9 1.2c.9.8 2.1 1.2 3.4 1.2 2 0 3.4-1 3.4-2.6 0-1.2-.7-1.9-2.3-2.2l-1.4-.3c-1-.2-1.3-.4-1.3-.9 0-.4.4-.7 1.1-.7.8 0 1.5.2 2.2.7l.8-1.3c-.8-.6-1.9-1-3.1-1-1.9 0-3 1-3 2.4Z" />
     </svg>
   ),
   books: (
@@ -1686,17 +1685,17 @@ export default function App() {
                   title="لينكدإن"
                 >
                   {SOCIAL_ICONS.linkedin}
+                 </a>
+                 <a
+                  href="https://www.skool.com/zraiee-3956/about"
+                  target="_blank"
+                rel="noopener"
+                aria-label="سكول"
+                className="grid h-9 w-9 place-items-center rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 transition"
+                title="سكول"
+                >
+                  {SOCIAL_ICONS.skool}
                 </a>
-                <a
-                    href="https://www.skool.com/zraiee-3956/about"
-                    target="_blank"
-                    rel="noopener"
-                    aria-label="سكول"
-                    className="grid h-9 w-9 place-items-center rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 transition"
-                    title="سكول"
-                    >
-                      {SOCIAL_ICONS.skool}
-                     </a>
                      </div>
                      </div>
 
