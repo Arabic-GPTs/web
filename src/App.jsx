@@ -472,15 +472,11 @@ const SOCIAL_ICONS = {
     <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true">
       <path d="M4.98 3.5a2.49 2.49 0 11.02 4.98 2.49 2.49 0 01-.02-4.98zM3 9h4v12H3V9zm7 0h3.83v1.64h.05c.53-1 1.84-2.05 3.8-2.05 4.07 0 4.82 2.68 4.82 6.16V21h-4v-5.52c0-1.32-.03-3.02-1.84-3.02-1.84 0-2.12 1.44-2.12 2.93V21h-4V9z" />
     </svg>
+   skool: (
+    <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true">
+      <path d="M4 5.5A2.5 2.5 0 0 1 6.5 3h11A2.5 2.5 0 0 1 20 5.5v13a2.5 2.5 0 0 1-2.5 2.5h-11A2.5 2.5 0 0 1 4 18.5v-13ZM7 7.25c0 .41.34.75.75.75h8.5a.75.75 0 0 0 0-1.5h-8.5a.75.75 0 0 0-.75.75Zm0 4c0 .41.34.75.75.75h5.5a.75.75 0 0 0 0-1.5h-5.5a.75.75 0 0 0-.75.75Zm0 4c0 .41.34.75.75.75h8.5a.75.75 0 0 0 0-1.5h-8.5a.75.75 0 0 0-.75.75Z" />
+    </svg>
   ),
-  skool: (
-    <img
-      src={skoolIconUrl}
-      alt="سكول"
-      className="h-[18px] w-[18px] object-contain"
-      aria-hidden="true"
-    />
-  ),  
   books: (
     <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true">
       <path d="M4 4.5A2.5 2.5 0 016.5 2H20v17.5a2.5 2.5 0 01-2.5 2.5H6.5A2.5 2.5 0 014 19.5v-15zM6.5 4A.5.5 0 006 4.5V18h11.5a.5.5 0 00.5-.5V4H6.5zm1.5 2h7v2H8V6zm0 4h7v2H8v-2z" />
