@@ -1610,7 +1610,7 @@ export default function App() {
                   className="grid h-9 w-9 place-items-center rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 transition"
                   title="تيليغرام"
                >
-                  {SOCIAL_ICONS.x}
+                  {SOCIAL_ICONS.telegram}
                 </a>
                 <a
                   href="https://www.youtube.com/@ArabicAIModels"
