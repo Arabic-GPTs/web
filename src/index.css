@@ -2,90 +2,94 @@
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>بوابة النماذج</title>
-
-  <!-- Tailwind -->
-  <script src="https://cdn.tailwindcss.com"></script>
 
   <style>
     body {
       margin: 0;
-      background: #0a0a0a;
-      font-family: "Cairo", sans-serif;
+      background: #0b0b0b;
       color: #fff;
+      font-family: Arial, sans-serif;
     }
 
-    /* ===== Banner ===== */
-    .top-banner {
-      display: flex;
-      justify-content: center;
-      align-items: center;
+    .site-header {
       background: #0f0f0f;
-      padding: 6px 0;
+      border-top: 1px solid #3a2d4c;
       border-bottom: 1px solid rgba(255,255,255,0.08);
     }
 
-    /* عرض الصورة بحجمها الأصلي بدون أي تدخل */
-    .banner-img {
-      width: auto !important;
-      height: auto !important;
-      max-width: none !important; /* إلغاء Tailwind */
-      display: block;
-    }
-
-    /* ===== Navbar ===== */
-    header {
-      background: rgba(20,20,20,0.7);
-      backdrop-filter: blur(10px);
-      border-bottom: 1px solid rgba(255,255,255,0.08);
-    }
-
-    .nav-container {
-      max-width: 1100px;
-      margin: auto;
+    .banner-wrap {
+      height: 76px;
       display: flex;
-      justify-content: center;
       align-items: center;
-      padding: 12px;
+      justify-content: flex-start;
+      padding: 0 32px;
+      box-sizing: border-box;
+      direction: ltr;
     }
 
-    .nav-links {
+    .banner-img {
+      width: 58px !important;
+      height: 48px !important;
+      max-width: none !important;
+      max-height: none !important;
+      object-fit: contain !important;
+      display: block !important;
+      visibility: visible !important;
+      opacity: 1 !important;
+    }
+
+    .nav-wrap {
+      padding: 10px 32px 12px;
+      border-top: 1px solid rgba(255,255,255,0.07);
+    }
+
+    .nav-box {
       display: flex;
-      gap: 10px;
-      background: rgba(40,40,40,0.6);
-      padding: 6px;
-      border-radius: 16px;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      min-height: 44px;
+      padding: 0 8px;
+      border: 1px solid rgba(255,255,255,0.14);
+      border-radius: 14px;
+      background: #151515;
+      box-sizing: border-box;
     }
 
-    .nav-links a {
-      padding: 8px 18px;
+    .nav-box a {
+      flex: 1;
+      text-align: center;
+      color: #fff;
+      text-decoration: none;
+      font-size: 13px;
+      padding: 8px 12px;
       border-radius: 10px;
-      color: #ccc;
-      font-size: 14px;
-      transition: 0.25s;
     }
 
-    .nav-links a.active {
-      background: #444;
-      color: #fff;
+    .nav-box a.active {
+      background: #4a4a4a;
+      font-weight: 700;
     }
 
-    .nav-links a:hover {
-      background: rgba(255,255,255,0.08);
-      color: #fff;
-    }
-
-    /* ===== Responsive ===== */
     @media (max-width: 768px) {
-      .nav-links {
-        flex-wrap: wrap;
-        justify-content: center;
+      .banner-wrap {
+        height: 64px;
+        padding: 0 18px;
       }
 
-      .nav-links a {
-        font-size: 13px;
-        padding: 6px 12px;
+      .nav-wrap {
+        padding: 8px 12px 10px;
+      }
+
+      .nav-box {
+        gap: 4px;
+      }
+
+      .nav-box a {
+        font-size: 12px;
+        padding: 7px 6px;
       }
     }
   </style>
@@ -93,15 +97,20 @@
 
 <body>
 
-  <!-- ===== الشعار (بالحجم الأصلي) ===== -->
-  <div class="top-banner">
-    <img src="banner.png" alt="الشعار" class="banner-img">
-  </div>
+  <header class="site-header">
 
-  <!-- ===== الشريط العلوي ===== -->
-  <header>
-    <div class="nav-container">
-      <nav class="nav-links">
+    <div class="banner-wrap">
+      <img
+        src="./banner.png"
+        alt="الشعار"
+        class="banner-img"
+        width="58"
+        height="48"
+      />
+    </div>
+
+    <div class="nav-wrap">
+      <nav class="nav-box">
         <a href="#" class="active">الرئيسية</a>
         <a href="#">الكتب</a>
         <a href="#">من نحن</a>
@@ -109,6 +118,7 @@
         <a href="#">اشترك</a>
       </nav>
     </div>
+
   </header>
 
 </body>
