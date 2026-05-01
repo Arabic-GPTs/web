@@ -1,428 +1,128 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>بوابة النماذج</title>
 
-/* Smooth gradient animation */
-@keyframes gradientShift {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
 
-.animate-gradient-slow {
-  background-size: 200% 200% !important;
-  animation: gradientShift 14s ease-in-out infinite;
-}
+  <style>
+    body {
+      background: #0a0a0a;
+      font-family: "Cairo", sans-serif;
+    }
 
-@keyframes shine {
-  0% {
-    transform: translateX(-120%);
-  }
+    /* ===== Banner أعلى الشريط ===== */
+    .top-banner {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 6px 0;
+      background: #000;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
 
-  100% {
-    transform: translateX(220%);
-  }
-}
+    .top-banner img {
+      height: 44px;
+      object-fit: contain;
+      transition: transform 0.3s ease;
+    }
 
-.animate-shine {
-  animation: shine 2.2s linear infinite;
-}
+    .top-banner img:hover {
+      transform: scale(1.05);
+    }
 
-@media (max-width: 768px) {
-  .electric-border::before {
-    animation-duration: 5s;
-    filter: blur(6px);
-    opacity: 0.7;
-  }
-}
+    /* ===== الشريط العلوي ===== */
+    .nav-container {
+      background: rgba(20,20,20,0.7);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
 
-/* Liquid Ether background approximation */
-.liquid-ether {
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: -10;
-  overflow: hidden;
-}
+    .nav-menu {
+      max-width: 1100px;
+      margin: auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px;
+    }
 
-.liquid-ether .blob {
-  position: absolute;
-  border-radius: 9999px;
-  filter: blur(40px);
-  opacity: 0.16;
-  mix-blend-mode: screen;
-}
+    .nav-links {
+      display: flex;
+      gap: 12px;
+      background: rgba(40,40,40,0.6);
+      padding: 6px;
+      border-radius: 14px;
+    }
 
-.liquid-ether .b1 {
-  width: 60vmax;
-  height: 60vmax;
-  background: radial-gradient(closest-side, rgba(163, 230, 53, 0.7), transparent 70%);
-  top: -10%;
-  left: -10%;
-  animation: float1 18s ease-in-out infinite;
-}
+    .nav-links a {
+      padding: 8px 18px;
+      border-radius: 10px;
+      color: #ccc;
+      font-size: 14px;
+      transition: 0.25s;
+    }
 
-.liquid-ether .b2 {
-  width: 55vmax;
-  height: 55vmax;
-  background: radial-gradient(closest-side, rgba(56, 189, 248, 0.7), transparent 70%);
-  bottom: -20%;
-  right: -10%;
-  animation: float2 22s ease-in-out infinite;
-}
+    .nav-links a.active {
+      background: #444;
+      color: #fff;
+    }
 
-.liquid-ether .b3 {
-  width: 50vmax;
-  height: 50vmax;
-  background: radial-gradient(closest-side, rgba(244, 63, 94, 0.6), transparent 70%);
-  top: 10%;
-  right: 5%;
-  animation: float3 26s ease-in-out infinite;
-}
+    .nav-links a:hover {
+      background: rgba(255,255,255,0.08);
+      color: #fff;
+    }
 
-@keyframes float1 {
+    .logo-box {
+      width: 42px;
+      height: 42px;
+      border-radius: 10px;
+      background: #1f1f1f;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
 
-  0%,
-  100% {
-    transform: translate3d(0, 0, 0);
-  }
+    .logo-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+  </style>
+</head>
 
-  50% {
-    transform: translate3d(5%, -4%, 0);
-  }
-}
+<body>
 
-@keyframes float2 {
+  <!-- ===== الشعار (Banner) ===== -->
+  <div class="top-banner">
+    <img src="banner.png" alt="Banner">
+  </div>
 
-  0%,
-  100% {
-    transform: translate3d(0, 0, 0);
-  }
+  <!-- ===== الشريط العلوي ===== -->
+  <header class="nav-container">
+    <div class="nav-menu">
 
-  50% {
-    transform: translate3d(-6%, 5%, 0);
-  }
-}
+      <!-- القائمة -->
+      <nav class="nav-links">
+        <a href="#" class="active">الرئيسية</a>
+        <a href="#">الكتب</a>
+        <a href="#">من نحن</a>
+        <a href="#">النماذج</a>
+        <a href="#">اشترك</a>
+      </nav>
 
-@keyframes float3 {
+      <!-- الشعار الجانبي -->
+      <div class="logo-box">
+        <img src="banner.png" alt="logo">
+      </div>
 
-  0%,
-  100% {
-    transform: translate3d(0, 0, 0);
-  }
+    </div>
+  </header>
 
-  50% {
-    transform: translate3d(3%, 6%, 0);
-  }
-}
-
-/* Mobile + reduced motion tuning */
-@media (max-width: 768px) {
-  .liquid-ether .blob {
-    opacity: 0.10;
-    filter: blur(24px);
-  }
-
-  .liquid-ether .b1 {
-    width: 70vmin;
-    height: 70vmin;
-  }
-
-  .liquid-ether .b2 {
-    width: 60vmin;
-    height: 60vmin;
-  }
-
-  .liquid-ether .b3 {
-    display: none;
-  }
-
-  .gooey {
-    filter: none;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-
-  .liquid-ether .b1,
-  .liquid-ether .b2,
-  .liquid-ether .b3 {
-    animation: none !important;
-  }
-
-  .electric-border::before {
-    animation: none !important;
-  }
-
-  .animate-shine,
-  .animate-spin {
-    animation: none !important;
-  }
-}
-
-/* Pixel Card corners */
-.pixel-card {
-  position: relative;
-  background-clip: padding-box;
-}
-
-.pixel-card::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  padding: 1px;
-  border-radius: 18px;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.04));
-  -webkit-mask:
-    linear-gradient(#000 0 0) content-box,
-    linear-gradient(#000 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  pointer-events: none;
-}
-
-.pixel-card::after {
-  content: "";
-  position: absolute;
-  inset: 6px;
-  background:
-    radial-gradient(4px 4px at 0 0, rgba(255, 255, 255, 0.15) 99%, transparent) top left,
-    radial-gradient(4px 4px at 100% 0, rgba(255, 255, 255, 0.15) 99%, transparent) top right,
-    radial-gradient(4px 4px at 0 100%, rgba(255, 255, 255, 0.15) 99%, transparent) bottom left,
-    radial-gradient(4px 4px at 100% 100%, rgba(255, 255, 255, 0.15) 99%, transparent) bottom right;
-  background-repeat: no-repeat;
-  background-size: 8px 8px;
-  opacity: 0.6;
-  pointer-events: none;
-}
-
-/* Electric Border effect for CTA */
-.electric-border {
-  position: relative;
-  isolation: isolate;
-}
-
-.electric-border::before {
-  content: "";
-  position: absolute;
-  inset: -2px;
-  border-radius: 14px;
-  background: conic-gradient(from 0deg,
-      rgba(163, 230, 53, 0.0), rgba(163, 230, 53, 0.8), rgba(16, 185, 129, 0.9), rgba(56, 189, 248, 0.8), rgba(244, 63, 94, 0.7), rgba(163, 230, 53, 0.0));
-  filter: blur(8px) brightness(1.1);
-  animation: spin 3.2s linear infinite;
-  -webkit-mask:
-    linear-gradient(#000 0 0) content-box,
-    linear-gradient(#000 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  padding: 2px;
-  pointer-events: none;
-  opacity: 0.9;
-}
-
-@keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-/* Gooey nav container */
-.gooey {
-  filter: url('#gooey');
-}
-
-/* خط افتراضي + لون خلفية عام */
-:root {
-  color-scheme: dark;
-}
-
-html {
-  scroll-behavior: smooth;
-}
-
-body {
-  @apply bg-neutral-950 text-neutral-100;
-  font-family: "Cairo", "Noto Sans Arabic", system-ui, -apple-system, Segoe UI, Arial,
-    sans-serif;
-  line-height: 1.7;
-  }
-
-/* Base responsive typography using rem scaling within safe bounds */
-@layer base {
-  html { font-size: clamp(15px, 0.55vw + 13.2px, 17px); }
-}
-
-/* NVIDIA-inspired palette tokens */
-:root.theme-nvidia {
-  --nv-bg: #0a0d0a;
-  --nv-surface-1: #0f130f;
-  --nv-surface-2: #141914;
-  --nv-surface-3: #191f19;
-  --nv-border: #232a23;
-  --nv-divider: #1a201a;
-  --nv-text: #ecf6ea;
-  --nv-muted: #b8c8b8;
-  --nv-accent: #76b900; /* NVIDIA Green */
-  --nv-accent-2: #10b981; /* Emerald 500 */
-  --nv-accent-cyan: #22d3ee; /* Cyan for cool details */
-  --nv-warning: #f59e0b;
-  --nv-danger: #ef4444;
-  --nv-focus: rgba(159, 230, 56, 0.4);
-}
-
-@layer components {
-  /* Surfaces */
-  .nv-surface {
-    background-color: var(--nv-surface-1);
-    border-color: color-mix(in oklab, var(--nv-border), #000 35%);
-  }
-
-  .nv-card {
-    @apply rounded-3xl border shadow;
-    background: linear-gradient(180deg, color-mix(in oklab, var(--nv-surface-2), #000 10%), var(--nv-surface-3));
-    border-color: color-mix(in oklab, var(--nv-border), #000 20%);
-  }
-
-  /* Buttons */
-  .nv-btn {
-    @apply inline-flex items-center gap-2 font-bold text-white rounded-2xl px-4 py-2.5 transition;
-    background-image: linear-gradient(135deg, var(--nv-accent) 0%, var(--nv-accent-2) 55%, var(--nv-accent) 100%);
-    box-shadow: 0 10px 30px -12px rgba(16, 185, 129, 0.35), 0 1px 0 0 rgba(255,255,255,0.06) inset;
-    background-size: 200% 200%;
-    animation: gradientShift 14s ease-in-out infinite;
-  }
-  .nv-btn:hover { transform: translateY(-1px); filter: brightness(1.05); }
-  .nv-btn:active { transform: translateY(0); filter: brightness(0.98); }
-  .nv-btn:focus-visible { outline: none; box-shadow: 0 0 0 2px rgba(255,255,255,0.08), 0 0 0 6px var(--nv-focus); }
-
-  /* Ghost / outline button */
-  .nv-btn-ghost {
-    @apply inline-flex items-center gap-2 font-bold rounded-2xl px-4 py-2.5 transition text-white/90 border;
-    border-color: color-mix(in oklab, var(--nv-border), #000 10%);
-    background: color-mix(in oklab, var(--nv-surface-2), transparent 35%);
-  }
-  .nv-btn-ghost:hover { background: color-mix(in oklab, var(--nv-surface-2), #ffffff 7%); }
-  .nv-btn-ghost:focus-visible { outline: none; box-shadow: 0 0 0 2px rgba(255,255,255,0.06), 0 0 0 6px var(--nv-focus); }
-
-  /* Category chip */
-  .nv-chip {
-    @apply inline-flex items-center gap-1 whitespace-nowrap rounded-xl px-3 py-2 text-xs md:text-sm border transition text-white/90;
-    border-color: color-mix(in oklab, var(--nv-border), #000 10%);
-    background: color-mix(in oklab, var(--nv-surface-2), transparent 40%);
-    text-align: start; /* right in RTL, left in LTR */
-    justify-content: flex-start;
-    width: 100%;
-    display: flex; /* override inline-flex to allow full-width in grid cell */
-  }
-  .nv-chip[data-active="true"] {
-    color: #fff;
-    background-image: linear-gradient(135deg, var(--nv-accent) 0%, var(--nv-accent-2) 65%, var(--nv-accent) 100%);
-    border-color: transparent;
-    background-size: 200% 200%;
-    animation: gradientShift 16s ease-in-out infinite;
-  }
-
-  /* Inputs & selects */
-  .nv-input {
-    @apply rounded-2xl border px-2 py-1.5 flex items-center gap-1;
-    background: color-mix(in oklab, var(--nv-surface-2), transparent 10%);
-    border-color: color-mix(in oklab, var(--nv-border), #000 15%);
-  }
-  .nv-input:focus-within {
-    box-shadow: 0 0 0 2px rgba(255,255,255,0.06), 0 0 0 6px var(--nv-focus);
-  }
-  .nv-input input::placeholder { color: color-mix(in oklab, var(--nv-muted), #000 15%); }
-
-  .nv-select {
-    @apply rounded-xl border px-3 py-2 text-sm outline-none bg-transparent;
-    background: color-mix(in oklab, var(--nv-surface-2), transparent 10%);
-    border-color: color-mix(in oklab, var(--nv-border), #000 15%);
-  }
-  .nv-select:focus-visible {
-    box-shadow: 0 0 0 2px rgba(255,255,255,0.06), 0 0 0 6px var(--nv-focus);
-  }
-  /* Ensure dropdown list text is readable on white native menus */
-  .nv-select option {
-    color: #111 !important;           /* black text for white popup */
-    background-color: #fff !important;/* keep menu background white */
-  }
-
-  /* Link accent */
-  .nv-link {
-    background-image: linear-gradient(90deg, var(--nv-accent) 0%, var(--nv-accent-2) 50%, var(--nv-accent) 100%);
-    -webkit-background-clip: text; background-clip: text; color: transparent;
-    background-size: 200% 200%;
-    animation: gradientShift 18s ease-in-out infinite;
-  }
-}
-
-/* اختيار النص */
-::selection {
-  background: rgba(190, 242, 100, 0.35);
-  /* lime-300/35 */
-  color: #fff;
-}
-
-/* تفضيل تقليل الحركة */
-@media (prefers-reduced-motion: reduce) {
-  * {
-    animation: none !important;
-    transition: none !important;
-    scroll-behavior: auto !important;
-  }
-}
-
-/* Global button hover behavior */
-@layer components {
-  /* Smooth hover transitions */
-  button,
-  a[role="button"] {
-    transition: background-color 180ms ease, color 180ms ease, box-shadow 180ms ease;
-  }
-
-  /* Neutral hover on generic buttons (exclude framework buttons) */
-  button:not(.nv-btn):not(.nv-btn-ghost):hover,
-  a[role="button"]:not(.nv-btn):not(.nv-btn-ghost):hover {
-    background-color: rgba(255, 255, 255, 0.08) !important;
-  }
-
-  /* Ensure our framework buttons behave the same */
-  .nv-btn:hover,
-  .nv-btn-ghost:hover {
-    filter: brightness(1.06) !important;
-  }
-
-  /* Optional: add this class where you want text to flip to black on hover */
-  .hover-text-black:hover { color: #000 !important; }
-}
-
-/* Hide top header social channels and their labels */
-header a[href*="instagram.com"],
-header a[href*="facebook.com"],
-header a[href*="tiktok.com"],
-header a[href^="mailto:"],
-header a[href*="paypal.com"],
-header a[href*="linkedin.com"],
-header a[href*="t.me"],
-header a[href*="x.com"],
-header a[href*="youtube.com"],
-header a[href*="wa.me"],
-header a[href*="whatsapp.com"] {
-  display: none !important;
-}
-
-/* Hide brand text link in header; keep logo icon only */
-header a.focus\:outline-none {
-  display: none !important;
-}
-
-/* Hide the inline label text (e.g., "تابعنا على") */
-header span[class*="md:inline"][class*="text-xs"][class*="mr-1"] {
-  display: none !important;
-}
-
-/* Hide the XL-only list of channel names */
-header div[class*="xl:flex"][class*="gap-1"][class*="text-[11px]"] {
-  display: none !important;
-}
+</body>
+</html>
