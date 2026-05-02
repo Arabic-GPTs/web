@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "prebuild": "node scripts/build_data.mjs",
-    "build": "vite build --base=/web/",
+    "build": "vite build",
     "preview": "vite preview --open",
     "img:banner": "node scripts/process_images.mjs --task banner",
     "img:covers": "node scripts/process_images.mjs --task covers",
