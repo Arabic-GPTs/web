@@ -10,7 +10,7 @@ const resolvePublicPath = (path) => {
   return `${normalizedBase}${normalizedPath}`;
 };
 
-const logoUrl = resolvePublicPath("og-image.png");
+const logoUrl = resolvePublicPath("logo.png");
 const bgVideoUrl = resolvePublicPath("1080-60fps-ai.mp4");
 const PACKAGE_PDFS_URL = resolvePublicPath("data/packagePdfs.json");
 const PACKAGE_PDFS_MANIFEST_URL = resolvePublicPath(
