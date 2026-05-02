@@ -351,7 +351,6 @@ function runDevAssertions() {
   );
 }
 
-runDevAssertions();
 
 const DEFAULT_BOT_ABOUT =
   "يُعدُّ هذا البوت أداةً ذكية متخصصة في دعم الباحثين وطلاب الدراسات العليا في اختيار عناوين أصيلة ومتميزة لرسائل الماجستير والدكتوراه، من خلال تحليل التخصصات الأكاديمية واستنباط الفرص البحثية غير المستكشفة.";
@@ -532,6 +531,8 @@ const CATEGORY_ICONS = {
     </svg>
   ),
 };
+
+runDevAssertions();
 
 export default function App() {
   const [route, setRoute] = useState(
