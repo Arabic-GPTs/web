@@ -1,125 +1,31 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>بوابة النماذج</title>
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-  <style>
-    body {
-      margin: 0;
-      background: #0b0b0b;
-      color: #fff;
-      font-family: Arial, sans-serif;
-    }
+:root {
+  color-scheme: dark;
+  font-family: "Cairo", "Noto Sans Arabic", system-ui, sans-serif;
+  background: #0b0b0c;
+}
 
-    .site-header {
-      background: #0f0f0f;
-      border-top: 1px solid #3a2d4c;
-      border-bottom: 1px solid rgba(255,255,255,0.08);
-    }
+html,
+body,
+#root {
+  min-height: 100%;
+}
 
-    .banner-wrap {
-      height: 76px;
-      display: flex;
-      align-items: center;
-      justify-content: flex-start;
-      padding: 0 32px;
-      box-sizing: border-box;
-      direction: ltr;
-    }
+body {
+  margin: 0;
+  background:
+    radial-gradient(circle at top, rgba(118, 185, 0, 0.15), transparent 28%),
+    linear-gradient(180deg, #0b0b0c 0%, #070708 100%);
+  color: #fff;
+}
 
-    .banner-img {
-      width: 58px !important;
-      height: 48px !important;
-      max-width: none !important;
-      max-height: none !important;
-      object-fit: contain !important;
-      display: block !important;
-      visibility: visible !important;
-      opacity: 1 !important;
-    }
+a {
+  color: inherit;
+}
 
-    .nav-wrap {
-      padding: 10px 32px 12px;
-      border-top: 1px solid rgba(255,255,255,0.07);
-    }
-
-    .nav-box {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      min-height: 44px;
-      padding: 0 8px;
-      border: 1px solid rgba(255,255,255,0.14);
-      border-radius: 14px;
-      background: #151515;
-      box-sizing: border-box;
-    }
-
-    .nav-box a {
-      flex: 1;
-      text-align: center;
-      color: #fff;
-      text-decoration: none;
-      font-size: 13px;
-      padding: 8px 12px;
-      border-radius: 10px;
-    }
-
-    .nav-box a.active {
-      background: #4a4a4a;
-      font-weight: 700;
-    }
-
-    @media (max-width: 768px) {
-      .banner-wrap {
-        height: 64px;
-        padding: 0 18px;
-      }
-
-      .nav-wrap {
-        padding: 8px 12px 10px;
-      }
-
-      .nav-box {
-        gap: 4px;
-      }
-
-      .nav-box a {
-        font-size: 12px;
-        padding: 7px 6px;
-      }
-    }
-  </style>
-</head>
-
-<body>
-
-  <header class="site-header">
-
-    <div class="banner-wrap">
-      <img
-        src="./banner.png"
-        alt="الشعار"
-        class="banner-img"
-        width="58"
-        height="48"
-      />
-    </div>
-
-    <div class="nav-wrap">
-      <nav class="nav-box">
-        <a href="#" class="active">الرئيسية</a>
-        <a href="#">الكتب</a>
-        <a href="#">من نحن</a>
-        <a href="#">النماذج</a>
-        <a href="#">اشترك</a>
-      </nav>
-    </div>
-
-  </header>
-
-</body>
-</html>
+::selection {
+  background: rgba(118, 185, 0, 0.35);
+}
