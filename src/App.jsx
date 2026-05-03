@@ -1609,7 +1609,7 @@ export default function App() {
                   {SOCIAL_ICONS.whatsapp}
                 </a>
                 <a
-                  href="https://t.me/ArabicAIModels"
+                  href="https://t.me/ArabAIModels"
                   target="_blank"
                   rel="noopener"
                   aria-label="تيليغرام"
@@ -1619,7 +1619,7 @@ export default function App() {
                   {SOCIAL_ICONS.telegram}
                 </a>
                 <a
-                  href="https://www.youtube.com/@ArabicAIModels"
+                  href="https://www.youtube.com/@ArabAIModels"
                   target="_blank"
                   rel="noopener"
                   aria-label="يوتيوب"
@@ -1629,7 +1629,7 @@ export default function App() {
                   {SOCIAL_ICONS.youtube}
                 </a>
                 <a
-                  href="https://www.instagram.com/ArabicAIModels"
+                  href="https://www.instagram.com/ArabAIModels"
                   target="_blank"
                   rel="noopener"
                   aria-label="إنستغرام"
@@ -1639,7 +1639,7 @@ export default function App() {
                   {SOCIAL_ICONS.instagram}
                 </a>
                 <a
-                  href="https://www.facebook.com/ArabicAIModels"
+                  href="https://www.facebook.com/ArabAIModels"
                   target="_blank"
                   rel="noopener"
                   aria-label="فيسبوك"
@@ -1649,7 +1649,7 @@ export default function App() {
                   {SOCIAL_ICONS.facebook}
                 </a>
                 <a
-                  href="https://www.tiktok.com/@ArabicAIModels"
+                  href="https://www.tiktok.com/@ArabAIModels"
                   target="_blank"
                   rel="noopener"
                   aria-label="تيك توك"
@@ -1679,7 +1679,7 @@ export default function App() {
                   {SOCIAL_ICONS.paypal}
                 </a>
                 <a
-                  href="https://www.linkedin.com/in/ArabicAIModels"
+                  href="https://www.linkedin.com/in/ArabAIModels"
                   target="_blank"
                   rel="noopener"
                   aria-label="لينكدإن"
